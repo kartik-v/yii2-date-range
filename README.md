@@ -10,7 +10,8 @@ function to receive the selection.
 Additional enhancements added for this widget (by Krajee):
 
 - allows ability to work with Bootstrap input group addons and set the picker position to point at the input-group-addon icon.
-- enhanced translation features providing ability to add/configure your translation for each language. In order to create your own translation, please follow these steps.
+- enhanced translation features providing ability to add/configure your translation for each language. In order to create your own translation, 
+  please follow [these steps](http://localhost:8000/yii-kv/site/date-range#translations).
 - automatically convert format from PHP Date/time format to Moment.js Date/time format.
 - automatically trigger change of base field to enforce Yii ActiveField validation
 - ability to set the widget to show as a dropdown and a container (instead of input) to hold/display the selected options.
