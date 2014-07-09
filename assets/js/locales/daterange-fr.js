@@ -8,21 +8,8 @@
  * For more JQuery plugins visit http://plugins.krajee.com
  * For more Yii related demos visit http://demos.krajee.com
  */
-/**
- * Set variable name `dpr_locale_<lang>`
- */
-var dpr_locale_fr = {
-    applyLabel: 'appliquer',
-    cancelLabel: 'annuler',
-    fromLabel: 'De',
-    toLabel: 'Pour',
-    weekLabel: 'W',
-    customRangeLabel: 'Plage personnalisée',
-    daysOfWeek: moment()._lang._weekdaysMin.slice(),
-    monthNames: moment()._lang._monthsShort.slice(),
-    firstDay: 1
-};
-/**
+
+ /**
  * Set moment i18n configuration
  */
 moment.lang('fr', {
@@ -69,3 +56,18 @@ moment.lang('fr', {
         doy : 4  // The week that contains Jan 4th is the first week of the year.
     }
 });
+
+/**
+ * Set variable name `dpr_locale_<lang>`
+ */
+var dpr_locale_fr = {
+    applyLabel: 'appliquer',
+    cancelLabel: 'annuler',
+    fromLabel: 'De',
+    toLabel: 'Pour',
+    weekLabel: 'W',
+    customRangeLabel: 'Plage personnalisée',
+    daysOfWeek: moment()._lang._weekdaysMin.slice(),
+    monthNames: moment()._lang._monthsShort.slice(),
+    firstDay: 1
+};

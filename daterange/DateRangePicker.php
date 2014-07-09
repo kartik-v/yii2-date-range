@@ -8,6 +8,7 @@
 
 namespace kartik\daterange;
 
+use Yii;
 use yii\base\InvalidConfigException;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
@@ -78,6 +79,11 @@ class DateRangePicker extends \kartik\widgets\InputWidget
      * `tag`: string, the HTML tag for rendering the container. Defaults to `div`.
      */
     public $containerOptions = ['class' => 'drp-container input-group'];
+    
+    /**
+     * @var array the the internalization configuration for this module
+     */
+    public $i18n = [];
 
     /**
      * @var array the template for rendering the container, when hideInput is set
@@ -106,6 +112,7 @@ HTML;
     public function init()
     {
         parent::init();
+        $this->initI18N();
         if ($this->convertFormat && isset($this->pluginOptions['format'])) {
             $this->pluginOptions['format'] = static::convertDateFormat($this->pluginOptions['format']);
         }
@@ -122,12 +129,12 @@ HTML;
         if ($this->presetDropdown) {
             $this->initRangeExpr = true;
             $this->pluginOptions['ranges'] = [
-                "Today" => ["moment()", "moment()"],
-                "Yesterday" => ["moment().subtract('days', 1)", "moment().subtract('days', 1)"],
-                "Last 7 Days" => ["moment().subtract('days', 6)", "moment()"],
-                "Last 30 Days" => ["moment().subtract('days', 29)", "moment()"],
-                "This Month" => ["moment().startOf('month')", "moment().endOf('month')"],
-                "Last Month" => ["moment().subtract('month', 1).startOf('month')", "moment().subtract('month', 1).endOf('month')"],
+                Yii::t('kvdrp', "Today") => ["moment()", "moment()"],
+                Yii::t('kvdrp', "Yesterday") => ["moment().subtract('days', 1)", "moment().subtract('days', 1)"],
+                Yii::t('kvdrp', "Last {n} Days", ['n'=>7]) => ["moment().subtract('days', 6)", "moment()"],
+                Yii::t('kvdrp', "Last {n} Days", ['n'=>30]) => ["moment().subtract('days', 29)", "moment()"],
+                Yii::t('kvdrp', "This Month") => ["moment().startOf('month')", "moment().endOf('month')"],
+                Yii::t('kvdrp', "Last Month") => ["moment().subtract('month', 1).startOf('month')", "moment().subtract('month', 1).endOf('month')"],
             ];
             $this->pluginOptions['startDate'] = new JsExpression("moment().subtract('days', 29)");
             $this->pluginOptions['endDate'] = new JsExpression("moment()");
@@ -221,6 +228,22 @@ JS;
         $this->registerPlugin(self::PLUGIN_NAME, $id, null, $callback);
     }
 
+    /**
+     * Yii i18n configuration for server side translation
+     */
+    public function initI18N()
+    {
+        Yii::setAlias('@kvdrp', dirname(__FILE__) . '/../');
+        if (empty($this->i18n)) {
+            $this->i18n = [
+                'class' => 'yii\i18n\PhpMessageSource',
+                'basePath' => '@kvdrp/messages',
+                'forceTranslation' => true
+            ];
+        }
+        Yii::$app->i18n->translations['kvdrp'] = $this->i18n;
+    }
+    
     /**
      * Automatically convert the date format from PHP DateTime to Moment.js DateTime format
      * as required by bootstrap-daterangepicker plugin.
