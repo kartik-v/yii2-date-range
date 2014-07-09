@@ -14,7 +14,7 @@ Additional enhancements added for this widget (by Krajee):
   please follow [these steps](http://localhost:8000/yii-kv/site/date-range#translations).
 - automatically convert format from PHP Date/time format to Moment.js Date/time format.
 - automatically trigger change of base field to enforce Yii ActiveField validation
-- ability to set the widget to show as a dropdown and a container (instead of input) to hold/display the selected options.
+- ability to set the widget to display a preset dropdown of date options within a container (and hidden input).
 - style the container options as per your need using templates
 - automatically disable date-range based on disabled/readonly options.
 

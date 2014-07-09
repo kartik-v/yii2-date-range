@@ -66,9 +66,9 @@ class DateRangePicker extends \kartik\widgets\InputWidget
 
     /**
      * @var boolean whether the widget should automatically format the date from
-     * the PHP DateTime format to the Bootstrap DateRangePicker plugin format
+     * the PHP DateTime format to the Moment Datetime format
      * @see http://php.net/manual/en/function.date.php
-     * @see https://github.com/dangrossman/bootstrap-daterangepicker#options
+     * @see http://momentjs.com/docs/#/parsing/string-format/
      */
     public $convertFormat = false;
 
@@ -77,7 +77,7 @@ class DateRangePicker extends \kartik\widgets\InputWidget
      * to true. The following special options are recognized:
      * `tag`: string, the HTML tag for rendering the container. Defaults to `div`.
      */
-    public $containerOptions = ['class' => 'input-group'];
+    public $containerOptions = ['class' => 'drp-container input-group'];
 
     /**
      * @var array the template for rendering the container, when hideInput is set
@@ -201,6 +201,7 @@ function(start, end) {
     var val = start.format('{$format}') + '{$separator}' + end.format('{$format}');
     {$id}.find('.range-value').html(val);
     {$input}.val(val);
+    {$input}.trigger('change');
 }
 JS;
             } elseif ($this->useWithAddon) {
@@ -209,6 +210,7 @@ JS;
 function(start, end) {
     var val = start.format('{$format}') + '{$separator}' + end.format('{$format}');
     {$input}.val(val);
+    {$input}.trigger('change');
 }
 JS;
             } else {
