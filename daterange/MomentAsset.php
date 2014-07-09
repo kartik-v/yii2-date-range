@@ -9,20 +9,19 @@
 namespace kartik\daterange;
 
 /**
- * DateRangePicker bundle for \kartik\daterange\DateRangePicker.
+ * MomentAsset bundle for \kartik\daterange\DateRangePicker.
  *
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since 1.0
  */
-class DateRangePickerAsset extends \kartik\widgets\AssetBundle
+class MomentAsset extends \kartik\widgets\AssetBundle
 {
-    public $depends = ['\kartik\daterange\MomentAsset'];
+    public $jsOptions = ['position' => \yii\web\View::POS_HEAD];
 
     public function init()
     {
         $this->setSourcePath(__DIR__ . '/../assets');
-        $this->setupAssets('css', ['css/daterangepicker']);
-        $this->setupAssets('js', ['js/daterangepicker']);
+        $this->setupAssets('js', ['js/moment']);
         parent::init();
     }
 

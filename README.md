@@ -44,7 +44,15 @@ to the ```require``` section of your `composer.json` file.
 ```php
 use kartik\daterange\DateRangePicker;
 echo DateRangePicker::widget([
-    
+    'model'=>$model,
+    'attribute'=>'datetime_range',
+    'convertFormat'=>true,
+    'pluginOptions'=>[
+        'timePicker'=>true,
+        'timePickerIncrement'=>30,
+        'format'=>'Y-m-d h:i A'
+    ]
+]);
 ]); 
 ```
 
