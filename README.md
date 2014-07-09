@@ -62,7 +62,6 @@ echo DateRangePicker::widget([
         'format'=>'Y-m-d h:i A'
     ]
 ]);
-]); 
 ```
 
 ## License
