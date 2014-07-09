@@ -44,15 +44,7 @@ to the ```require``` section of your `composer.json` file.
 ```php
 use kartik\daterange\DateRangePicker;
 echo DateRangePicker::widget([
-    'daterangeColor' => DateRangePicker::TYPE_DANGER,
-    'handleColor' => DateRangePicker::TYPE_DANGER,
-    'pluginOptions' => [
-        'orientation' => 'horizontal',
-        'handle' => 'round',
-        'min' => 0,
-        'max' => 255,
-        'step' => 1
-    ],
+    
 ]); 
 ```
 
