@@ -1,13 +1,21 @@
 yii2-date-range
 =================
 
-### _Extension is under development_
-
 An advanced date range picker input for Yii Framework 2 based on [dangrossman/bootstrap-daterangepicker plugin](https://github.com/dangrossman/bootstrap-daterangepicker). 
 The date range picker widget is styled for Bootstrap 3.x and creates a dropdown menu from which a user can select a range of dates. If the plugin is invoked with no options, 
 it will present two calendars to choose a start and end date from. Optionally, you can provide a list of date ranges the user can select from instead of 
 choosing dates from the calendars. If attached to a text input, the selected dates will be inserted into the text box. Otherwise, you can provide a custom callback 
 function to receive the selection.
+
+Additional enhancements added for this widget (by Krajee):
+
+- allows ability to work with Bootstrap input group addons and set the picker position to point at the input-group-addon icon.
+- enhanced translation features providing ability to add/configure your translation for each language. In order to create your own translation, please follow these steps.
+- automatically convert format from PHP Date/time format to Moment.js Date/time format.
+- automatically trigger change of base field to enforce Yii ActiveField validation
+- ability to set the widget to show as a dropdown and a container (instead of input) to hold/display the selected options.
+- style the container options as per your need using templates
+- automatically disable date-range based on disabled/readonly options.
 
 > NOTE: This extension depends on the [kartik-v/yii2-widgets](https://github.com/kartik-v/yii2-widgets) extension which in turn depends on the 
 [yiisoft/yii2-bootstrap](https://github.com/yiisoft/yii2/tree/master/extensions/bootstrap) extension. Check the 
