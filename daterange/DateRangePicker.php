@@ -66,14 +66,6 @@ class DateRangePicker extends \kartik\widgets\InputWidget
     public $presetDropdown = false;
 
     /**
-     * @var boolean whether the widget should automatically format the date from
-     * the PHP DateTime format to the Moment Datetime format
-     * @see http://php.net/manual/en/function.date.php
-     * @see http://momentjs.com/docs/#/parsing/string-format/
-     */
-    public $convertFormat = false;
-
-    /**
      * @var array the HTML attributes for the container, if hideInput is set
      * to true. The following special options are recognized:
      * `tag`: string, the HTML tag for rendering the container. Defaults to `div`.
