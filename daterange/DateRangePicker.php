@@ -127,8 +127,10 @@ HTML;
                 $this->pluginOptions['startDate'] = $dates[0];
                 $this->pluginOptions['endDate'] = $dates[1];
             }
-            $this->containerTemplate = str_replace('{value}', $this->value, $this->containerTemplate);
         }
+        $value = empty($this->value) ? '' : $this->value;
+        $this->containerTemplate = str_replace('{value}', $value, $this->containerTemplate);
+        
         $this->initRange();
         echo $this->renderInput();
         $this->registerAssets();
