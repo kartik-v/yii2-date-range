@@ -81,7 +81,8 @@ class DateRangePicker extends \kartik\widgets\InputWidget
      * @var array the template for rendering the container, when hideInput is set
      * to true. The special tag `{input}` will be replaced with the hidden form input.
      * In addition, the element with css class `range-value` will be replaced by the
-     * calculated plugin value.
+     * calculated plugin value. The special tag `{value}` will be replaced with the
+     * value of the hidden form input during initialization
      */
     public $containerTemplate = <<< HTML
         <span class="input-group-addon">
@@ -89,13 +90,23 @@ class DateRangePicker extends \kartik\widgets\InputWidget
         </span>
         <span class="form-control text-right">
             <span class="pull-left">
-                <span class="range-value"></span>
+                <span class="range-value">{value}</span>
             </span>
             <b class="caret"></b>
             {input}
         </span>
 HTML;
+    
+    /**
+     * @var string the pluginOptions format for the date time 
+     */
+    private $_format;
 
+    /**
+     * @var string the pluginOptions separator
+     */
+    private $_separator;
+    
     /**
      * Initializes the widget
      *
@@ -107,6 +118,16 @@ HTML;
         $this->initI18N();
         if ($this->convertFormat && isset($this->pluginOptions['format'])) {
             $this->pluginOptions['format'] = static::convertDateFormat($this->pluginOptions['format']);
+        }
+        $this->_format = ArrayHelper::getValue($this->pluginOptions, 'format', 'YYYY-MM-DD');
+        $this->_separator = ArrayHelper::getValue($this->pluginOptions, 'separator', ' - ');
+        if (!empty($this->value) && $this->hideInput) {
+            $dates = explode($this->_separator, $this->value);
+            if (count($dates) > 1) {
+                $this->pluginOptions['startDate'] = $dates[0];
+                $this->pluginOptions['endDate'] = $dates[1];
+            }
+            $this->containerTemplate = str_replace('{value}', $this->value, $this->containerTemplate);
         }
         $this->initRange();
         echo $this->renderInput();
@@ -191,13 +212,11 @@ HTML;
         }
         DateRangePickerAsset::register($view);
         $callback = empty($this->callback) ? '' : $this->callback;
-        $format = ArrayHelper::getValue($this->pluginOptions, 'format', 'YYYY-MM-DD');
-        $separator = ArrayHelper::getValue($this->pluginOptions, 'separator', ' - ');
         if (empty($callback)) {
             if ($this->hideInput) {
                 $callback = <<< JS
 function(start, end) {
-    var val = start.format('{$format}') + '{$separator}' + end.format('{$format}');
+    var val = start.format('{$this->_format}') + '{$this->_separator}' + end.format('{$this->_format}');
     {$id}.find('.range-value').html(val);
     {$input}.val(val);
     {$input}.trigger('change');
@@ -207,7 +226,7 @@ JS;
                 $id = "{$input}.closest('.input-group')";
                 $callback = <<< JS
 function(start, end) {
-    var val = start.format('{$format}') + '{$separator}' + end.format('{$format}');
+    var val = start.format('{$this->_format}') + '{$this->_separator}' + end.format('{$this->_format}');
     {$input}.val(val);
     {$input}.trigger('change');
 }
@@ -242,7 +261,7 @@ JS;
      *
      * @see http://php.net/manual/en/function.date.php
      * @see http://momentjs.com/docs/#/parsing/string-format/
-     * @param string $format the PHP date format string
+     * @param string $this->_format the PHP date format string
      * @return string
      */
     protected static function convertDateFormat($format)
