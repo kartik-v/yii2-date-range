@@ -24,5 +24,5 @@ return [
     'This Month'=>'Este mês',
     'Last Month'=>'Último mês',
     // Demo Data
-    'Select Date Range'=>'Selecione o intervalo de datas'
+    'Select Date Range'=>'Selecione o período'
 ];
