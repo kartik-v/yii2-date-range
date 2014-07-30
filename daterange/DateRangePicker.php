@@ -207,9 +207,9 @@ HTML;
             $id = '$("#' . $this->containerOptions['id'] . '")';
         }
         if (!empty($this->language) && substr($this->language, 0, 2) != 'en') {
-            LanguageAsset::register($view)->js[] = 'daterange-' . $this->language . '.js';
+            LanguageAsset::register($view)->js[] = 'daterange-' .  $this->language . '.js';
             if (empty($this->pluginOptions['locale'])) {
-                $this->pluginOptions['locale'] = new JsExpression('dpr_locale_' . $this->language);
+                $this->pluginOptions['locale'] = new JsExpression('dpr_locale_' . str_replace('-', '_',$this->language));
             }
         }
         DateRangePickerAsset::register($view);
