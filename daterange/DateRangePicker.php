@@ -76,6 +76,12 @@ class DateRangePicker extends \kartik\widgets\InputWidget
      * @var array the the internalization configuration for this module
      */
     public $i18n = [];
+    
+    /**
+     * @var boolean If set to true, this will automatically convert format
+     * from PHP Date/time format to Moment.js Date/time format.
+     */
+    public $convertFormat = false; 
 
     /**
      * @var array the template for rendering the container, when hideInput is set
