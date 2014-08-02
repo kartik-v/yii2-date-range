@@ -115,12 +115,10 @@ HTML;
     public function init()
     {
         parent::init();
-        $this->initI18N();
         if (!$this->checkLocale()) {
-            throw new InvalidConfigException("The locales have not been setup for your language '{$this->language}'. \n
-                You can submit the translations by reading the DateRangePicker documentation. \n
-                Alternatively, to continue without using any translations set the 'language' property to 'en' in your widget configuration.");
+           $this->language = 'en';
         }
+        $this->initI18N();
         if ($this->convertFormat && isset($this->pluginOptions['format'])) {
             $this->pluginOptions['format'] = static::convertDateFormat($this->pluginOptions['format']);
         }
