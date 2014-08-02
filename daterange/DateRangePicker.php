@@ -116,6 +116,11 @@ HTML;
     {
         parent::init();
         $this->initI18N();
+        if (!$this->checkLocale()) {
+            throw new InvalidConfigException("The locales have not been setup for your language '{$this->language}'. \n
+                You can submit the translations by reading the DateRangePicker documentation. \n
+                Alternatively, to continue without using any translations set the 'language' property to 'en' in your widget configuration.");
+        }
         if ($this->convertFormat && isset($this->pluginOptions['format'])) {
             $this->pluginOptions['format'] = static::convertDateFormat($this->pluginOptions['format']);
         }
@@ -167,6 +172,18 @@ HTML;
         $this->pluginOptions['ranges'] = $range;
     }
 
+    /**
+     * Check if the locale has been setup
+     */
+    protected function checkLocale() {
+        if (substr($this->language, 0, 2) == 'en') {
+            return true;
+        }
+        $s = DIRECTORY_SEPARATOR;
+        $file = __DIR__ . "{$s}..{$s}assets{$s}js{$s}locales{$s}daterange-{$this->language}.js";
+        return (file_exists($file));
+    }
+    
     /**
      * Parses and returns a JsExpression
      *
