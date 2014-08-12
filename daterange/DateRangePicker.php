@@ -217,10 +217,10 @@ HTML;
     {
         $view = $this->getView();
         MomentAsset::register($view);
-        $input = '$("#' . $this->options['id'] . '")';
+        $input = 'jQuery("#' . $this->options['id'] . '")';
         $id = $input;
         if ($this->hideInput) {
-            $id = '$("#' . $this->containerOptions['id'] . '")';
+            $id = 'jQuery("#' . $this->containerOptions['id'] . '")';
         }
         if (!empty($this->language) && substr($this->language, 0, 2) != 'en') {
             LanguageAsset::register($view)->js[] = 'daterange-' . $this->language . '.js';
