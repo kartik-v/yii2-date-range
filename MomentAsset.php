@@ -3,7 +3,7 @@
 /**
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014
  * @package yii2-date-range
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 namespace kartik\daterange;
@@ -14,13 +14,13 @@ namespace kartik\daterange;
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since 1.0
  */
-class MomentAsset extends \kartik\widgets\AssetBundle
+class MomentAsset extends \kartik\base\AssetBundle
 {
     public $jsOptions = ['position' => \yii\web\View::POS_HEAD];
 
     public function init()
     {
-        $this->setSourcePath(__DIR__ . '/../assets');
+        $this->setSourcePath(__DIR__ . '/assets');
         $this->setupAssets('js', ['js/moment']);
         parent::init();
     }

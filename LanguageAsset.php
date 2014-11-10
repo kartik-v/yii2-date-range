@@ -3,7 +3,7 @@
 /**
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014
  * @package yii2-date-range
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 namespace kartik\daterange;
@@ -14,14 +14,14 @@ namespace kartik\daterange;
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since 1.0
  */
-class LanguageAsset extends \kartik\widgets\AssetBundle
+class LanguageAsset extends \kartik\base\AssetBundle
 {
     public $jsOptions = ['position' => \yii\web\View::POS_HEAD];
     public $depends = ['\kartik\daterange\MomentAsset'];
 
     public function init()
     {
-        $this->setSourcePath(__DIR__ . '/../assets/js/locales');
+        $this->setSourcePath(__DIR__ . '/assets/js/locales');
         parent::init();
     }
 

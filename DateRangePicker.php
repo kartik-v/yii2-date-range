@@ -3,7 +3,7 @@
 /**
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014
  * @package yii2-date-range
- * @version 1.0.0
+ * @version 1.1.0
  */
 
 namespace kartik\daterange;
@@ -23,7 +23,7 @@ use yii\web\View;
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since 1.0
  */
-class DateRangePicker extends \kartik\widgets\InputWidget
+class DateRangePicker extends \kartik\base\InputWidget
 {
     const PLUGIN_NAME = 'daterangepicker';
 
@@ -178,7 +178,7 @@ HTML;
             return true;
         }
         $s = DIRECTORY_SEPARATOR;
-        $file = __DIR__ . "{$s}..{$s}assets{$s}js{$s}locales{$s}daterange-{$this->language}.js";
+        $file = __DIR__ . "{$s}assets{$s}js{$s}locales{$s}daterange-{$this->language}.js";
         return (file_exists($file));
     }
     
