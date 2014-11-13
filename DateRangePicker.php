@@ -262,7 +262,7 @@ JS;
      */
     public function initI18N()
     {
-        Yii::setAlias('@kvdrp', dirname(__FILE__) . '/../');
+        Yii::setAlias('@kvdrp', dirname(__FILE__));
         if (empty($this->i18n)) {
             $this->i18n = [
                 'class' => 'yii\i18n\PhpMessageSource',
