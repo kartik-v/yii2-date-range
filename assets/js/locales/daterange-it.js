@@ -11,9 +11,9 @@
  /**
  * Set moment i18n configuration
  */
-moment.lang('fr', {
+moment.lang('it', {
     months : "gennaio_febraio_marzo_aprile_maggio_giugno_luglio_agosto_settembre_ottobre_novembre_dicembre".split("_"),
-    monthsShort : "gen._feb._mar_apr._mag_giu_lug._ago_set._ott._nov._dic.".split("_"),
+    monthsShort : "gen._feb._mar._apr._mag._giu._lug._ago._set._ott._nov._dic.".split("_"),
     weekdays : "domenica_lunedì_martedì_mercoledì_giovedì_venerdì_sabato".split("_"),
     weekdaysShort : "dom._lun._mar._mer._gio._ven._sab.".split("_"),
     weekdaysMin : "Do_Lu_Ma_Me_Gi_Ve_Sa".split("_"),
@@ -25,16 +25,16 @@ moment.lang('fr', {
         LLLL : "dddd D MMMM YYYY LT"
     },
     calendar : {
-        sameDay: "[Aujourd'hui à] LT",
-        nextDay: '[Demain à] LT',
-        nextWeek: 'dddd [à] LT',
-        lastDay: '[Hier à] LT',
-        lastWeek: 'dddd [dernier à] LT',
+        sameDay: "[Oggi alle] LT",
+        nextDay: '[Domani alle] LT',
+        nextWeek: 'dddd [alle] LT',
+        lastDay: '[Ieri alle] LT',
+        lastWeek: 'dddd [scorso alle] LT',
         sameElse: 'L'
     },
     relativeTime : {
-        future : "dans %s",
-        past : "il y a %s",
+        future : "entro %s",
+        past : "%s fa",
         s : "qualche secondo",
         m : "un minuto",
         mm : "%d minuti",
@@ -65,7 +65,7 @@ var dpr_locale_it = {
     fromLabel: 'Da',
     toLabel: 'A',
     weekLabel: 'Sett.',
-    customRangeLabel: 'Plage personnalisée',
+    customRangeLabel: 'Range personalizzato',
     daysOfWeek: moment()._lang._weekdaysMin.slice(),
     monthNames: moment()._lang._monthsShort.slice(),
     firstDay: 1
