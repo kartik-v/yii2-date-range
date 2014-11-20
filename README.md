@@ -21,6 +21,9 @@ Additional enhancements added for this widget (by Krajee):
 ### Demo
 You can see detailed [documentation](http://demos.krajee.com/date-range) on usage of the extension.
 
+### Latest Release
+The latest version of the extension is release v1.2.0. Refer the [CHANGE LOG](https://github.com/kartik-v/yii2-date-range/blob/master/CHANGE.md) for details of various releases.
+
 ## Installation
 
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
