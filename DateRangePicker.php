@@ -3,7 +3,7 @@
 /**
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014
  * @package yii2-date-range
- * @version 1.2.0
+ * @version 1.3.0
  */
 
 namespace kartik\daterange;
@@ -31,7 +31,6 @@ class DateRangePicker extends \kartik\base\InputWidget
      * @var string the javascript callback to be passed to the plugin constructor.
      * Note: a default value is set for this when you set `hideInput` to false, OR
      * you set `useWithAddon` to `true`.
-     * @see https://github.com/dangrossman/bootstrap-daterangepicker#options
      */
     public $callback;
 
@@ -98,6 +97,11 @@ class DateRangePicker extends \kartik\base\InputWidget
 HTML;
 
     /**
+     * @var string locale language to be used for the plugin
+     */
+    protected $_localeLang = '';
+    
+    /**
      * @var string the pluginOptions format for the date time
      */
     private $_format;
@@ -106,6 +110,7 @@ HTML;
      * @var string the pluginOptions separator
      */
     private $_separator;
+    
 
     /**
      * Initializes the widget
@@ -115,10 +120,8 @@ HTML;
     public function init()
     {
         parent::init();
-        if (!$this->checkLocale()) {
-           $this->language = 'en';
-        }
         $this->initI18N();
+        $this->initLocale();
         if ($this->convertFormat && isset($this->pluginOptions['format'])) {
             $this->pluginOptions['format'] = static::convertDateFormat($this->pluginOptions['format']);
         }
@@ -144,18 +147,19 @@ HTML;
      */
     protected function initRange()
     {
+        if (isset($dummyValidation)) {
+            $msg = Yii::t('kvdrp', 'Select Date Range');
+        }
         if ($this->presetDropdown) {
             $this->initRangeExpr = true;
             $this->pluginOptions['ranges'] = [
-                Yii::t('kvdrp', "Today") => ["moment()", "moment()"],
-                Yii::t('kvdrp', "Yesterday") => ["moment().subtract('days', 1)", "moment().subtract('days', 1)"],
-                Yii::t('kvdrp', "Last {n} Days", ['n' => 7]) => ["moment().subtract('days', 6)", "moment()"],
-                Yii::t('kvdrp', "Last {n} Days", ['n' => 30]) => ["moment().subtract('days', 29)", "moment()"],
+                Yii::t('kvdrp', "Today") => ["moment().startOf('day')", "moment()"],
+                Yii::t('kvdrp', "Yesterday") => ["moment().startOf('day').subtract(1,'days')", "moment().endOf('day').subtract(1,'days')"],
+                Yii::t('kvdrp', "Last {n} Days", ['n' => 7]) => ["moment().startOf('day').subtract(6, 'days')", "moment()"],
+                Yii::t('kvdrp', "Last {n} Days", ['n' => 30]) => ["moment().startOf('day').subtract(29, 'days')", "moment()"],
                 Yii::t('kvdrp', "This Month") => ["moment().startOf('month')", "moment().endOf('month')"],
-                Yii::t('kvdrp', "Last Month") => ["moment().subtract('month', 1).startOf('month')", "moment().subtract('month', 1).endOf('month')"],
+                Yii::t('kvdrp', "Last Month") => ["moment().subtract(1, 'month').startOf('month')", "moment().subtract(1, 'month').endOf('month')"],
             ];
-            $this->pluginOptions['startDate'] = new JsExpression("moment().subtract('days', 29)");
-            $this->pluginOptions['endDate'] = new JsExpression("moment()");
         }
         if (!$this->initRangeExpr || empty($this->pluginOptions['ranges']) || !is_array($this->pluginOptions['ranges'])) {
             return;
@@ -171,15 +175,36 @@ HTML;
     }
 
     /**
-     * Check if the locale has been setup
+     * Initialize locale settings
      */
-    protected function checkLocale() {
-        if (substr($this->language, 0, 2) == 'en') {
-            return true;
+    protected function initLocale() {
+        $this->initLanguage();
+        $this->_localeLang = strtolower($this->language);
+        if (empty($this->_lang) || $this->_lang == 'en') {
+            return;
         }
         $s = DIRECTORY_SEPARATOR;
-        $file = __DIR__ . "{$s}assets{$s}js{$s}locales{$s}daterange-{$this->language}.js";
-        return (file_exists($file));
+        $file = __DIR__ . "{$s}assets{$s}js{$s}locale{$s}{$this->_localeLang}.js";
+        if (!file_exists($file)) {
+            $this->_localeLang = $this->_lang;
+        }
+        $file = __DIR__ . "{$s}assets{$s}js{$s}locale{$s}{$this->_localeLang}.js";
+        if (!file_exists($file)) {
+            return;
+        }
+        $localeSettings = ArrayHelper::getValue($this->pluginOptions, 'locale', []);
+        $localeSettings += [
+            'applyLabel' => Yii::t('kvdrp', 'Apply'),
+            'cancelLabel' => Yii::t('kvdrp', 'Cancel'),
+            'fromLabel' => Yii::t('kvdrp', 'From'),
+            'toLabel' => Yii::t('kvdrp', 'To'),
+            'weekLabel' => Yii::t('kvdrp', 'W'),
+            'customRangeLabel' => Yii::t('kvdrp', 'Custom Range'),
+            'daysOfWeek' => new JsExpression('moment.weekdaysMin()'),
+            'monthNames' => new JsExpression('moment.monthsShort()'),
+            'firstDay' => new JsExpression('moment.localeData()._week.dow')
+        ];
+        $this->pluginOptions['locale'] = $localeSettings;
     }
     
     /**
@@ -222,17 +247,13 @@ HTML;
         if ($this->hideInput) {
             $id = 'jQuery("#' . $this->containerOptions['id'] . '")';
         }
-        if (!empty($this->language) && substr($this->language, 0, 2) != 'en') {
-            LanguageAsset::register($view)->js[] = 'daterange-' . $this->language . '.js';
-            if (empty($this->pluginOptions['locale'])) {
-                $this->pluginOptions['locale'] = new JsExpression('dpr_locale_' . str_replace('-', '_', $this->language));
-            }
+        if ($this->_localeLang != 'en') {
+            LanguageAsset::register($view)->js[] = "{$this->_localeLang}.js";
         }
         DateRangePickerAsset::register($view);
-        $callback = empty($this->callback) ? '' : $this->callback;
-        if (empty($callback)) {
+        if (empty($this->callback)) {
             if ($this->hideInput) {
-                $callback = <<< JS
+                $this->callback = <<< JS
 function(start, end) {
     var val = start.format('{$this->_format}') + '{$this->_separator}' + end.format('{$this->_format}');
     {$id}.find('.range-value').html(val);
@@ -242,7 +263,7 @@ function(start, end) {
 JS;
             } elseif ($this->useWithAddon) {
                 $id = "{$input}.closest('.input-group')";
-                $callback = <<< JS
+                $this->callback = <<< JS
 function(start, end) {
     var val = start.format('{$this->_format}') + '{$this->_separator}' + end.format('{$this->_format}');
     {$input}.val(val);
@@ -254,7 +275,7 @@ JS;
                 return;
             }
         }
-        $this->registerPlugin(self::PLUGIN_NAME, $id, null, $callback);
+        $this->registerPlugin(self::PLUGIN_NAME, $id, null, $this->callback);
     }
 
     /**

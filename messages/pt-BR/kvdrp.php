@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Message translations.
  *
@@ -18,11 +17,16 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Today'=>'Hoje',
-    'Yesterday'=>'Ontem',
-    'Last {n} Days'=>'Últimos {n} dias',
-    'This Month'=>'Este mês',
-    'Last Month'=>'Último mês',
-    // Demo Data
-    'Select Date Range'=>'Selecione o período'
+    'Apply' => 'Aplicar',
+    'Cancel' => 'Cancelar',
+    'Custom Range' => 'Intervalo personalizado',
+    'From' => 'De',
+    'To' => 'Até',
+    'W' => 'W',
+    'Select Date Range' => 'Selecione o período',
+    'Last Month' => 'Último mês',
+    'Last {n} Days' => 'Últimos {n} dias',
+    'This Month' => 'Este mês',
+    'Today' => 'Hoje',
+    'Yesterday' => 'Ontem',
 ];

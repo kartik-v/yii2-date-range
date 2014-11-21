@@ -10,8 +10,7 @@ function to receive the selection.
 Additional enhancements added for this widget (by Krajee):
 
 - allows ability to work with Bootstrap input group addons and set the picker position to point at the input-group-addon icon.
-- enhanced translation features providing ability to add/configure your translation for each language. In order to create your own translation, 
-  please follow [these steps](http://demos.krajee.com/date-range#translations).
+- enhanced translation features using yii i18n message files.
 - automatically convert format from PHP Date/time format to Moment.js Date/time format.
 - automatically trigger change of base field to enforce Yii ActiveField validation
 - ability to set the widget to display a preset dropdown of date options within a container (and hidden input).
@@ -22,7 +21,7 @@ Additional enhancements added for this widget (by Krajee):
 You can see detailed [documentation](http://demos.krajee.com/date-range) on usage of the extension.
 
 ### Latest Release
-The latest version of the extension is release v1.2.0. Refer the [CHANGE LOG](https://github.com/kartik-v/yii2-date-range/blob/master/CHANGE.md) for details of various releases.
+The latest version of the extension is release v1.3.0. Refer the [CHANGE LOG](https://github.com/kartik-v/yii2-date-range/blob/master/CHANGE.md) for details of various releases.
 
 ## Installation
 

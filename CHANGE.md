@@ -1,3 +1,14 @@
+Version 1.3.0
+=============
+**Date:** 21-Nov-2014
+
+- (enh #7): Added Russian Translations
+- (enh #12): Added Spanish Translations
+- (enh #13): Update moment.js related range initializations.
+- (enh #14): Update moment library to latest release.
+- (enh #15): Revamp widget to remove dependency on custom locale JS files enhancement
+- (enh #16): Update Lithunian translations and create German translations.
+
 Version 1.2.0
 =============
 **Date:** 20-Nov-2014
