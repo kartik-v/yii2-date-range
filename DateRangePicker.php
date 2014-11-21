@@ -180,17 +180,14 @@ HTML;
     protected function initLocale() {
         $this->initLanguage();
         $this->_localeLang = strtolower($this->language);
-        if (empty($this->_lang) || $this->_localelang === 'en') {
+        if (empty($this->_lang) || $this->_localeLang === 'en') {
             return;
         }
-        $s = DIRECTORY_SEPARATOR;
-        $file = __DIR__ . "{$s}assets{$s}js{$s}locale{$s}{$this->_localeLang}.js";
-        if (!file_exists($file)) {
+        if (!static::isTranslatable($this->_localeLang)) {
             $this->_localeLang = $this->_lang;
-        }
-        $file = __DIR__ . "{$s}assets{$s}js{$s}locale{$s}{$this->_localeLang}.js";
-        if (!file_exists($file)) {
-            return;
+            if (!static::isTranslatable($this->_localeLang)) {
+                return;
+            }
         }
         $localeSettings = ArrayHelper::getValue($this->pluginOptions, 'locale', []);
         $localeSettings += [
@@ -205,6 +202,17 @@ HTML;
             'firstDay' => new JsExpression('moment.localeData()._week.dow')
         ];
         $this->pluginOptions['locale'] = $localeSettings;
+    }
+    
+    /**
+     * Check if a translation is possible
+     * @param string $lang the language code
+     * @return bool
+     */
+    protected static function isTranslatable($lang) {
+        $s = DIRECTORY_SEPARATOR;
+        $file = __DIR__ . "{$s}assets{$s}js{$s}locale{$s}{$lang}.js";
+        return (!empty($lang) && $lang !== 'en' && file_exists($file));
     }
     
     /**
