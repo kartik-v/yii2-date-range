@@ -180,7 +180,7 @@ HTML;
     protected function initLocale() {
         $this->initLanguage();
         $this->_localeLang = strtolower($this->language);
-        if (empty($this->_lang) || $this->_lang == 'en') {
+        if (empty($this->_lang) || $this->_localelang === 'en') {
             return;
         }
         $s = DIRECTORY_SEPARATOR;
