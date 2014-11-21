@@ -147,14 +147,14 @@ HTML;
         if ($this->presetDropdown) {
             $this->initRangeExpr = true;
             $this->pluginOptions['ranges'] = [
-                Yii::t('kvdrp', "Today") => ["moment()", "moment()"],
-                Yii::t('kvdrp', "Yesterday") => ["moment().subtract('days', 1)", "moment().subtract('days', 1)"],
-                Yii::t('kvdrp', "Last {n} Days", ['n' => 7]) => ["moment().subtract('days', 6)", "moment()"],
-                Yii::t('kvdrp', "Last {n} Days", ['n' => 30]) => ["moment().subtract('days', 29)", "moment()"],
+                Yii::t('kvdrp', "Today") => ["moment().startOf('day')", "moment()"],
+                Yii::t('kvdrp', "Yesterday") => ["moment().startOf('day').subtract(1,'days')", "moment().endOf('day').subtract(1,'days')"],
+                Yii::t('kvdrp', "Last {n} Days", ['n' => 7]) => ["moment().startOf('day').subtract(6, 'days')", "moment()"],
+                Yii::t('kvdrp', "Last {n} Days", ['n' => 30]) => ["moment().startOf('day').subtract(29, 'days')", "moment()"],
                 Yii::t('kvdrp', "This Month") => ["moment().startOf('month')", "moment().endOf('month')"],
-                Yii::t('kvdrp', "Last Month") => ["moment().subtract('month', 1).startOf('month')", "moment().subtract('month', 1).endOf('month')"],
+                Yii::t('kvdrp', "Last Month") => ["moment().subtract(1, 'month').startOf('month')", "moment().subtract(1, 'month').endOf('month')"],
             ];
-            $this->pluginOptions['startDate'] = new JsExpression("moment().subtract('days', 29)");
+            $this->pluginOptions['startDate'] = new JsExpression("moment().subtract(1, 'month')");
             $this->pluginOptions['endDate'] = new JsExpression("moment()");
         }
         if (!$this->initRangeExpr || empty($this->pluginOptions['ranges']) || !is_array($this->pluginOptions['ranges'])) {
