@@ -17,9 +17,9 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Apply' => 'применять',
+    'Apply' => 'применить',
     'Cancel' => 'отменить',
-    'Custom Range' => 'Пользовательские Диапазон',
+    'Custom Range' => 'Свой диапазон',
     'From' => 'от',
     'Last Month' => 'Прошлый месяц',
     'Last {n} Days' => 'Последние {n} дней',
