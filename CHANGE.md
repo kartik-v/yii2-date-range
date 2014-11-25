@@ -1,3 +1,11 @@
+Version 1.4.0
+=============
+**Date:** 25-Nov-2014
+
+- (enh #17): Updated Russian translations
+- (bug #18): Plugin data attributes not set because of input rendering sequence.
+- (enh #19): Enhance widget to use updated plugin registration from Krajee base 
+
 Version 1.3.0
 =============
 **Date:** 21-Nov-2014

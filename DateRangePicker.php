@@ -3,7 +3,7 @@
 /**
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014
  * @package yii2-date-range
- * @version 1.3.0
+ * @version 1.4.0
  */
 
 namespace kartik\daterange;
@@ -25,7 +25,10 @@ use yii\web\View;
  */
 class DateRangePicker extends \kartik\base\InputWidget
 {
-    const PLUGIN_NAME = 'daterangepicker';
+    /**
+     * @inherit doc
+     */
+    protected $_pluginName = 'daterangepicker';
 
     /**
      * @var string the javascript callback to be passed to the plugin constructor.
@@ -138,8 +141,9 @@ HTML;
         $this->containerTemplate = str_replace('{value}', $value, $this->containerTemplate);
 
         $this->initRange();
-        echo $this->renderInput();
+        $this->containerOptions['id'] = $this->options['id'] . '-container';
         $this->registerAssets();
+        echo $this->renderInput();
     }
 
     /**
@@ -237,7 +241,6 @@ HTML;
             Html::addCssClass($this->options, 'form-control');
             return $this->getInput('textInput');
         }
-        $this->containerOptions['id'] = $this->options['id'] . '-container';
         $tag = ArrayHelper::remove($this->containerOptions, 'tag', 'div');
         $content = str_replace('{input}', $this->getInput('hiddenInput'), $this->containerTemplate);
         return Html::tag($tag, $content, $this->containerOptions);
@@ -279,11 +282,11 @@ function(start, end) {
 }
 JS;
             } else {
-                $this->registerPlugin(self::PLUGIN_NAME, $id);
+                $this->registerPlugin($this->_pluginName, $id);
                 return;
             }
         }
-        $this->registerPlugin(self::PLUGIN_NAME, $id, null, $this->callback);
+        $this->registerPlugin($this->_pluginName, $id, null, $this->callback);
     }
 
     /**
