@@ -3,7 +3,7 @@
 /**
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014
  * @package yii2-date-range
- * @version 1.4.0
+ * @version 1.5.0
  */
 
 namespace kartik\daterange;
@@ -182,16 +182,9 @@ HTML;
      * Initialize locale settings
      */
     protected function initLocale() {
-        $this->initLanguage();
-        $this->_localeLang = strtolower($this->language);
-        if (empty($this->_lang) || $this->_localeLang === 'en') {
+        $this->setLanguage('');
+        if (empty($this->_langFile)) {
             return;
-        }
-        if (!static::isTranslatable($this->_localeLang)) {
-            $this->_localeLang = $this->_lang;
-            if (!static::isTranslatable($this->_localeLang)) {
-                return;
-            }
         }
         $localeSettings = ArrayHelper::getValue($this->pluginOptions, 'locale', []);
         $localeSettings += [
@@ -206,17 +199,6 @@ HTML;
             'firstDay' => new JsExpression('moment.localeData()._week.dow')
         ];
         $this->pluginOptions['locale'] = $localeSettings;
-    }
-    
-    /**
-     * Check if a translation is possible
-     * @param string $lang the language code
-     * @return bool
-     */
-    protected static function isTranslatable($lang) {
-        $s = DIRECTORY_SEPARATOR;
-        $file = __DIR__ . "{$s}assets{$s}js{$s}locale{$s}{$lang}.js";
-        return (!empty($lang) && $lang !== 'en' && file_exists($file));
     }
     
     /**
@@ -258,8 +240,8 @@ HTML;
         if ($this->hideInput) {
             $id = 'jQuery("#' . $this->containerOptions['id'] . '")';
         }
-        if ($this->_localeLang != 'en') {
-            LanguageAsset::register($view)->js[] = "{$this->_localeLang}.js";
+        if (!empty($this->_langFile)) {
+            LanguageAsset::register($view)->js[] = $this->_langFile;
         }
         DateRangePickerAsset::register($view);
         if (empty($this->callback)) {

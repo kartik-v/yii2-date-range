@@ -3,7 +3,7 @@
 /**
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014
  * @package yii2-date-range
- * @version 1.4.0
+ * @version 1.5.0
  */
 
 namespace kartik\daterange;
@@ -21,7 +21,7 @@ class LanguageAsset extends \kartik\base\AssetBundle
 
     public function init()
     {
-        $this->setSourcePath(__DIR__ . '/assets/js/locale');
+        $this->setSourcePath(__DIR__ . '/assets');
         parent::init();
     }
 

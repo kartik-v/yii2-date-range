@@ -1,3 +1,13 @@
+Version 1.5.0
+=============
+**Date:** 29-Nov-2014
+
+- (enh #20): Enhance language locale file parsing and registering
+    - Remove `_localeLang` property
+    - Rename `locale` folder to `locales` to be consistent with `datepicker` and `datetimepicker` plugins
+    - Utilize enhancements in krajee base [enh #9](https://github.com/kartik-v/yii2-krajee-base/issues/9) and  [enh #10 ](https://github.com/kartik-v/yii2-krajee-base/issues/10) 
+    - Update `LanguageAsset` for new path
+
 Version 1.4.0
 =============
 **Date:** 25-Nov-2014
