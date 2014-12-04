@@ -1,3 +1,9 @@
+Version 1.5.1
+=============
+**Date:** 04-Dec-2014
+
+- (enh #22): Estonian translation for kvdrp.php
+
 Version 1.5.0
 =============
 **Date:** 29-Nov-2014

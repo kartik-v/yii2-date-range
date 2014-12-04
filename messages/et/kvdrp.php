@@ -17,16 +17,16 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Apply' => '',
-    'Cancel' => '',
-    'Custom Range' => '',
-    'From' => '',
-    'Last Month' => '',
-    'Last {n} Days' => '',
-    'Select Date Range' => '',
-    'This Month' => '',
-    'To' => '',
-    'Today' => '',
-    'W' => '',
-    'Yesterday' => '',
+    'Apply' => 'Sisesta',
+    'Cancel' => 'Tühista',
+    'Custom Range' => 'Vaba valik',
+    'From' => 'Alates',
+    'Last Month' => 'Eelmine kuu',
+    'Last {n} Days' => 'Viimased {n} päeva',
+    'Select Date Range' => 'Vali kuupäevade vahemik',
+    'This Month' => 'Käesolev kuu',
+    'To' => 'Kuni',
+    'Today' => 'Täna',
+    'W' => 'N',
+    'Yesterday' => 'Eile',
 ];
