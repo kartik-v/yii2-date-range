@@ -25,7 +25,7 @@ return [
     'Last {n} Days' => 'Последние {n} дней',
     'Select Date Range' => 'Выберите диапазон дат',
     'This Month' => 'Этот месяц',
-    'To' => 'на',
+    'To' => 'до',
     'Today' => 'Сегодня',
     'W' => 'W',
     'Yesterday' => 'Вчера',
