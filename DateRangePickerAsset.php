@@ -18,6 +18,9 @@ class DateRangePickerAsset extends \kartik\base\AssetBundle
 {
     public $depends = ['\kartik\daterange\MomentAsset'];
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         $this->setSourcePath(__DIR__ . '/assets');

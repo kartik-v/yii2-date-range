@@ -19,6 +19,9 @@ class LanguageAsset extends \kartik\base\AssetBundle
     public $jsOptions = ['position' => \yii\web\View::POS_HEAD];
     public $depends = ['\kartik\daterange\MomentAsset'];
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         $this->setSourcePath(__DIR__ . '/assets');

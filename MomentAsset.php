@@ -18,6 +18,9 @@ class MomentAsset extends \kartik\base\AssetBundle
 {
     public $jsOptions = ['position' => \yii\web\View::POS_HEAD];
 
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         $this->setSourcePath(__DIR__ . '/assets');

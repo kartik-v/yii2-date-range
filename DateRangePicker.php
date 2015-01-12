@@ -26,17 +26,11 @@ use yii\web\View;
 class DateRangePicker extends \kartik\base\InputWidget
 {
     /**
-     * @inherit doc
-     */
-    protected $_pluginName = 'daterangepicker';
-
-    /**
      * @var string the javascript callback to be passed to the plugin constructor.
      * Note: a default value is set for this when you set `hideInput` to false, OR
      * you set `useWithAddon` to `true`.
      */
     public $callback;
-
     /**
      * @var boolean whether to hide the input (e.g. when you want to show the date
      * range picker as a dropdown). If set to true, the input will be hidden. The plugin
@@ -45,7 +39,6 @@ class DateRangePicker extends \kartik\base\InputWidget
      * the container.
      */
     public $hideInput = false;
-
     /**
      * @var boolean whether you are using the picker with a input group addon. You can set it
      * to `true`, when `hideInput` is false, and you wish to show the picker position more
@@ -53,31 +46,23 @@ class DateRangePicker extends \kartik\base\InputWidget
      * to generate the selected range value for the input.
      */
     public $useWithAddon = false;
-
     /**
      * @var initialize all the list values set in `pluginOptions['ranges']`
      * and convert all values to yii\web\JsExpression
      */
     public $initRangeExpr = true;
-
     /**
      * @var boolean show a preset dropdown. If set to true, this will automatically generate
      * a preset list of ranges for selection. Setting this to true will also automatically
      * set `initRangeExpr` to true.
      */
     public $presetDropdown = false;
-
     /**
      * @var array the HTML attributes for the container, if hideInput is set
      * to true. The following special options are recognized:
      * `tag`: string, the HTML tag for rendering the container. Defaults to `div`.
      */
     public $containerOptions = ['class' => 'drp-container input-group'];
-
-    /**
-     * @var array the the internalization configuration for this module
-     */
-    public $i18n = [];
 
     /**
      * @var array the template for rendering the container, when hideInput is set
@@ -98,12 +83,15 @@ class DateRangePicker extends \kartik\base\InputWidget
             {input}
         </span>
 HTML;
-
+    /**
+     * @inherit doc
+     */
+    protected $_pluginName = 'daterangepicker';
     /**
      * @var string locale language to be used for the plugin
      */
     protected $_localeLang = '';
-    
+
     /**
      * @var string the pluginOptions format for the date time
      */
@@ -113,7 +101,6 @@ HTML;
      * @var string the pluginOptions separator
      */
     private $_separator;
-    
 
     /**
      * Initializes the widget
@@ -123,6 +110,7 @@ HTML;
     public function init()
     {
         parent::init();
+        $this->_msgCat = 'kvdrp';
         $this->initI18N();
         $this->initLocale();
         if ($this->convertFormat && isset($this->pluginOptions['format'])) {
@@ -147,41 +135,10 @@ HTML;
     }
 
     /**
-     * Initializes the pluginOptions range list
-     */
-    protected function initRange()
-    {
-        if (isset($dummyValidation)) {
-            $msg = Yii::t('kvdrp', 'Select Date Range');
-        }
-        if ($this->presetDropdown) {
-            $this->initRangeExpr = true;
-            $this->pluginOptions['ranges'] = [
-                Yii::t('kvdrp', "Today") => ["moment().startOf('day')", "moment()"],
-                Yii::t('kvdrp', "Yesterday") => ["moment().startOf('day').subtract(1,'days')", "moment().endOf('day').subtract(1,'days')"],
-                Yii::t('kvdrp', "Last {n} Days", ['n' => 7]) => ["moment().startOf('day').subtract(6, 'days')", "moment()"],
-                Yii::t('kvdrp', "Last {n} Days", ['n' => 30]) => ["moment().startOf('day').subtract(29, 'days')", "moment()"],
-                Yii::t('kvdrp', "This Month") => ["moment().startOf('month')", "moment().endOf('month')"],
-                Yii::t('kvdrp', "Last Month") => ["moment().subtract(1, 'month').startOf('month')", "moment().subtract(1, 'month').endOf('month')"],
-            ];
-        }
-        if (!$this->initRangeExpr || empty($this->pluginOptions['ranges']) || !is_array($this->pluginOptions['ranges'])) {
-            return;
-        }
-        $range = [];
-        foreach ($this->pluginOptions['ranges'] as $key => $value) {
-            if (!is_array($value) || empty($value[0]) || empty($value[1])) {
-                throw new InvalidConfigException("Invalid settings for pluginOptions['ranges']. Each range value must be a two element array.");
-            }
-            $range[$key] = [static::parseJsExpr($value[0]), static::parseJsExpr($value[1])];
-        }
-        $this->pluginOptions['ranges'] = $range;
-    }
-
-    /**
      * Initialize locale settings
      */
-    protected function initLocale() {
+    protected function initLocale()
+    {
         $this->setLanguage('');
         if (empty($this->_langFile)) {
             return;
@@ -200,92 +157,6 @@ HTML;
         ];
         $this->pluginOptions['locale'] = $localeSettings;
     }
-    
-    /**
-     * Parses and returns a JsExpression
-     *
-     * @param string|JsExpression $value
-     * @return JsExpression
-     */
-    protected static function parseJsExpr($value)
-    {
-        return $value instanceof JsExpression ? $value : new JsExpression($value);
-    }
-
-    /**
-     * Renders the input
-     *
-     * @return string
-     */
-    protected function renderInput()
-    {
-        if (!$this->hideInput) {
-            Html::addCssClass($this->options, 'form-control');
-            return $this->getInput('textInput');
-        }
-        $tag = ArrayHelper::remove($this->containerOptions, 'tag', 'div');
-        $content = str_replace('{input}', $this->getInput('hiddenInput'), $this->containerTemplate);
-        return Html::tag($tag, $content, $this->containerOptions);
-    }
-
-    /**
-     * Registers the needed client assets
-     */
-    public function registerAssets()
-    {
-        $view = $this->getView();
-        MomentAsset::register($view);
-        $input = 'jQuery("#' . $this->options['id'] . '")';
-        $id = $input;
-        if ($this->hideInput) {
-            $id = 'jQuery("#' . $this->containerOptions['id'] . '")';
-        }
-        if (!empty($this->_langFile)) {
-            LanguageAsset::register($view)->js[] = $this->_langFile;
-        }
-        DateRangePickerAsset::register($view);
-        if (empty($this->callback)) {
-            if ($this->hideInput) {
-                $this->callback = <<< JS
-function(start, end) {
-    var val = start.format('{$this->_format}') + '{$this->_separator}' + end.format('{$this->_format}');
-    {$id}.find('.range-value').html(val);
-    {$input}.val(val);
-    {$input}.trigger('change');
-}
-JS;
-            } elseif ($this->useWithAddon) {
-                $id = "{$input}.closest('.input-group')";
-                $this->callback = <<< JS
-function(start, end) {
-    var val = start.format('{$this->_format}') + '{$this->_separator}' + end.format('{$this->_format}');
-    {$input}.val(val);
-    {$input}.trigger('change');
-}
-JS;
-            } else {
-                $this->registerPlugin($this->_pluginName, $id);
-                return;
-            }
-        }
-        $this->registerPlugin($this->_pluginName, $id, null, $this->callback);
-    }
-
-    /**
-     * Yii i18n configuration for server side translation
-     */
-    public function initI18N()
-    {
-        Yii::setAlias('@kvdrp', dirname(__FILE__));
-        if (empty($this->i18n)) {
-            $this->i18n = [
-                'class' => 'yii\i18n\PhpMessageSource',
-                'basePath' => '@kvdrp/messages',
-                'forceTranslation' => true
-            ];
-        }
-        Yii::$app->i18n->translations['kvdrp'] = $this->i18n;
-    }
 
     /**
      * Automatically convert the date format from PHP DateTime to Moment.js DateTime format
@@ -295,6 +166,7 @@ JS;
      * @see http://momentjs.com/docs/#/parsing/string-format/
      *
      * @param string $format the PHP date format string
+     *
      * @return string
      */
     protected static function convertDateFormat($format)
@@ -343,5 +215,120 @@ JS;
             // unix timestamp
             'U' => 'X',
         ]);
+    }
+
+    /**
+     * Initializes the pluginOptions range list
+     */
+    protected function initRange()
+    {
+        if (isset($dummyValidation)) {
+            $msg = Yii::t('kvdrp', 'Select Date Range');
+        }
+        if ($this->presetDropdown) {
+            $this->initRangeExpr = true;
+            $this->pluginOptions['ranges'] = [
+                Yii::t('kvdrp', "Today") => ["moment().startOf('day')", "moment()"],
+                Yii::t('kvdrp', "Yesterday") => [
+                    "moment().startOf('day').subtract(1,'days')",
+                    "moment().endOf('day').subtract(1,'days')"
+                ],
+                Yii::t('kvdrp', "Last {n} Days", ['n' => 7]) => [
+                    "moment().startOf('day').subtract(6, 'days')",
+                    "moment()"
+                ],
+                Yii::t('kvdrp', "Last {n} Days", ['n' => 30]) => [
+                    "moment().startOf('day').subtract(29, 'days')",
+                    "moment()"
+                ],
+                Yii::t('kvdrp', "This Month") => ["moment().startOf('month')", "moment().endOf('month')"],
+                Yii::t('kvdrp', "Last Month") => [
+                    "moment().subtract(1, 'month').startOf('month')",
+                    "moment().subtract(1, 'month').endOf('month')"
+                ],
+            ];
+        }
+        if (!$this->initRangeExpr || empty($this->pluginOptions['ranges']) || !is_array($this->pluginOptions['ranges'])) {
+            return;
+        }
+        $range = [];
+        foreach ($this->pluginOptions['ranges'] as $key => $value) {
+            if (!is_array($value) || empty($value[0]) || empty($value[1])) {
+                throw new InvalidConfigException("Invalid settings for pluginOptions['ranges']. Each range value must be a two element array.");
+            }
+            $range[$key] = [static::parseJsExpr($value[0]), static::parseJsExpr($value[1])];
+        }
+        $this->pluginOptions['ranges'] = $range;
+    }
+
+    /**
+     * Parses and returns a JsExpression
+     *
+     * @param string|JsExpression $value
+     *
+     * @return JsExpression
+     */
+    protected static function parseJsExpr($value)
+    {
+        return $value instanceof JsExpression ? $value : new JsExpression($value);
+    }
+
+    /**
+     * Registers the needed client assets
+     */
+    public function registerAssets()
+    {
+        $view = $this->getView();
+        MomentAsset::register($view);
+        $input = 'jQuery("#' . $this->options['id'] . '")';
+        $id = $input;
+        if ($this->hideInput) {
+            $id = 'jQuery("#' . $this->containerOptions['id'] . '")';
+        }
+        if (!empty($this->_langFile)) {
+            LanguageAsset::register($view)->js[] = $this->_langFile;
+        }
+        DateRangePickerAsset::register($view);
+        if (empty($this->callback)) {
+            if ($this->hideInput) {
+                $this->callback = <<< JS
+function(start, end) {
+    var val = start.format('{$this->_format}') + '{$this->_separator}' + end.format('{$this->_format}');
+    {$id}.find('.range-value').html(val);
+    {$input}.val(val);
+    {$input}.trigger('change');
+}
+JS;
+            } elseif ($this->useWithAddon) {
+                $id = "{$input}.closest('.input-group')";
+                $this->callback = <<< JS
+function(start, end) {
+    var val = start.format('{$this->_format}') + '{$this->_separator}' + end.format('{$this->_format}');
+    {$input}.val(val);
+    {$input}.trigger('change');
+}
+JS;
+            } else {
+                $this->registerPlugin($this->_pluginName, $id);
+                return;
+            }
+        }
+        $this->registerPlugin($this->_pluginName, $id, null, $this->callback);
+    }
+
+    /**
+     * Renders the input
+     *
+     * @return string
+     */
+    protected function renderInput()
+    {
+        if (!$this->hideInput) {
+            Html::addCssClass($this->options, 'form-control');
+            return $this->getInput('textInput');
+        }
+        $tag = ArrayHelper::remove($this->containerOptions, 'tag', 'div');
+        $content = str_replace('{input}', $this->getInput('hiddenInput'), $this->containerTemplate);
+        return Html::tag($tag, $content, $this->containerOptions);
     }
 }
