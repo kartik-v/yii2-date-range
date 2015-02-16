@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015
  * @package yii2-date-range
- * @version 1.5.0
+ * @version 1.6.1
  */
 
 namespace kartik\daterange;
@@ -118,7 +118,7 @@ HTML;
         }
         $this->_format = ArrayHelper::getValue($this->pluginOptions, 'format', 'YYYY-MM-DD');
         $this->_separator = ArrayHelper::getValue($this->pluginOptions, 'separator', ' - ');
-        if (!empty($this->value) && $this->hideInput) {
+        if (!empty($this->value)) {
             $dates = explode($this->_separator, $this->value);
             if (count($dates) > 1) {
                 $this->pluginOptions['startDate'] = $dates[0];

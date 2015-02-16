@@ -1,3 +1,11 @@
+Version 1.6.1
+=============
+**Date:** 16-Feb-2015
+
+- (enh #27): Correct initial value initialization for all cases.
+- (enh #28): Upgrade to latest release of bootstrap-daterangepicker plugin.
+- Set copyright year to current.
+
 Version 1.6.0
 =============
 **Date:** 12-Jan-2015

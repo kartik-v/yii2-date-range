@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2014
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015
  * @package yii2-date-range
- * @version 1.5.0
+ * @version 1.6.1
  */
 
 namespace kartik\daterange;
