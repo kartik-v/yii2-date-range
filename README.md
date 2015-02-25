@@ -1,6 +1,12 @@
 yii2-date-range
 =================
 
+[![Latest Stable Version](https://poser.pugx.org/kartik-v/yii2-date-range/v/stable.svg)](https://packagist.org/packages/kartik-v/yii2-date-range)
+[![License](https://poser.pugx.org/kartik-v/yii2-date-range/license.svg)](https://packagist.org/packages/kartik-v/yii2-date-range)
+[![Total Downloads](https://poser.pugx.org/kartik-v/yii2-date-range/downloads.svg)](https://packagist.org/packages/kartik-v/yii2-date-range)
+[![Monthly Downloads](https://poser.pugx.org/kartik-v/yii2-date-range/d/monthly.png)](https://packagist.org/packages/kartik-v/yii2-date-range)
+[![Daily Downloads](https://poser.pugx.org/kartik-v/yii2-date-range/d/daily.png)](https://packagist.org/packages/kartik-v/yii2-date-range)
+
 An advanced date range picker input for Yii Framework 2 based on [dangrossman/bootstrap-daterangepicker plugin](https://github.com/dangrossman/bootstrap-daterangepicker). 
 The date range picker widget is styled for Bootstrap 3.x and creates a dropdown menu from which a user can select a range of dates. If the plugin is invoked with no options, 
 it will present two calendars to choose a start and end date from. Optionally, you can provide a list of date ranges the user can select from instead of 
