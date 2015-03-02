@@ -1,3 +1,12 @@
+Version 1.6.2
+=============
+**Date:** 02-Mar-2015
+
+- (enh #27): Correct initial value initialization for all cases.
+- (enh #28): Upgrade to latest release of bootstrap-daterangepicker plugin.
+- Set copyright year to current.
+- (enh #29): Improve validation to retrieve the right translation messages folder.
+
 Version 1.6.1
 =============
 **Date:** 16-Feb-2015

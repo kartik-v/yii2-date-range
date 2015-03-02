@@ -111,7 +111,7 @@ HTML;
     {
         parent::init();
         $this->_msgCat = 'kvdrp';
-        $this->initI18N();
+        $this->initI18N(__DIR__);
         $this->initLocale();
         if ($this->convertFormat && isset($this->pluginOptions['format'])) {
             $this->pluginOptions['format'] = static::convertDateFormat($this->pluginOptions['format']);
