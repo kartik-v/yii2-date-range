@@ -17,16 +17,16 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Apply' => '',
-    'Cancel' => '',
-    'Custom Range' => '',
-    'From' => '',
-    'Last Month' => '',
-    'Last {n} Days' => '',
-    'Select Date Range' => '',
-    'This Month' => '',
-    'To' => '',
-    'Today' => '',
-    'W' => '',
-    'Yesterday' => '',
+    'Apply' => 'ОК',
+    'Cancel' => 'Скасувати',
+    'Custom Range' => 'Свій діапазон',
+    'From' => 'З',
+    'Last Month' => 'Попередній місяць',
+    'Last {n} Days' => 'Останні {n} днів',
+    'Select Date Range' => 'Оберіть діапазон дат',
+    'This Month' => 'Цей міяць',
+    'To' => 'По',
+    'Today' => 'Сьогодні',
+    'W' => 'Т',
+    'Yesterday' => 'Вчора',
 ];
