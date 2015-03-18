@@ -17,16 +17,16 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Apply' => '',
-    'Cancel' => '',
-    'Custom Range' => '',
-    'From' => '',
-    'Last Month' => '',
-    'Last {n} Days' => '',
-    'Select Date Range' => '',
-    'This Month' => '',
-    'To' => '',
-    'Today' => '',
-    'W' => '',
-    'Yesterday' => '',
+    'Apply' => 'Aplicar',
+    'Cancel' => 'Cancelar',
+    'Custom Range' => 'Definir Período',
+    'From' => 'Desde',
+    'Last Month' => 'Último Mês',
+    'Last {n} Days' => 'Últimos {n} Dias',
+    'Select Date Range' => 'Selecionar Período',
+    'This Month' => 'Este Mês',
+    'To' => 'Até',
+    'Today' => 'Hoje',
+    'W' => 'W',
+    'Yesterday' => 'Ontem',
 ];
