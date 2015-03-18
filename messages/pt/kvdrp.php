@@ -21,7 +21,7 @@ return [
     'Cancel' => 'Cancelar',
     'Custom Range' => 'Definir Período',
     'From' => 'Desde',
-    'Last Month' => 'Último Mês',
+    'Last Month' => 'Mês Passado',
     'Last {n} Days' => 'Últimos {n} Dias',
     'Select Date Range' => 'Selecionar Período',
     'This Month' => 'Este Mês',
