@@ -17,15 +17,11 @@ namespace kartik\daterange;
 class MomentAsset extends \kartik\base\AssetBundle
 {
     public $jsOptions = ['position' => \yii\web\View::POS_HEAD];
+    
+    public $sourcePath = '@bower/bootstrap-daterangepicker'; 
 
-    /**
-     * @inheritdoc
-     */
-    public function init()
-    {
-        $this->setSourcePath(__DIR__ . '/assets');
-        $this->setupAssets('js', ['js/moment']);
-        parent::init();
-    }
+    public $js = [
+        'moment.js',
+    ];
 
 }
