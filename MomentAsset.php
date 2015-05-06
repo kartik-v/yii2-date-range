@@ -18,7 +18,7 @@ class MomentAsset extends \kartik\base\AssetBundle
 {
     public $jsOptions = ['position' => \yii\web\View::POS_HEAD];
     
-    public $sourcePath = '@bower/bootstrap-daterangepicker'; 
+    public $sourcePath = '@bower/moment'; 
 
     public $js = [
         'moment.js',
