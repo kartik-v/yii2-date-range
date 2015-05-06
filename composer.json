@@ -14,7 +14,8 @@
     ],
     "minimum-stability": "stable",
     "require": {
-        "kartik-v/yii2-krajee-base": "*"
+        "kartik-v/yii2-krajee-base": "*",
+        "bower-asset/bootstrap-daterangepicker":"*"
     },
     "autoload": {
         "psr-4": {
