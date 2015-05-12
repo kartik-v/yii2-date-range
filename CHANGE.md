@@ -1,3 +1,12 @@
+Version 1.6.3
+=============
+**Date:** 12-May-2015
+
+- (enh #31): Add Ukranian translations.
+- (enh #32): Add Portugese translations.
+- (enh #36): Add Polish translations.
+- (enh #38): Update to latest release of bootstrap-datarangepicker plugin.
+
 Version 1.6.2
 =============
 **Date:** 02-Mar-2015
