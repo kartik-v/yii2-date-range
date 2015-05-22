@@ -4,7 +4,7 @@
     "keywords": ["yii2", "extension", "widget", "date-range", "time", "date", "range", "bootstrap", "bootstrap 3"],
     "homepage": "https://github.com/kartik-v/yii2-date-range",
     "type": "yii2-extension",
-    "license": "BSD 3-Clause",
+    "license": "BSD-3-Clause",
     "authors": [
         {
             "name": "Kartik Visweswaran",
