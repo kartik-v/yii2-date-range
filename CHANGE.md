@@ -1,3 +1,9 @@
+Version 1.6.4
+=============
+**Date:** 30-May-2015
+
+- (enh #41): Add Simplified Chinese translations.
+
 Version 1.6.3
 =============
 **Date:** 22-May-2015
