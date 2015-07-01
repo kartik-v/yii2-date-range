@@ -17,16 +17,16 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Apply' => '',
-    'Cancel' => '',
-    'Custom Range' => '',
-    'From' => '',
-    'Last Month' => '',
-    'Last {n} Days' => '',
-    'Select Date Range' => '',
-    'This Month' => '',
-    'To' => '',
-    'Today' => '',
-    'W' => '',
-    'Yesterday' => '',
+    'Apply' => 'Aplikovať',
+    'Cancel' => 'Zrušiť',
+    'Custom Range' => 'Vlastný rozsah',
+    'From' => 'Od',
+    'Last Month' => 'Predchádzajúci mesiac',
+    'Last {n} Days' => 'Posledných {n} dní',
+    'Select Date Range' => 'Výber dátumového rozsahu',
+    'This Month' => 'Aktuálny mesiac',
+    'To' => 'Do',
+    'Today' => 'Dnes',
+    'W' => 'T',
+    'Yesterday' => 'Včera',
 ];
