@@ -6,6 +6,7 @@ Version 1.6.4
 - (enh #43): Add Slovak translations.
 - (bug #45): Correct MomentAsset dependency.
 - (enh #46): Better defaulting of `form-control` CSS class.
+- (enh #50): Enhancement for single date picker plugin functionality.
 - (enh #51): Update to latest release of bootstrap-datarangepicker plugin.
 
 Version 1.6.3

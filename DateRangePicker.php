@@ -308,9 +308,13 @@ function(start, end) {
 JS;
             } elseif ($this->useWithAddon) {
                 $id = "{$input}.closest('.input-group')";
+                $val = "start.format('{$this->_format}') + '{$this->_separator}' + end.format('{$this->_format}')";
+                if (ArrayHelper::getValue($this->pluginOptions, 'singleDatePicker', false)) {
+                    $val = "start.format('{$this->_format}')";
+                }
                 $this->callback = <<< JS
 function(start, end) {
-    var val = start.format('{$this->_format}') + '{$this->_separator}' + end.format('{$this->_format}');
+    var val = {$val};
     {$input}.val(val);
     {$input}.trigger('change');
 }
