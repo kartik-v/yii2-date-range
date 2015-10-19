@@ -16,7 +16,8 @@ namespace kartik\daterange;
  */
 class MomentAsset extends \kartik\base\AssetBundle
 {
-    public $jsOptions = ['position' => \yii\web\View::POS_HEAD];
+    public $jsOptions = ['position' => \yii\web\View::POS_HEAD];  
+    public $depends = [];
 
     /**
      * @inheritdoc
