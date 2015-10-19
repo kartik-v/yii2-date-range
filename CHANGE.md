@@ -4,6 +4,7 @@ Version 1.6.4
 
 - (enh #41): Add Simplified Chinese translations.
 - (enh #43): Add Slovak translations.
+- (enh #46): Better defaulting of `form-control` CSS class.
 - (enh #51): Update to latest release of bootstrap-datarangepicker plugin.
 
 Version 1.6.3

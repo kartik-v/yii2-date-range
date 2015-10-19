@@ -83,6 +83,12 @@ class DateRangePicker extends \kartik\base\InputWidget
             {input}
         </span>
 HTML;
+
+    /**
+     * @var array the HTML attributes for the form input
+     */
+    public $options = ['class' => 'form-control'];
+    
     /**
      * @inherit doc
      */
@@ -325,7 +331,6 @@ JS;
     protected function renderInput()
     {
         if (!$this->hideInput) {
-            Html::addCssClass($this->options, 'form-control');
             return $this->getInput('textInput');
         }
         $tag = ArrayHelper::remove($this->containerOptions, 'tag', 'div');
