@@ -3,7 +3,7 @@
 /**
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015
  * @package yii2-date-range
- * @version 1.6.3
+ * @version 1.6.4
  */
 
 namespace kartik\daterange;
@@ -113,11 +113,12 @@ HTML;
         $this->_msgCat = 'kvdrp';
         $this->initI18N(__DIR__);
         $this->initLocale();
-        if ($this->convertFormat && isset($this->pluginOptions['format'])) {
-            $this->pluginOptions['format'] = static::convertDateFormat($this->pluginOptions['format']);
+        if ($this->convertFormat && isset($this->pluginOptions['locale']) && isset($this->pluginOptions['locale']['format'])) {
+            $this->pluginOptions['locale']['format'] = static::convertDateFormat($this->pluginOptions['locale']['format']);
         }
-        $this->_format = ArrayHelper::getValue($this->pluginOptions, 'format', 'YYYY-MM-DD');
-        $this->_separator = ArrayHelper::getValue($this->pluginOptions, 'separator', ' - ');
+        $locale = ArrayHelper::getValue($this->pluginOptions, 'locale', []);
+        $this->_format = ArrayHelper::getValue($locale, 'format', 'YYYY-MM-DD');
+        $this->_separator = ArrayHelper::getValue($locale, 'separator', ' - ');
         if (!empty($this->value)) {
             $dates = explode($this->_separator, $this->value);
             if (count($dates) > 1) {

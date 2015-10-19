@@ -1,8 +1,10 @@
 Version 1.6.4
 =============
-**Date:** 30-May-2015
+**Date:** 19-Oct-2015
 
 - (enh #41): Add Simplified Chinese translations.
+- (enh #43): Add Slovak translations.
+- (enh #51): Update to latest release of bootstrap-datarangepicker plugin.
 
 Version 1.6.3
 =============

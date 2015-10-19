@@ -3,7 +3,7 @@
 /**
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015
  * @package yii2-date-range
- * @version 1.6.3
+ * @version 1.6.4
  */
 
 namespace kartik\daterange;
