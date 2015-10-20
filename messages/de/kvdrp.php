@@ -19,7 +19,7 @@
 return [
     'Apply' => 'anwenden',
     'Cancel' => 'stornieren',
-    'Custom Range' => 'Kundenbereich',
+    'Custom Range' => 'Benutzerdefiniert',
     'From' => 'von',
     'Last Month' => 'Letzter Monat',
     'Last {n} Days' => 'Letzte {n} Tage',
