@@ -2,10 +2,10 @@ yii2-date-range
 =================
 
 [![Latest Stable Version](https://img.shields.io/packagist/v/kartik-v/yii2-date-range.svg)](https://packagist.org/packages/kartik-v/yii2-date-range)
-[![License](https://img.shields.io/packagist/l/kartik-v/yii2-date-range.svg)](https://packagist.org/packages/kartik-v/yii2-date-range)
-[![Total Downloads](https://img.shields.io/packagist/dt/kartik-v/yii2-date-range.svg)](https://packagist.org/packages/kartik-v/yii2-date-range)
-[![Monthly Downloads](https://img.shields.io/packagist/dm/kartik-v/yii2-date-range.svg)](https://packagist.org/packages/kartik-v/yii2-date-range)
-[![Daily Downloads](https://img.shields.io/packagist/dd/kartik-v/yii2-date-range.svg)](https://packagist.org/packages/kartik-v/yii2-date-range)
+[![License](https://poser.pugx.org/kartik-v/yii2-date-range/license)](https://packagist.org/packages/kartik-v/yii2-date-range)
+[![Total Downloads](https://poser.pugx.org/kartik-v/yii2-date-range/downloads)](https://packagist.org/packages/kartik-v/yii2-date-range)
+[![Monthly Downloads](https://poser.pugx.org/kartik-v/yii2-date-range/d/monthly)](https://packagist.org/packages/kartik-v/yii2-date-range)
+[![Daily Downloads](https://poser.pugx.org/kartik-v/yii2-date-range/d/daily)](https://packagist.org/packages/kartik-v/yii2-date-range)
 
 An advanced date range picker input for Yii Framework 2 based on [dangrossman/bootstrap-daterangepicker plugin](https://github.com/dangrossman/bootstrap-daterangepicker). 
 The date range picker widget is styled for Bootstrap 3.x and creates a dropdown menu from which a user can select a range of dates. If the plugin is invoked with no options, 
@@ -27,7 +27,7 @@ Additional enhancements added for this widget (by Krajee):
 You can see detailed [documentation](http://demos.krajee.com/date-range) on usage of the extension.
 
 ### Latest Release
-The latest version of the extension is release v1.6.4. Refer the [CHANGE LOG](https://github.com/kartik-v/yii2-date-range/blob/master/CHANGE.md) for details of various releases.
+The latest version of the extension is release v1.6.5. Refer the [CHANGE LOG](https://github.com/kartik-v/yii2-date-range/blob/master/CHANGE.md) for details of various releases.
 
 ## Installation
 
@@ -63,7 +63,9 @@ echo DateRangePicker::widget([
     'pluginOptions'=>[
         'timePicker'=>true,
         'timePickerIncrement'=>30,
-        'locale'=>['format'=>'Y-m-d h:i A']
+        'locale'=>[
+            'format'=>'Y-m-d h:i A'
+        ]
     ]
 ]);
 ```

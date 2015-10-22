@@ -3,7 +3,7 @@
 /**
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015
  * @package yii2-date-range
- * @version 1.6.4
+ * @version 1.6.5
  */
 
 namespace kartik\daterange;
@@ -13,63 +13,69 @@ use yii\base\InvalidConfigException;
 use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
 use yii\web\JsExpression;
-use yii\web\View;
+use kartik\base\InputWidget;
 
 /**
- * An advanced date range picker input for Yii Framework 2 based on
- * bootstrap-daterangepicker plugin.
+ * An advanced date range picker input for Yii Framework 2 based on bootstrap-daterangepicker plugin.
  *
  * @see https://github.com/dangrossman/bootstrap-daterangepicker
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since 1.0
  */
-class DateRangePicker extends \kartik\base\InputWidget
+class DateRangePicker extends InputWidget
 {
     /**
-     * @var string the javascript callback to be passed to the plugin constructor.
-     * Note: a default value is set for this when you set `hideInput` to false, OR
-     * you set `useWithAddon` to `true`.
+     * @var string the javascript callback to be passed to the plugin constructor. Note: a default value is set for
+     * this property when you set `hideInput` to false, OR you set `useWithAddon` to `true` or `autoUpdateOnInit` to
+     * `false`. If you set a value here it will override any auto-generated callbacks.
      */
-    public $callback;
+    public $callback = null;
+
     /**
-     * @var boolean whether to hide the input (e.g. when you want to show the date
-     * range picker as a dropdown). If set to true, the input will be hidden. The plugin
-     * will be initialized on a container element (default 'div'), using the container template.
-     * A default `callback` will be setup in this case to display the selected range value within
-     * the container.
+     * @var boolean whether to auto update the input on initialization. If set to `false`, this will auto set the
+     * plugin's `autoUpdateInput` to `false`. A default `callback` will be auto-generated when this is set to `false`.
+     */
+    public $autoUpdateOnInit = false;
+
+    /**
+     * @var boolean whether to hide the input (e.g. when you want to show the date range picker as a dropdown). If set
+     * to `true`, the input will be hidden. The plugin will be initialized on a container element (default 'div'),
+     * using the container template. A default `callback` will be setup in this case to display the selected range
+     * value within the container.
      */
     public $hideInput = false;
+
     /**
-     * @var boolean whether you are using the picker with a input group addon. You can set it
-     * to `true`, when `hideInput` is false, and you wish to show the picker position more
-     * correctly at the input-group-addon icon. A default `callback` will be setup in this case
-     * to generate the selected range value for the input.
+     * @var boolean whether you are using the picker with a input group addon. You can set it to `true`, when
+     * `hideInput` is false, and you wish to show the picker position more correctly at the input-group-addon icon.
+     * A default `callback` will be generated in this case to generate the selected range value for the input.
      */
     public $useWithAddon = false;
+
     /**
-     * @var initialize all the list values set in `pluginOptions['ranges']`
-     * and convert all values to yii\web\JsExpression
+     * @var boolean initialize all the list values set in `pluginOptions['ranges']` and convert all values to
+     * `yii\web\JsExpression`
      */
     public $initRangeExpr = true;
+
     /**
-     * @var boolean show a preset dropdown. If set to true, this will automatically generate
-     * a preset list of ranges for selection. Setting this to true will also automatically
-     * set `initRangeExpr` to true.
+     * @var boolean show a preset dropdown. If set to true, this will automatically generate a preset list of ranges
+     * for selection. Setting this to true will also automatically set `initRangeExpr` to true.
      */
     public $presetDropdown = false;
+
     /**
-     * @var array the HTML attributes for the container, if hideInput is set
-     * to true. The following special options are recognized:
-     * `tag`: string, the HTML tag for rendering the container. Defaults to `div`.
+     * @var array the HTML attributes for the container, if hideInput is set to true. The following special options
+     * are recognized:
+     * - `tag`: string, the HTML tag for rendering the container. Defaults to `div`.
      */
     public $containerOptions = ['class' => 'drp-container input-group'];
 
     /**
-     * @var array the template for rendering the container, when hideInput is set
-     * to true. The special tag `{input}` will be replaced with the hidden form input.
-     * In addition, the element with css class `range-value` will be replaced by the
-     * calculated plugin value. The special tag `{value}` will be replaced with the
-     * value of the hidden form input during initialization
+     * @var array the template for rendering the container, when hideInput is set to `true`. The special tag `{input}`
+     * will be replaced with the hidden form input. In addition, the element with css class `range-value` will be
+     * replaced by the calculated plugin value. The special tag `{value}` will be replaced with the value of the hidden
+     * form input during initialization
      */
     public $containerTemplate = <<< HTML
         <span class="input-group-addon">
@@ -88,11 +94,12 @@ HTML;
      * @var array the HTML attributes for the form input
      */
     public $options = ['class' => 'form-control'];
-    
+
     /**
      * @inherit doc
      */
     protected $_pluginName = 'daterangepicker';
+
     /**
      * @var string locale language to be used for the plugin
      */
@@ -101,12 +108,12 @@ HTML;
     /**
      * @var string the pluginOptions format for the date time
      */
-    private $_format;
+    protected $_format;
 
     /**
      * @var string the pluginOptions separator
      */
-    private $_separator;
+    protected $_separator;
 
     /**
      * Initializes the widget
@@ -134,6 +141,11 @@ HTML;
         }
         $value = empty($this->value) ? '' : $this->value;
         $this->containerTemplate = str_replace('{value}', $value, $this->containerTemplate);
+
+        // Set `autoUpdateInput` to false for certain settings
+        if (!$this->autoUpdateOnInit || $this->hideInput || $this->useWithAddon) {
+            $this->pluginOptions['autoUpdateInput'] = false;
+        }
 
         $this->initRange();
         $this->containerOptions['id'] = $this->options['id'] . '-container';
@@ -166,8 +178,8 @@ HTML;
     }
 
     /**
-     * Automatically convert the date format from PHP DateTime to Moment.js DateTime format
-     * as required by bootstrap-daterangepicker plugin.
+     * Automatically convert the date format from PHP DateTime to Moment.js DateTime format as required by
+     * the `bootstrap-daterangepicker` plugin.
      *
      * @see http://php.net/manual/en/function.date.php
      * @see http://momentjs.com/docs/#/parsing/string-format/
@@ -230,6 +242,7 @@ HTML;
     protected function initRange()
     {
         if (isset($dummyValidation)) {
+            /** @noinspection PhpUnusedLocalVariableInspection */
             $msg = Yii::t('kvdrp', 'Select Date Range');
         }
         if ($this->presetDropdown) {
@@ -297,32 +310,23 @@ HTML;
         }
         DateRangePickerAsset::register($view);
         if (empty($this->callback)) {
+            $val = "start.format('{$this->_format}') + '{$this->_separator}' + end.format('{$this->_format}')";
+            if (ArrayHelper::getValue($this->pluginOptions, 'singleDatePicker', false)) {
+                $val = "start.format('{$this->_format}')";
+            }
+            $change = "{$input}.val(val);{$input}.trigger('change');";
             if ($this->hideInput) {
-                $this->callback = <<< JS
-function(start, end) {
-    var val = start.format('{$this->_format}') + '{$this->_separator}' + end.format('{$this->_format}');
-    {$id}.find('.range-value').html(val);
-    {$input}.val(val);
-    {$input}.trigger('change');
-}
-JS;
+                $script = "var val={$val};{$id}.find('.range-value').html(val);{$change}";
             } elseif ($this->useWithAddon) {
                 $id = "{$input}.closest('.input-group')";
-                $val = "start.format('{$this->_format}') + '{$this->_separator}' + end.format('{$this->_format}')";
-                if (ArrayHelper::getValue($this->pluginOptions, 'singleDatePicker', false)) {
-                    $val = "start.format('{$this->_format}')";
-                }
-                $this->callback = <<< JS
-function(start, end) {
-    var val = {$val};
-    {$input}.val(val);
-    {$input}.trigger('change');
-}
-JS;
+                $script = "var val={$val};{$change}";
+            } elseif (!$this->autoUpdateOnInit) {
+                $script = "var val={$val};{$change}";
             } else {
                 $this->registerPlugin($this->_pluginName, $id);
                 return;
             }
+            $this->callback = "function(start,end,label){{$script}}";
         }
         $this->registerPlugin($this->_pluginName, $id, null, $this->callback);
     }
