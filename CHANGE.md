@@ -1,6 +1,13 @@
 Change Log: `yii2-date-range`
 =============================
 
+## Version 1.6.6
+
+**Date:** 11-Jan-2016
+
+- (enh #55): Enhancements for PJAX based reinitialization. Complements enhancements in kartik-v/yii2-krajee-base#52 and kartik-v/yii2-krajee-base#53.
+- (enh #56): Update to latest version of bootstrap-daterangepicker.
+
 ## Version 1.6.5
 
 **Date:** 22-Oct-2015

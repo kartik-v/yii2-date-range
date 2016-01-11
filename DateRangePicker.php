@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015 - 2016
  * @package yii2-date-range
- * @version 1.6.5
+ * @version 1.6.6
  */
 
 namespace kartik\daterange;
@@ -96,9 +96,9 @@ HTML;
     public $options = ['class' => 'form-control'];
 
     /**
-     * @inherit doc
+     * @inheritdoc
      */
-    protected $_pluginName = 'daterangepicker';
+    public $pluginName = 'daterangepicker';
 
     /**
      * @var string locale language to be used for the plugin
@@ -323,12 +323,12 @@ HTML;
             } elseif (!$this->autoUpdateOnInit) {
                 $script = "var val={$val};{$change}";
             } else {
-                $this->registerPlugin($this->_pluginName, $id);
+                $this->registerPlugin($this->pluginName, $id);
                 return;
             }
             $this->callback = "function(start,end,label){{$script}}";
         }
-        $this->registerPlugin($this->_pluginName, $id, null, $this->callback);
+        $this->registerPlugin($this->pluginName, $id, null, $this->callback);
     }
 
     /**
