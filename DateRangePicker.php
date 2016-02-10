@@ -362,18 +362,23 @@ HTML;
     {
         if (!$this->hideInput) {
             $content = $this->getInput('textInput');
+        } else {
+            $content = str_replace('{input}', $this->getInput('hiddenInput'), $this->containerTemplate);
+        }
             
-            if ($this->minAttribute) {
-                $content .=$this->renderMinInput();
-            }
-            if ($this->maxAttribute) {
-                $content .=$this->renderMaxInput();
-            }
+        if ($this->minAttribute) {
+            $content .= $this->renderMinInput();
+        }
+        
+        if ($this->maxAttribute) {
+            $content .= $this->renderMaxInput();
+        }
 
+        if (!$this->hideInput) {
             return $content;
         }
+
         $tag = ArrayHelper::remove($this->containerOptions, 'tag', 'div');
-        $content = str_replace('{input}', $this->getInput('hiddenInput'), $this->containerTemplate);
 
         return Html::tag($tag, $content, $this->containerOptions);
     }
