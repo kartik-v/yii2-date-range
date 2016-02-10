@@ -69,6 +69,25 @@ echo DateRangePicker::widget([
     ]
 ]);
 ```
+or using seperate min/max attributes on model
+
+```php
+use kartik\daterange\DateRangePicker;
+echo DateRangePicker::widget([
+    'model'=>$model,
+    'attribute'=>'datetime_range',
+    'convertFormat'=>true,
+    'minAttribute'=>'datetime_min',
+    'maxAttribute'=>'datetime_max',
+    'pluginOptions'=>[
+        'timePicker'=>true,
+        'timePickerIncrement'=>30,
+        'locale'=>[
+            'format'=>'Y-m-d h:i A'
+        ]
+    ]
+]);
+```
 
 ## License
 
