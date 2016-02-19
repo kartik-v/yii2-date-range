@@ -17,16 +17,16 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Apply' => '',
-    'Cancel' => '',
-    'Custom Range' => '',
-    'From' => '',
-    'Last Month' => '',
-    'Last {n} Days' => '',
-    'Select Date Range' => '',
-    'This Month' => '',
-    'To' => '',
-    'Today' => '',
-    'W' => '',
-    'Yesterday' => '',
+    'Apply' => 'Rendben',
+    'Cancel' => 'Mégsem',
+    'Custom Range' => 'Egyedi időszak',
+    'From' => 'Tól',
+    'Last Month' => 'Múlt hónap',
+    'Last {n} Days' => 'Utolsó {n} nap',
+    'Select Date Range' => 'Válasszon dátumokat',
+    'This Month' => 'E hónap',
+    'To' => 'Ig',
+    'Today' => 'Ma',
+    'W' => 'Hét',
+    'Yesterday' => 'Tegnap',
 ];
