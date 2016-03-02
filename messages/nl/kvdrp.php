@@ -24,7 +24,7 @@ return [
     'Last Month' => 'Laatste maand',
     'Last {n} Days' => 'Laatste {n} dagen',
     'Select Date Range' => 'Selecteer datum bereik',
-    'This Month' => 'Deze maan',
+    'This Month' => 'Deze maand',
     'To' => 'Tot',
     'Today' => 'Vandaag',
     'W' => 'W',
