@@ -72,6 +72,16 @@ class DateRangePicker extends InputWidget
     public $containerOptions = ['class' => 'drp-container input-group'];
 
     /**
+     * @var
+     */
+    public $minAttribute;
+
+    /**
+     * @var
+     */
+    public $maxAttribute;
+
+    /**
      * @var array the template for rendering the container, when hideInput is set to `true`. The special tag `{input}`
      * will be replaced with the hidden form input. In addition, the element with css class `range-value` will be
      * replaced by the calculated plugin value. The special tag `{value}` will be replaced with the value of the hidden
@@ -311,10 +321,22 @@ HTML;
         DateRangePickerAsset::register($view);
         if (empty($this->callback)) {
             $val = "start.format('{$this->_format}') + '{$this->_separator}' + end.format('{$this->_format}')";
+            
             if (ArrayHelper::getValue($this->pluginOptions, 'singleDatePicker', false)) {
                 $val = "start.format('{$this->_format}')";
             }
-            $change = "{$input}.val(val);{$input}.trigger('change');";
+            $change = '';
+            if ($this->minAttribute) {
+                $inputMin = 'jQuery("#' . $this->options['id'] . '-min")';
+                $change .="{$inputMin}.val(start.format('{$this->_format}'));";
+            }
+            
+            if ($this->maxAttribute) {
+                $inputMax = 'jQuery("#' . $this->options['id'] . '-max")';
+                $change .="{$inputMax}.val(end.format('{$this->_format}'));";
+            }
+            
+            $change .= "{$input}.val(val);{$input}.trigger('change');";
             if ($this->hideInput) {
                 $script = "var val={$val};{$id}.find('.range-value').html(val);{$change}";
             } elseif ($this->useWithAddon) {
@@ -339,10 +361,34 @@ HTML;
     protected function renderInput()
     {
         if (!$this->hideInput) {
-            return $this->getInput('textInput');
+            $content = $this->getInput('textInput');
+        } else {
+            $content = str_replace('{input}', $this->getInput('hiddenInput'), $this->containerTemplate);
         }
+            
+        if ($this->minAttribute) {
+            $content .= $this->renderMinInput();
+        }
+        
+        if ($this->maxAttribute) {
+            $content .= $this->renderMaxInput();
+        }
+
+        if (!$this->hideInput) {
+            return $content;
+        }
+
         $tag = ArrayHelper::remove($this->containerOptions, 'tag', 'div');
-        $content = str_replace('{input}', $this->getInput('hiddenInput'), $this->containerTemplate);
+
         return Html::tag($tag, $content, $this->containerOptions);
+    }
+
+    protected function renderMinInput()
+    {
+        return Html::activeHiddenInput($this->model, $this->minAttribute, ['id'=>$this->options['id'].'-min']);
+    }
+    protected function renderMaxInput()
+    {
+        return Html::activeHiddenInput($this->model, $this->maxAttribute, ['id'=>$this->options['id'].'-max']);
     }
 }
