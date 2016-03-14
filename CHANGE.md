@@ -1,6 +1,16 @@
 Change Log: `yii2-date-range`
 =============================
 
+## Version 1.6.7
+
+**Date:** 14-Mar-2016
+
+- (enh #58): Add support for separate start and end attributes and inputs.
+- (enh #59): Add Hungarian Translations.
+- (enh #61): Add Dutch Translations.
+- (enh #62): Add Romanian Translations.
+- Add branch alias for dev-master latest release.
+
 ## Version 1.6.6
 
 **Date:** 11-Jan-2016

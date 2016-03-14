@@ -77,8 +77,8 @@ echo DateRangePicker::widget([
     'model'=>$model,
     'attribute'=>'datetime_range',
     'convertFormat'=>true,
-    'minAttribute'=>'datetime_min',
-    'maxAttribute'=>'datetime_max',
+    'startAttribute'=>'datetime_min',
+    'endAttribute'=>'datetime_max',
     'pluginOptions'=>[
         'timePicker'=>true,
         'timePickerIncrement'=>30,

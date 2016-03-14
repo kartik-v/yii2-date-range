@@ -3,7 +3,7 @@
 /**
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015 - 2016
  * @package yii2-date-range
- * @version 1.6.6
+ * @version 1.6.7
  */
 
 namespace kartik\daterange;
@@ -28,5 +28,4 @@ class MomentAsset extends \kartik\base\AssetBundle
         $this->setupAssets('js', ['js/moment']);
         parent::init();
     }
-
 }
