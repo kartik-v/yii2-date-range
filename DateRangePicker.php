@@ -234,7 +234,7 @@ HTML;
             'toLabel' => Yii::t('kvdrp', 'To'),
             'weekLabel' => Yii::t('kvdrp', 'W'),
             'customRangeLabel' => Yii::t('kvdrp', 'Custom Range'),
-            'daysOfWeek' => new JsExpression('moment.weekdaysStart()'),
+            'daysOfWeek' => new JsExpression('moment.weekdaysShort()'),
             'monthNames' => new JsExpression('moment.monthsShort()'),
             'firstDay' => new JsExpression('moment.localeData()._week.dow')
         ];
