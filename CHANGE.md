@@ -11,6 +11,7 @@ Change Log: `yii2-date-range`
 - (enh #62): Add Romanian Translations.
 - Add branch alias for dev-master latest release.
 - (bug #65): Correct moment `weekdaysStart` to `weekdaysMin`.
+- (enh #67): Parse input change correctly when range input value is cleared
 
 ## Version 1.6.6
 

@@ -378,7 +378,8 @@ HTML;
             if (ArrayHelper::getValue($this->pluginOptions, 'singleDatePicker', false)) {
                 $val = "start.format('{$this->_format}')";
             }
-            $change = $this->getRangeJs('start') . $this->getRangeJs('end') . "{$input}.val(val).trigger('change');";
+            $rangeJs = $this->getRangeJs('start') . $this->getRangeJs('end');
+            $change =  $rangeJs . "{$input}.val(val).trigger('change');";
             if ($this->hideInput) {
                 $script = "var val={$val};{$id}.find('.range-value').html(val);{$change}";
             } elseif ($this->useWithAddon) {
@@ -392,6 +393,20 @@ HTML;
             }
             $this->callback = "function(start,end,label){{$script}}";
         }
+        // parse input change correctly when range input value is cleared
+        $js = <<< JS
+{$input}.off('change.kvdrp').on('change.kvdrp', function() {
+    var drp = {$id}.data('{$this->pluginName}'), now;
+    if ($(this).val() || !drp) {
+        return;
+    }
+    now = moment().format('{$this->_format}') || '';
+    drp.setStartDate(now);
+    drp.setEndDate(now);
+    {$rangeJs};
+});
+JS;
+        $view->registerJs($js);
         $this->registerPlugin($this->pluginName, $id, null, $this->callback);
     }
 
@@ -426,7 +441,8 @@ HTML;
         }
         $opts = $type . 'InputOptions';
         $options = $this->$opts;
-        return "jQuery('#" . $options['id'] . "').val({$type}.format('{$this->_format}'));";
+        $input = "jQuery('#" . $this->options['id'] . "')";
+        return "var v={$input}.val() ? {$type}.format('{$this->_format}') : '';jQuery('#" . $options['id'] . "').val(v).trigger('change');";
     }
 
     /**
