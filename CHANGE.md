@@ -10,6 +10,7 @@ Change Log: `yii2-date-range`
 - (enh #61): Add Dutch Translations.
 - (enh #62): Add Romanian Translations.
 - Add branch alias for dev-master latest release.
+- (bug #65): Correct moment `weekdaysStart` to `weekdaysMin`.
 
 ## Version 1.6.6
 
