@@ -8,12 +8,12 @@
 
 namespace kartik\daterange;
 
+use kartik\base\InputWidget;
 use Yii;
 use yii\base\InvalidConfigException;
-use yii\helpers\Html;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
 use yii\web\JsExpression;
-use kartik\base\InputWidget;
 
 /**
  * An advanced date range picker input for Yii Framework 2 based on bootstrap-daterangepicker plugin.
@@ -373,6 +373,7 @@ HTML;
             LanguageAsset::register($view)->js[] = $this->_langFile;
         }
         DateRangePickerAsset::register($view);
+        $rangeJs = '';
         if (empty($this->callback)) {
             $val = "start.format('{$this->_format}') + '{$this->_separator}' + end.format('{$this->_format}')";
             if (ArrayHelper::getValue($this->pluginOptions, 'singleDatePicker', false)) {
@@ -403,7 +404,7 @@ HTML;
     now = moment().format('{$this->_format}') || '';
     drp.setStartDate(now);
     drp.setEndDate(now);
-    {$rangeJs};
+    {$rangeJs}
 });
 JS;
         $view->registerJs($js);
@@ -442,7 +443,8 @@ JS;
         $opts = $type . 'InputOptions';
         $options = $this->$opts;
         $input = "jQuery('#" . $this->options['id'] . "')";
-        return "var v={$input}.val() ? {$type}.format('{$this->_format}') : '';jQuery('#" . $options['id'] . "').val(v).trigger('change');";
+        return "var v={$input}.val() ? {$type}.format('{$this->_format}') : '';jQuery('#" . $options['id'] .
+            "').val(v).trigger('change');";
     }
 
     /**
