@@ -17,16 +17,16 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Apply' => '',
-    'Cancel' => '',
-    'Custom Range' => '',
-    'From' => '',
-    'Last Month' => '',
-    'Last {n} Days' => '',
-    'Select Date Range' => '',
-    'This Month' => '',
-    'To' => '',
-    'Today' => '',
-    'W' => '',
-    'Yesterday' => '',
+    'Apply' => 'นำไปใช้',
+    'Cancel' => 'ยกเลิก',
+    'Custom Range' => 'กำหนดช่วงเวลา',
+    'From' => 'จาก',
+    'Last Month' => 'เดือนที่แล้ว',
+    'Last {n} Days' => '{n} วันที่แล้ว',
+    'Select Date Range' => 'เลือกระยะเวลา',
+    'This Month' => 'เดือนนี้',
+    'To' => 'ถึง',
+    'Today' => 'วันนี้',
+    'W' => 'W',
+    'Yesterday' => 'เมื่อวานนี้',
 ];
