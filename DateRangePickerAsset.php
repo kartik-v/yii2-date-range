@@ -16,7 +16,10 @@ namespace kartik\daterange;
  */
 class DateRangePickerAsset extends \kartik\base\AssetBundle
 {
-    public $depends = ['\kartik\daterange\MomentAsset'];
+    public $depends = [
+        'yii\web\JqueryAsset',
+        '\kartik\daterange\MomentAsset'
+    ];
 
     /**
      * @inheritdoc
