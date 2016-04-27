@@ -7,6 +7,7 @@
  */
 
 namespace kartik\daterange;
+use kartik\base\AssetBundle;
 
 /**
  * DateRangePicker bundle for \kartik\daterange\DateRangePicker.
@@ -14,15 +15,14 @@ namespace kartik\daterange;
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since 1.0
  */
-class DateRangePickerAsset extends \kartik\base\AssetBundle
+class DateRangePickerAsset extends AssetBundle
 {
-    public $depends = ['\kartik\daterange\MomentAsset'];
-
     /**
      * @inheritdoc
      */
     public function init()
     {
+        $this->depends = array_merge($this->depends, ['kartik\daterange\MomentAsset']);
         $this->setSourcePath(__DIR__ . '/assets');
         $this->setupAssets('css', ['css/daterangepicker', 'css/daterangepicker-kv']);
         $this->setupAssets('js', ['js/daterangepicker']);
