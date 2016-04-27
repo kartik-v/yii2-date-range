@@ -14,7 +14,7 @@ Change Log: `yii2-date-range`
 - (enh #67): Parse input change correctly when range input value is cleared.
 - (enh #68): Update to latest release of bootstrap-daterangepicker plugin and moment library.
 - (enh #71): Add Thai translations.
-- (bug #73): Correct dependency for `DateRangePickerAsset`.
+- (bug #73): Correct dependency for `DateRangePickerAsset` and `LanguageAsset`.
 
 ## Version 1.6.6
 

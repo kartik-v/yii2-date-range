@@ -7,6 +7,7 @@
  */
 
 namespace kartik\daterange;
+use kartik\base\AssetBundle;
 
 /**
  * DateRangeLang bundle for \kartik\daterange\DateRangePicker.
@@ -14,16 +15,16 @@ namespace kartik\daterange;
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since 1.0
  */
-class LanguageAsset extends \kartik\base\AssetBundle
+class LanguageAsset extends AssetBundle
 {
     public $jsOptions = ['position' => \yii\web\View::POS_HEAD];
-    public $depends = ['\kartik\daterange\MomentAsset'];
 
     /**
      * @inheritdoc
      */
     public function init()
     {
+        $this->depends = array_merge($this->depends, ['\kartik\daterange\MomentAsset']);
         $this->setSourcePath(__DIR__ . '/assets');
         parent::init();
     }
