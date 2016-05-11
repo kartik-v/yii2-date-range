@@ -26,35 +26,36 @@ class DateRangePicker extends InputWidget
 {
     /**
      * @var string the javascript callback to be passed to the plugin constructor. Note: a default value is set for
-     * this property when you set `hideInput` to false, OR you set `useWithAddon` to `true` or `autoUpdateOnInit` to
-     * `false`. If you set a value here it will override any auto-generated callbacks.
+     *     this property when you set `hideInput` to false, OR you set `useWithAddon` to `true` or `autoUpdateOnInit`
+     *     to `false`. If you set a value here it will override any auto-generated callbacks.
      */
     public $callback = null;
 
     /**
      * @var boolean whether to auto update the input on initialization. If set to `false`, this will auto set the
-     * plugin's `autoUpdateInput` to `false`. A default `callback` will be auto-generated when this is set to `false`.
+     *     plugin's `autoUpdateInput` to `false`. A default `callback` will be auto-generated when this is set to
+     *     `false`.
      */
     public $autoUpdateOnInit = false;
 
     /**
      * @var boolean whether to hide the input (e.g. when you want to show the date range picker as a dropdown). If set
-     * to `true`, the input will be hidden. The plugin will be initialized on a container element (default 'div'),
-     * using the container template. A default `callback` will be setup in this case to display the selected range
-     * value within the container.
+     *     to `true`, the input will be hidden. The plugin will be initialized on a container element (default 'div'),
+     *     using the container template. A default `callback` will be setup in this case to display the selected range
+     *     value within the container.
      */
     public $hideInput = false;
 
     /**
      * @var boolean whether you are using the picker with a input group addon. You can set it to `true`, when
-     * `hideInput` is false, and you wish to show the picker position more correctly at the input-group-addon icon.
-     * A default `callback` will be generated in this case to generate the selected range value for the input.
+     *     `hideInput` is false, and you wish to show the picker position more correctly at the input-group-addon icon.
+     *     A default `callback` will be generated in this case to generate the selected range value for the input.
      */
     public $useWithAddon = false;
 
     /**
      * @var boolean initialize all the list values set in `pluginOptions['ranges']` and convert all values to
-     * `yii\web\JsExpression`
+     *     `yii\web\JsExpression`
      */
     public $initRangeExpr = true;
 
@@ -380,7 +381,7 @@ HTML;
                 $val = "start.format('{$this->_format}')";
             }
             $rangeJs = $this->getRangeJs('start') . $this->getRangeJs('end');
-            $change =  $rangeJs . "{$input}.val(val).trigger('change');";
+            $change = $rangeJs . "{$input}.val(val).trigger('change');";
             if ($this->hideInput) {
                 $script = "var val={$val};{$id}.find('.range-value').html(val);{$change}";
             } elseif ($this->useWithAddon) {
@@ -428,6 +429,46 @@ JS;
     }
 
     /**
+     * Gets input options based on type
+     *
+     * @param string $type whether `start` or `end`
+     *
+     * @return array|mixed
+     */
+    protected function getInputOpts($type = '')
+    {
+        $opts = $type . 'InputOptions';
+        return isset($this->$opts) && is_array($this->$opts) ? $this->$opts : [];
+    }
+
+    /**
+     * Sets input options for a specific type
+     *
+     * @param string $type whether `start` or `end`
+     * @param array  $options the options to set
+     */
+    protected function setInputOpts($type = '', $options = [])
+    {
+        $opts = $type . 'InputOptions';
+        if (property_exists($this, $opts)) {
+            $this->$opts = $options;
+        }
+    }
+
+    /**
+     * Gets the range attribute value based on type
+     *
+     * @param string $type whether `start` or `end`
+     *
+     * @return mixed|string
+     */
+    protected function getRangeAttr($type = '')
+    {
+        $attr = $type . 'Attribute';
+        return $type && isset($this->$attr) ? $this->$attr : '';
+    }
+
+    /**
      * Generates and returns the client script on date range change, when the start and end attributes are set
      *
      * @param string $type whether `start` or `end`
@@ -436,15 +477,13 @@ JS;
      */
     protected function getRangeJs($type = '')
     {
-        $attr = $type . 'Attribute';
-        if (!$this->$attr) {
+        if (empty($this->getRangeAttr($type))) {
             return '';
         }
-        $opts = $type . 'InputOptions';
-        $options = $this->$opts;
+        $options = $this->getInputOpts($type);
         $input = "jQuery('#" . $this->options['id'] . "')";
         return "var v={$input}.val() ? {$type}.format('{$this->_format}') : '';jQuery('#" . $options['id'] .
-            "').val(v).trigger('change');";
+        "').val(v).trigger('change');";
     }
 
     /**
@@ -456,22 +495,21 @@ JS;
      */
     protected function getRangeInput($type = '')
     {
-        $attr = $type . 'Attribute';
-        if (!$this->$attr) {
+        $attr = $this->getRangeAttr($type);
+        if (empty($attr)) {
             return '';
         }
-        $opts = $type . 'InputOptions';
-        $options = $this->$opts;
+        $options = $this->getInputOpts($type);
         if (empty($options['id'])) {
             $options['id'] = $this->options['id'] . '-' . $type;
         }
         if ($this->hasModel()) {
-            $this->$opts = $options;
-            return Html::activeHiddenInput($this->model, $this->$attr, $options);
+            $this->setInputOpts($type, $options);
+            return Html::activeHiddenInput($this->model, $attr, $options);
         }
         $options['type'] = 'hidden';
-        $options['name'] = $this->$attr;
-        $this->$opts = $options;
+        $options['name'] = $attr;
+        $this->setInputOpts($type, $options);
         return Html::tag('input', '', $options);
     }
 
@@ -483,17 +521,16 @@ JS;
      */
     protected function initRangeValue($type = '', $value = '')
     {
-        $attr = $type . 'Attribute';
-        if (!$this->$attr || empty($value)) {
+        $attr = $this->getRangeAttr($type);
+        if (empty($attr) || empty($value)) {
             return;
         }
         if ($this->hasModel()) {
             $this->model->$attr = $value;
         } else {
-            $opts = $type . 'InputOptions';
-            $options = $this->$opts;
+            $options = $this->getInputOpts($type);
             $options['value'] = $value;
-            $this->$opts = $options;
+            $this->setInputOpts($type, $options);
         }
     }
 
@@ -506,12 +543,12 @@ JS;
      */
     protected function getRangeValue($type = '')
     {
-        $attr = $type . 'Attribute';
-        if (!$this->$attr) {
+        $attr = $this->getRangeAttr($type);
+        if (empty($attr)) {
             return '';
         }
-        $opts = $type . 'InputOptions';
-        return $this->hasModel() ? Html::getAttributeValue($this->model, $this->$attr) :
-            ArrayHelper::getValue($this->$opts, 'value', '');
+        $options = $this->getInputOpts($type);
+        return $this->hasModel() ? Html::getAttributeValue($this->model, $attr) :
+            ArrayHelper::getValue($options, 'value', '');
     }
 }
