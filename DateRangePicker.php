@@ -477,7 +477,8 @@ JS;
      */
     protected function getRangeJs($type = '')
     {
-        if (empty($this->getRangeAttr($type))) {
+        $rangeAttr = $this->getRangeAttr($type);
+        if (empty($rangeAttr)) {
             return '';
         }
         $options = $this->getInputOpts($type);

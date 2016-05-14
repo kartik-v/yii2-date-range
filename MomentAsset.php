@@ -12,7 +12,7 @@ use yii\web\View;
 use kartik\base\AssetBundle;
 
 /**
- * MomentAsset bundle for \kartik\daterange\DateRangePicker.
+ * Moment Asset bundle for \kartik\daterange\DateRangePicker.
  *
  * @author Kartik Visweswaran <kartikv2@gmail.com>
  * @since 1.0

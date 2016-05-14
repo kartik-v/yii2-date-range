@@ -3,7 +3,7 @@ Change Log: `yii2-date-range`
 
 ## Version 1.6.7
 
-**Date:** 11-May-2016
+**Date:** 14-May-2016
 
 - (enh #58): Add support for separate start and end attributes and inputs.
 - (enh #59): Add Hungarian Translations.
@@ -16,6 +16,8 @@ Change Log: `yii2-date-range`
 - (bug #70): More better attribute and input options parsing.
 - (enh #71): Add Thai translations.
 - (bug #73): Correct dependency for `DateRangePickerAsset` and `LanguageAsset`.
+- (bug #74): Correct asset bundle dependency.
+- (bug #75): Correct code for PHP 5.5.
 
 ## Version 1.6.6
 
