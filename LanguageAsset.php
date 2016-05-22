@@ -21,4 +21,5 @@ class LanguageAsset extends AssetBundle
 {
     public $jsOptions = ['position' => View::POS_HEAD];
     public $depends = ['\kartik\daterange\MomentAsset'];
+    public $sourcePath = __DIR__ . '/assets';
 }
