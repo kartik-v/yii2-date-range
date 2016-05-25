@@ -8,8 +8,8 @@
 
 namespace kartik\daterange;
 
-use yii\web\AssetBundle;
 use yii\web\View;
+use kartik\base\AssetBundle;
 
 /**
  * Language Asset bundle for \kartik\daterange\DateRangePicker.
@@ -21,4 +21,13 @@ class LanguageAsset extends AssetBundle
 {
     public $jsOptions = ['position' => View::POS_HEAD];
     public $depends = ['\kartik\daterange\MomentAsset'];
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        $this->setSourcePath(__DIR__ . '/assets');
+        parent::init();
+    }    
 }
