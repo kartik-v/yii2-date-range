@@ -18,12 +18,16 @@ use kartik\base\AssetBundle;
  */
 class DateRangePickerAsset extends AssetBundle
 {
+    public $depends = [
+        '\kartik\daterange\MomentAsset',
+        'yii\web\JqueryAsset'
+    ];
+
     /**
      * @inheritdoc
      */
     public function init()
     {
-        $this->depends = array_merge($this->depends, ['kartik\daterange\MomentAsset']);
         $this->setSourcePath(__DIR__ . '/assets');
         $this->setupAssets('css', ['css/daterangepicker', 'css/daterangepicker-kv']);
         $this->setupAssets('js', ['js/daterangepicker']);
