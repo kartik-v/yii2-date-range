@@ -29,5 +29,5 @@ class LanguageAsset extends AssetBundle
     {
         $this->setSourcePath(__DIR__ . '/assets');
         parent::init();
-    }    
+    }
 }
