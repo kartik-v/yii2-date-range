@@ -375,6 +375,7 @@ HTML;
         }
         DateRangePickerAsset::register($view);
         $rangeJs = '';
+        $addon = '';
         if (empty($this->callback)) {
             $val = "start.format('{$this->_format}') + '{$this->_separator}' + end.format('{$this->_format}')";
             if (ArrayHelper::getValue($this->pluginOptions, 'singleDatePicker', false)) {
@@ -385,7 +386,7 @@ HTML;
             if ($this->hideInput) {
                 $script = "var val={$val};{$id}.find('.range-value').html(val);{$change}";
             } elseif ($this->useWithAddon) {
-                $id = "{$input}.closest('.input-group')";
+                $addon = "$input.parent().find('.input-group-addon').click(function() {$input.click();});";
                 $script = "var val={$val};{$change}";
             } elseif (!$this->autoUpdateOnInit) {
                 $script = "var val={$val};{$change}";
@@ -407,6 +408,7 @@ HTML;
     drp.setEndDate(now);
     {$rangeJs}
 });
+{$addon}
 JS;
         $view->registerJs($js);
         $this->registerPlugin($this->pluginName, $id, null, $this->callback);
