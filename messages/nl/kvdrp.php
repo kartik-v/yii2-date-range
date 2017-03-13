@@ -17,16 +17,16 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Apply' => '',
-    'Cancel' => '',
-    'Custom Range' => '',
-    'From' => '',
-    'Last Month' => '',
-    'Last {n} Days' => '',
-    'Select Date Range' => '',
-    'This Month' => '',
-    'To' => '',
-    'Today' => '',
-    'W' => '',
-    'Yesterday' => '',
+    'Apply' => 'Toepassen',
+    'Cancel' => 'Annuleer',
+    'Custom Range' => 'Aangepast bereik',
+    'From' => 'Van',
+    'Last Month' => 'Laatste maand',
+    'Last {n} Days' => 'Laatste {n} dagen',
+    'Select Date Range' => 'Selecteer datum bereik',
+    'This Month' => 'Deze maand',
+    'To' => 'Tot',
+    'Today' => 'Vandaag',
+    'W' => 'W',
+    'Yesterday' => 'Gisteren',
 ];

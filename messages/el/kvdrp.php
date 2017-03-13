@@ -17,16 +17,16 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Apply' => '',
-    'Cancel' => '',
-    'Custom Range' => '',
-    'From' => '',
-    'Last Month' => '',
-    'Last {n} Days' => '',
-    'Select Date Range' => '',
-    'This Month' => '',
-    'To' => '',
-    'Today' => '',
-    'W' => '',
-    'Yesterday' => '',
+    'Apply' => 'Εφαρμογή',
+    'Cancel' => 'Ακύρωση',
+    'Custom Range' => 'Ευρος από χρήστη',
+    'From' => 'Από',
+    'Last Month' => 'Τελευταίος Μήνας',
+    'Last {n} Days' => 'Τελευταίες {n} Ημέρες',
+    'Select Date Range' => 'Επιλέξτε Εύρος Ημερομηνιών',
+    'This Month' => 'Αυτός Ο Μήνας',
+    'To' => 'Εώς',
+    'Today' => 'Σήμερα',
+    'W' => 'Εβδομάδα',
+    'Yesterday' => 'Εχθές',
 ];

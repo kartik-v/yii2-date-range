@@ -17,16 +17,16 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Apply' => '',
-    'Cancel' => '',
-    'Custom Range' => '',
-    'From' => '',
-    'Last Month' => '',
-    'Last {n} Days' => '',
-    'Select Date Range' => '',
-    'This Month' => '',
-    'To' => '',
-    'Today' => '',
-    'W' => '',
-    'Yesterday' => '',
+    'Apply' => 'Aplica',
+    'Cancel' => 'Renunta',
+    'Custom Range' => 'Interval personalizat',
+    'From' => 'Din',
+    'Last Month' => 'Ultima luna',
+    'Last {n} Days' => 'Ultimele {n} zile',
+    'Select Date Range' => 'Alege intervalul',
+    'This Month' => 'Aceasta luna',
+    'To' => 'Pana la',
+    'Today' => 'Azi',
+    'W' => 'W',
+    'Yesterday' => 'Ieri',
 ];
