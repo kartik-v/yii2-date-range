@@ -70,7 +70,7 @@ class DateRangePicker extends InputWidget
      * are recognized:
      * - `tag`: string, the HTML tag for rendering the container. Defaults to `div`.
      */
-    public $containerOptions = ['class' => 'drp-container input-group'];
+    public $containerOptions = [];
 
     /**
      * @var string the attribute name which you can set optionally to track changes to the range start value. One of
@@ -111,17 +111,20 @@ class DateRangePicker extends InputWidget
      * form input during initialization
      */
     public $containerTemplate = <<< HTML
-        <span class="input-group-addon">
-            <i class="glyphicon glyphicon-calendar"></i>
-        </span>
-        <span class="form-control text-right">
-            <span class="pull-left">
-                <span class="range-value">{value}</span>
-            </span>
-            <b class="caret"></b>
-            {input}
-        </span>
+        <div class="form-control kv-drp-dropdown">
+            <i class="glyphicon glyphicon-calendar"></i>&nbsp;
+            <span class="range-value">{value}</span>
+            <span class="pull-right"><b class="caret"></b></span>
+        </div>
+        {input}
 HTML;
+
+    /**
+     * HTML attributes for span to display default value for preset dropdown. By default for a preset dropdown,
+     * if the value is empty, it will default to "Today". The following special options are supported:
+     * - `tag`: the HTML tag under which the default value markup will be displayed when empty. Defaults to `em`.
+     */
+    public $defaultPresetValueOptions = ['class' => 'text-muted'];
 
     /**
      * @var array the HTML attributes for the form input
@@ -213,6 +216,10 @@ HTML;
         $this->_endInput = $this->getRangeInput('end');
         if (empty($this->containerOptions['id'])) {
             $this->containerOptions['id'] = $this->options['id'] . '-container';
+        }
+        if (empty($this->containerOptions['class'])) {
+            $css = $this->presetDropdown ? '' : ' input-group';
+            $this->containerOptions['class'] = 'kv-drp-container' . $css;
         }
         $this->initRange();
         $this->registerAssets();
@@ -311,7 +318,8 @@ HTML;
             $msg = Yii::t('kvdrp', 'Select Date Range');
         }
         if ($this->presetDropdown) {
-            $this->initRangeExpr = true;
+            $this->initRangeExpr = $this->hideInput = true;
+            $this->pluginOptions['opens'] = 'left';
             $this->pluginOptions['ranges'] = [
                 Yii::t('kvdrp', "Today") => ["moment().startOf('day')", "moment()"],
                 Yii::t('kvdrp', "Yesterday") => [
@@ -332,6 +340,10 @@ HTML;
                     "moment().subtract(1, 'month').endOf('month')"
                 ],
             ];
+            if (empty($this->value)) {
+                $this->pluginOptions['startDate'] = new JsExpression("moment().startOf('day')");
+                $this->pluginOptions['endDate'] = new JsExpression("moment()");
+            }
         }
         if (!$this->initRangeExpr || empty($this->pluginOptions['ranges']) || !is_array($this->pluginOptions['ranges'])) {
             return;
@@ -382,6 +394,9 @@ HTML;
             }
             $rangeJs = $this->getRangeJs('start') . $this->getRangeJs('end');
             $change = $rangeJs . "{$input}.val(val).trigger('change');";
+            if ($this->presetDropdown) {
+                $id = "{$id}.find('.kv-drp-dropdown')";
+            } 
             if ($this->hideInput) {
                 $script = "var val={$val};{$id}.find('.range-value').html(val);{$change}";
             } elseif ($this->useWithAddon) {
@@ -395,19 +410,28 @@ HTML;
             }
             $this->callback = "function(start,end,label){{$script}}";
         }
+        $nowFrom = "moment().startOf('day').format('{$this->_format}')";
+        $nowTo = "moment().format('{$this->_format}')";
         // parse input change correctly when range input value is cleared
         $js = <<< JS
 {$input}.off('change.kvdrp').on('change.kvdrp', function() {
-    var drp = {$id}.data('{$this->pluginName}'), now;
+    var drp = {$id}.data('{$this->pluginName}'), fm, to;
     if ($(this).val() || !drp) {
         return;
     }
-    now = moment().format('{$this->_format}') || '';
-    drp.setStartDate(now);
-    drp.setEndDate(now);
+    fm = {$nowFrom} || '';
+    to = {$nowTo} || '';
+    drp.setStartDate(fm);
+    drp.setEndDate(to);
     {$rangeJs}
 });
 JS;
+        if ($this->presetDropdown && empty($this->value)) {
+            $tag = ArrayHelper::remove($this->defaultPresetValueOptions, 'tag', 'em');
+            $fmTag = Html::beginTag($tag, $this->defaultPresetValueOptions);
+            $toTag = Html::endTag($tag);
+            $js .= "var val={$nowFrom}+'{$this->_separator}'+{$nowTo};{$id}.find('.range-value').html('{$fmTag}'+val+'{$toTag}');";
+        }
         $view->registerJs($js);
         $this->registerPlugin($this->pluginName, $id, null, $this->callback);
     }

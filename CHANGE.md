@@ -6,10 +6,12 @@ Change Log: `yii2-date-range`
 **Date:** 22-Mar-2017
 
 - (enh #85, #86): Add Greek Translations.
+- (enh #88): Enhance preset dropdown to default today's date when date is empty.
 - (enh #90): Add Date Range Behavior for easier application with model range attributes.
 - (enh #91): Update moment library to latest release.
 - Update daterangepicker library to latest release.
 - Add github contribution and issue/PR logging templates.
+- (enh #93): Various styling enhancements and preset plugin defaults for preset dropdown.
 
 ## Version 1.6.7
 
