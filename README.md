@@ -133,7 +133,7 @@ class UserSearch extends User
         }
 
         $query->andFilterWhere(['>=', 'createdAt', $this->createTimeStart])
-              ->andFilterWhere(['<', 'updatedAt', $this->createTimeEnd]);
+              ->andFilterWhere(['<', 'createdAt', $this->createTimeEnd]);
 
         return $dataProvider;
     }
