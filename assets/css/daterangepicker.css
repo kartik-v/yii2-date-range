@@ -10,7 +10,7 @@
 
 .daterangepicker {
   position: absolute;
-  background: #fff;
+  background-color: #fff;
   top: 100px;
   left: 20px;
   padding: 4px;
@@ -147,7 +147,7 @@
   border: 1px solid #ddd;
   padding: 4px;
   border-radius: 4px;
-  background: #fff;
+  background-color: #fff;
 }
 
 .daterangepicker table {
@@ -166,7 +166,7 @@
 
 .daterangepicker td.off, .daterangepicker td.off.in-range, .daterangepicker td.off.start-date, .daterangepicker td.off.end-date {
   color: #999;
-  background: #fff;
+  background-color: #fff;
 }
 
 .daterangepicker td.disabled, .daterangepicker option.disabled {

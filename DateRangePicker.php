@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015 - 2016
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015 - 2017
  * @package yii2-date-range
- * @version 1.6.7
+ * @version 1.6.8
  */
 
 namespace kartik\daterange;
@@ -26,36 +26,36 @@ class DateRangePicker extends InputWidget
 {
     /**
      * @var string the javascript callback to be passed to the plugin constructor. Note: a default value is set for
-     *     this property when you set `hideInput` to false, OR you set `useWithAddon` to `true` or `autoUpdateOnInit`
-     *     to `false`. If you set a value here it will override any auto-generated callbacks.
+     * this property when you set [[hideInput]] to false, OR you set [[useWithAddon]] to `true` or [[autoUpdateOnInit]]
+     * to `false`. If you set a value here it will override any auto-generated callbacks.
      */
     public $callback = null;
 
     /**
      * @var boolean whether to auto update the input on initialization. If set to `false`, this will auto set the
-     *     plugin's `autoUpdateInput` to `false`. A default `callback` will be auto-generated when this is set to
-     *     `false`.
+     * `pluginOptions['autoUpdateInput']` to `false`. A default [[callback]] will be auto-generated when this is set to
+     * `false`.
      */
     public $autoUpdateOnInit = false;
 
     /**
      * @var boolean whether to hide the input (e.g. when you want to show the date range picker as a dropdown). If set
-     *     to `true`, the input will be hidden. The plugin will be initialized on a container element (default 'div'),
-     *     using the container template. A default `callback` will be setup in this case to display the selected range
-     *     value within the container.
+     * to `true`, the input will be hidden. The plugin will be initialized on a container element (default 'div'),
+     * using the container template. A default `callback` will be setup in this case to display the selected range
+     * value within the container.
      */
     public $hideInput = false;
 
     /**
      * @var boolean whether you are using the picker with a input group addon. You can set it to `true`, when
-     *     `hideInput` is false, and you wish to show the picker position more correctly at the input-group-addon icon.
-     *     A default `callback` will be generated in this case to generate the selected range value for the input.
+     * `hideInput` is false, and you wish to show the picker position more correctly at the input-group-addon icon.
+     * A default `callback` will be generated in this case to generate the selected range value for the input.
      */
     public $useWithAddon = false;
 
     /**
      * @var boolean initialize all the list values set in `pluginOptions['ranges']` and convert all values to
-     *     `yii\web\JsExpression`
+     * `yii\web\JsExpression`
      */
     public $initRangeExpr = true;
 
@@ -74,7 +74,7 @@ class DateRangePicker extends InputWidget
 
     /**
      * @var string the attribute name which you can set optionally to track changes to the range start value. One of
-     *     the following actions will be taken when this is set:
+     * the following actions will be taken when this is set:
      *  - If using with model, an active hidden input will be automatically generated using this as an attribute name
      *     for the start value of the range.
      *  - If using without model, a normal hidden input will be automatically generated using this as an input name
@@ -84,7 +84,7 @@ class DateRangePicker extends InputWidget
 
     /**
      * @var string the attribute name which you can set optionally to track changes to the range end value. One of
-     *     the following actions will be taken when this is set:
+     * the following actions will be taken when this is set:
      *  - If using with model, an active hidden input will be automatically generated using this as an attribute name
      *     for the end value of the range.
      *  - If using without model, a normal hidden input will be automatically generated using this as an input name
@@ -94,13 +94,13 @@ class DateRangePicker extends InputWidget
 
     /**
      * @var array the HTML attributes for the start input (applicable only if `startAttribute` is set). If using
-     *     without a model, you can set a start value here within the `value` property.
+     * without a model, you can set a start value here within the `value` property.
      */
     public $startInputOptions = [];
 
     /**
      * @var array the HTML attributes for the end input (applicable only if `endAttribute` is set).  If using
-     *     without a model, you can set an end value here within the `value` property.
+     * without a model, you can set an end value here within the `value` property.
      */
     public $endInputOptions = [];
 
