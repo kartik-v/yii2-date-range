@@ -11,6 +11,7 @@ Change Log: `yii2-date-range`
 - (enh #91): Update moment library to latest release.
 - Update daterangepicker library to latest release.
 - Add github contribution and issue/PR logging templates.
+- (enh #92): Correct example for Date Range Behavior in README.md.
 - (enh #93): Various styling enhancements and preset plugin defaults for preset dropdown.
 
 ## Version 1.6.7
