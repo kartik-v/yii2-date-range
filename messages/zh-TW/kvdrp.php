@@ -17,16 +17,16 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Apply' => '',
-    'Cancel' => '',
-    'Custom Range' => '',
-    'From' => '',
-    'Last Month' => '',
-    'Last {n} Days' => '',
-    'Select Date Range' => '',
-    'This Month' => '',
-    'To' => '',
-    'Today' => '',
-    'W' => '',
-    'Yesterday' => '',
+    'Apply' => '套用',
+    'Cancel' => '取消',
+    'Custom Range' => '選擇區間',
+    'From' => '從',
+    'Last Month' => '上個月',
+    'Last {n} Days' => '過去{n}日',
+    'Select Date Range' => '選擇日期區間',
+    'This Month' => '這個月',
+    'To' => '到',
+    'Today' => '今日',
+    'W' => '周',
+    'Yesterday' => '昨日',
 ];
