@@ -17,16 +17,16 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Apply' => '',
-    'Cancel' => '',
+    'Apply' => 'אישור',
+    'Cancel' => 'ביטול',
     'Custom Range' => '',
-    'From' => '',
-    'Last Month' => '',
-    'Last {n} Days' => '',
-    'Select Date Range' => '',
-    'This Month' => '',
-    'To' => '',
-    'Today' => '',
-    'W' => '',
-    'Yesterday' => '',
+    'From' => 'מתאריך',
+    'Last Month' => 'חודש קודם',
+    'Last {n} Days' => '{n} הימים האחרונים',
+    'Select Date Range' => 'בחירת תווך תאריכים',
+    'This Month' => 'החודש הנוכחי',
+    'To' => 'עד תאריך',
+    'Today' => 'היום',
+    'W' => 'ש',
+    'Yesterday' => 'אתמול',
 ];
