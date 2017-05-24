@@ -17,16 +17,16 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Apply' => '',
-    'Cancel' => '',
-    'Custom Range' => '',
-    'From' => '',
-    'Last Month' => '',
-    'Last {n} Days' => '',
-    'Select Date Range' => '',
-    'This Month' => '',
-    'To' => '',
-    'Today' => '',
+    'Apply' => 'Anvend',
+    'Cancel' => 'Annuller',
+    'Custom Range' => 'Brugerdefineret interval',
+    'From' => 'Fra',
+    'Last Month' => 'Sidste måned',
+    'Last {n} Days' => 'Sidste {n} dage',
+    'Select Date Range' => 'Vælg interval',
+    'This Month' => 'Denne måned',
+    'To' => 'Til',
+    'Today' => 'I dag',
     'W' => '',
-    'Yesterday' => '',
+    'Yesterday' => 'I går',
 ];
