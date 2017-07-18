@@ -17,16 +17,16 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Apply' => '',
-    'Cancel' => '',
-    'Custom Range' => '',
-    'From' => '',
-    'Last Month' => '',
-    'Last {n} Days' => '',
-    'Select Date Range' => '',
-    'This Month' => '',
-    'To' => '',
-    'Today' => '',
-    'W' => '',
-    'Yesterday' => '',
+    'Apply' => 'Uygula',
+    'Cancel' => 'İptal',
+    'Custom Range' => 'Özel Aralık',
+    'From' => 'Başlangıç',
+    'Last Month' => 'Geçen Ay',
+    'Last {n} Days' => 'Son {n} gün',
+    'Select Date Range' => 'Tarih Aralığı Seç',
+    'This Month' => 'Bu Ay',
+    'To' => 'Bitiş',
+    'Today' => 'Bugün',
+    'W' => 'H',
+    'Yesterday' => 'Dün',
 ];
