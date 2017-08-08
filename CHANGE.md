@@ -3,93 +3,98 @@ Change Log: `yii2-date-range`
 
 ## Version 1.6.8
 
-**Date:** 22-Mar-2017
+**Date:** 08-Aug-2017
 
-- (enh #85, #86): Add Greek Translations.
-- (enh #88): Enhance preset dropdown to default today's date when date is empty.
-- (enh #90): Add Date Range Behavior for easier application with model range attributes.
-- (enh #91): Update moment library to latest release.
-- Update daterangepicker library to latest release.
-- Add github contribution and issue/PR logging templates.
-- (enh #92): Correct example for Date Range Behavior in README.md.
+- Chronological arrangement of issues in CHANGE.log.
+- (enh #101): Update Turkish Translations.
+- (enh #98): Update Danish Translations.
+- (enh #97): Update Hebrew Translations.
+- (enh #95): Update Chinese Traditional Translations.
 - (enh #93): Various styling enhancements and preset plugin defaults for preset dropdown.
+- (enh #92): Correct example for Date Range Behavior in README.md.
+- Add github contribution and issue/PR logging templates.
+- Update daterangepicker library to latest release.
+- (enh #91): Update moment library to latest release.
+- (enh #90): Add Date Range Behavior for easier application with model range attributes.
+- (enh #88): Enhance preset dropdown to default today's date when date is empty.
+- (enh #85, #86): Add Greek Translations.
 
 ## Version 1.6.7
 
 **Date:** 12-Jul-2016
 
-- (enh #58): Add support for separate start and end attributes and inputs.
-- (enh #59): Add Hungarian Translations.
-- (enh #61): Add Dutch Translations.
-- (enh #62): Add Romanian Translations.
-- Add branch alias for dev-master latest release.
-- (bug #65): Correct moment `weekdaysStart` to `weekdaysMin`.
-- (enh #67): Parse input change correctly when range input value is cleared.
-- (enh #68): Update to latest release of bootstrap-daterangepicker plugin and moment library.
-- (bug #70): More better attribute and input options parsing.
-- (enh #71): Add Thai translations.
-- (bug #73): Correct dependency for `DateRangePickerAsset` and `LanguageAsset`.
-- (bug #74): Correct asset bundle dependency.
-- (bug #75): Correct code for PHP 5.5.
 - (bug #76, #77, #78, #79): Correct dependency for `DateRangePickerAsset`.
+- (bug #75): Correct code for PHP 5.5.
+- (bug #74): Correct asset bundle dependency.
+- (bug #73): Correct dependency for `DateRangePickerAsset` and `LanguageAsset`.
+- (enh #71): Add Thai translations.
+- (bug #70): More better attribute and input options parsing.
+- (enh #68): Update to latest release of bootstrap-daterangepicker plugin and moment library.
+- (enh #67): Parse input change correctly when range input value is cleared.
+- (bug #65): Correct moment `weekdaysStart` to `weekdaysMin`.
+- Add branch alias for dev-master latest release.
+- (enh #62): Add Romanian Translations.
+- (enh #61): Add Dutch Translations.
+- (enh #59): Add Hungarian Translations.
+- (enh #58): Add support for separate start and end attributes and inputs.
 
 ## Version 1.6.6
 
 **Date:** 11-Jan-2016
 
-- (enh #55): Enhancements for PJAX based reinitialization. Complements enhancements in kartik-v/yii2-krajee-base#52 and kartik-v/yii2-krajee-base#53.
 - (enh #56): Update to latest version of bootstrap-daterangepicker.
+- (enh #55): Enhancements for PJAX based reinitialization. Complements enhancements in kartik-v/yii2-krajee-base#52 and kartik-v/yii2-krajee-base#53.
 
 ## Version 1.6.5
 
 **Date:** 22-Oct-2015
 
-- (enh #52): New property `autoUpdateOnInit` to prevent plugin triggering change due to `pluginOptions['autoUpdateInput']` default setting.
 - (enh #53): Added correct German translations.
+- (enh #52): New property `autoUpdateOnInit` to prevent plugin triggering change due to `pluginOptions['autoUpdateInput']` default setting.
 
 ## Version 1.6.4
 
 **Date:** 19-Oct-2015
 
-- (enh #41): Add Simplified Chinese translations.
-- (enh #43): Add Slovak translations.
 - (enh #51): Update to latest release of bootstrap-datarangepicker plugin.
+- (enh #43): Add Slovak translations.
+- (enh #41): Add Simplified Chinese translations.
 
 ## Version 1.6.3
 
 **Date:** 22-May-2015
 
-- (enh #31): Add Ukranian translations.
-- (enh #32): Add Portugese translations.
-- (enh #36): Add Polish translations.
-- (enh #38): Update to latest release of bootstrap-datarangepicker plugin.
 - (enh #40): Update moment library and locales.
+- (enh #38): Update to latest release of bootstrap-datarangepicker plugin.
+- (enh #36): Add Polish translations.
+- (enh #32): Add Portugese translations.
+- (enh #31): Add Ukranian translations.
 
 ## Version 1.6.2
 
 **Date:** 02-Mar-2015
 
-- (enh #27): Correct initial value initialization for all cases.
-- (enh #28): Upgrade to latest release of bootstrap-daterangepicker plugin.
-- Set copyright year to current.
 - (enh #29): Improve validation to retrieve the right translation messages folder.
+- (enh #28): Upgrade to latest release of bootstrap-daterangepicker plugin.
+- (enh #27): Correct initial value initialization for all cases.
+- Set copyright year to current.
 
 ## Version 1.6.1
 
 **Date:** 16-Feb-2015
 
-- (enh #27): Correct initial value initialization for all cases.
-- (enh #28): Upgrade to latest release of bootstrap-daterangepicker plugin.
 - Set copyright year to current.
+- (enh #28): Upgrade to latest release of bootstrap-daterangepicker plugin.
+- (enh #27): Correct initial value initialization for all cases.
 
 ## Version 1.6.0
 
 **Date:** 12-Jan-2015
 
-- (enh #22): Estonian translation for kvdrp.php
-- (enh #23): Russian translations updated.
-- Code formatting updates as per Yii2 standards.
 - Revamp to use new Krajee base InputWidget and TranslationTrait.
+- Code formatting updates as per Yii2 standards.
+- (enh #23): Russian translations updated.
+- (enh #22): Estonian translation for kvdrp.php
 
 ## Version 1.5.0
 
@@ -105,35 +110,35 @@ Change Log: `yii2-date-range`
 
 **Date:** 25-Nov-2014
 
-- (enh #17): Updated Russian translations
-- (bug #18): Plugin data attributes not set because of input rendering sequence.
 - (enh #19): Enhance widget to use updated plugin registration from Krajee base 
+- (bug #18): Plugin data attributes not set because of input rendering sequence.
+- (enh #17): Updated Russian translations
 
 ## Version 1.3.0
 
 **Date:** 21-Nov-2014
 
-- (enh #7): Added Russian Translations
-- (enh #12): Added Spanish Translations
-- (enh #13): Update moment.js related range initializations.
-- (enh #14): Update moment library to latest release.
-- (enh #15): Revamp widget to remove dependency on custom locale JS files enhancement
 - (enh #16): Update Lithunian translations and create German translations.
+- (enh #15): Revamp widget to remove dependency on custom locale JS files enhancement
+- (enh #14): Update moment library to latest release.
+- (enh #13): Update moment.js related range initializations.
+- (enh #12): Added Spanish Translations
+- (enh #7): Added Russian Translations
 
 ## Version 1.2.0
 
 **Date:** 20-Nov-2014
 
-- (bug #11): Fix bug in daterangepicker.js for duplicate dates in Dec 2013.
 - Upgrade to latest plugin release 1.3.16 dated 12-Nov-2014.
+- (bug #11): Fix bug in daterangepicker.js for duplicate dates in Dec 2013.
 
 ## Version 1.1.0
 
 **Date:** 10-Nov-2014
 
-- PSR4 alias change
-- Set dependency on Krajee base components
 - Set release to stable
+- Set dependency on Krajee base components
+- PSR4 alias change
 
 ## Version 1.0.0
 

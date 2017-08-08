@@ -18,6 +18,9 @@ use kartik\base\AssetBundle;
  */
 class DateRangePickerAsset extends AssetBundle
 {
+    /**
+     * @inheritdoc
+     */
     public $depends = [
         '\kartik\daterange\MomentAsset',
         'yii\web\JqueryAsset'

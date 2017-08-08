@@ -5,6 +5,7 @@
  * @package yii2-date-range
  * @version 1.6.8
  */
+
 namespace kartik\daterange;
 
 use yii\base\Model;
@@ -82,6 +83,18 @@ class DateRangeBehavior extends Behavior
     public $separator;
 
     /**
+     * Parses the given date into a Unix timestamp.
+     *
+     * @param string $date a date string
+     *
+     * @return integer|false a Unix timestamp. False on failure.
+     */
+    protected static function dateToTime($date)
+    {
+        return strtotime($date);
+    }
+
+    /**
      * @inheritdoc
      */
     public function init()
@@ -94,7 +107,9 @@ class DateRangeBehavior extends Behavior
             }
         } else {
             if (!isset($this->dateStartAttribute) || !isset($this->dateEndAttribute)) {
-                throw new InvalidConfigException('The "dateStartAttribute" and "dateEndAttribute" properties must be specified.');
+                throw new InvalidConfigException(
+                    'The "dateStartAttribute" and "dateEndAttribute" properties must be specified.'
+                );
             }
         }
     }
@@ -111,6 +126,7 @@ class DateRangeBehavior extends Behavior
 
     /**
      * Handles owner 'afterValidate' event.
+     *
      * @param \yii\base\Event $event event instance.
      */
     public function afterValidate($event)
@@ -137,6 +153,7 @@ class DateRangeBehavior extends Behavior
 
     /**
      * Evaluates the attribute value and assigns it to the given attribute.
+     *
      * @param string $attribute the owner attribute name
      * @param string $dateFormat the PHP date format string
      * @param string $date a date string
@@ -153,15 +170,5 @@ class DateRangeBehavior extends Behavior
                 $this->owner->$attribute = $timestamp !== false ? date($dateFormat, $timestamp) : false;
             }
         }
-    }
-
-    /**
-     * Parses the given date into a Unix timestamp.
-     * @param string $date a date string
-     * @return integer|false a Unix timestamp. False on failure.
-     */
-    protected static function dateToTime($date)
-    {
-        return strtotime($date);
     }
 }

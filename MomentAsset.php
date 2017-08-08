@@ -19,7 +19,13 @@ use kartik\base\AssetBundle;
  */
 class MomentAsset extends AssetBundle
 {
+    /**
+     * @inheritdoc
+     */
     public $jsOptions = ['position' => View::POS_HEAD];
+    /**
+     * @inheritdoc
+     */
     public $depends = [];
 
     /**

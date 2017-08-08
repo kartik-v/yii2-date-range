@@ -19,7 +19,13 @@ use kartik\base\AssetBundle;
  */
 class LanguageAsset extends AssetBundle
 {
+    /**
+     * @inheritdoc
+     */
     public $jsOptions = ['position' => View::POS_HEAD];
+    /**
+     * @inheritdoc
+     */
     public $depends = ['\kartik\daterange\MomentAsset'];
 
     /**

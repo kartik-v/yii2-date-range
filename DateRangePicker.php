@@ -120,8 +120,8 @@ class DateRangePicker extends InputWidget
 HTML;
 
     /**
-     * HTML attributes for span to display default value for preset dropdown. By default for a preset dropdown,
-     * if the value is empty, it will default to "Today". The following special options are supported:
+     * HTML attributes for the `span` element that displays the default value for a preset dropdown. By default for a
+     * preset dropdown, if the value is empty, it will default to "Today". The following special options are supported:
      * - `tag`: the HTML tag under which the default value markup will be displayed when empty. Defaults to `em`.
      */
     public $defaultPresetValueOptions = ['class' => 'text-muted'];
@@ -162,94 +162,6 @@ HTML;
     protected $_endInput = '';
 
     /**
-     * @inheritdoc
-     */
-    public function run()
-    {
-        $this->initSettings();
-        echo $this->renderInput();
-    }
-
-    /**
-     * Initializes widget settings
-     *
-     * @throws InvalidConfigException
-     */
-    protected function initSettings()
-    {
-        $this->_msgCat = 'kvdrp';
-        $this->initI18N(__DIR__);
-        $this->initLocale();
-        if ($this->convertFormat && isset($this->pluginOptions['locale']['format'])) {
-            $this->pluginOptions['locale']['format'] = static::convertDateFormat($this->pluginOptions['locale']['format']);
-        }
-        $locale = ArrayHelper::getValue($this->pluginOptions, 'locale', []);
-        $this->_format = ArrayHelper::getValue($locale, 'format', 'YYYY-MM-DD');
-        $this->_separator = ArrayHelper::getValue($locale, 'separator', ' - ');
-        if (!empty($this->value)) {
-            $dates = explode($this->_separator, $this->value);
-            if (count($dates) > 1) {
-                $this->pluginOptions['startDate'] = $dates[0];
-                $this->pluginOptions['endDate'] = $dates[1];
-                $this->initRangeValue('start', $dates[0]);
-                $this->initRangeValue('end', $dates[1]);
-            }
-        } elseif ($this->startAttribute && $this->endAttribute) {
-            $start = $this->getRangeValue('start');
-            $end = $this->getRangeValue('end');
-            $this->value = $start . $this->_separator . $end;
-            if ($this->hasModel()) {
-                $attr = $this->attribute;
-                $this->model->$attr = $this->value;
-            }
-            $this->pluginOptions['startDate'] = $start;
-            $this->pluginOptions['endDate'] = $end;
-        }
-        $value = empty($this->value) ? '' : $this->value;
-        $this->containerTemplate = str_replace('{value}', $value, $this->containerTemplate);
-
-        // Set `autoUpdateInput` to false for certain settings
-        if (!$this->autoUpdateOnInit || $this->hideInput || $this->useWithAddon) {
-            $this->pluginOptions['autoUpdateInput'] = false;
-        }
-        $this->_startInput = $this->getRangeInput('start');
-        $this->_endInput = $this->getRangeInput('end');
-        if (empty($this->containerOptions['id'])) {
-            $this->containerOptions['id'] = $this->options['id'] . '-container';
-        }
-        if (empty($this->containerOptions['class'])) {
-            $css = $this->presetDropdown ? '' : ' input-group';
-            $this->containerOptions['class'] = 'kv-drp-container' . $css;
-        }
-        $this->initRange();
-        $this->registerAssets();
-    }
-
-    /**
-     * Initialize locale settings
-     */
-    protected function initLocale()
-    {
-        $this->setLanguage('');
-        if (empty($this->_langFile)) {
-            return;
-        }
-        $localeSettings = ArrayHelper::getValue($this->pluginOptions, 'locale', []);
-        $localeSettings += [
-            'applyLabel' => Yii::t('kvdrp', 'Apply'),
-            'cancelLabel' => Yii::t('kvdrp', 'Cancel'),
-            'fromLabel' => Yii::t('kvdrp', 'From'),
-            'toLabel' => Yii::t('kvdrp', 'To'),
-            'weekLabel' => Yii::t('kvdrp', 'W'),
-            'customRangeLabel' => Yii::t('kvdrp', 'Custom Range'),
-            'daysOfWeek' => new JsExpression('moment.weekdaysMin()'),
-            'monthNames' => new JsExpression('moment.monthsShort()'),
-            'firstDay' => new JsExpression('moment.localeData()._week.dow')
-        ];
-        $this->pluginOptions['locale'] = $localeSettings;
-    }
-
-    /**
      * Automatically convert the date format from PHP DateTime to Moment.js DateTime format as required by the
      * `bootstrap-daterangepicker` plugin.
      *
@@ -262,7 +174,7 @@ HTML;
      */
     protected static function convertDateFormat($format)
     {
-        return strtr($format, [
+        $conversions = [
             // meridian lowercase remains same
             // 'a' => 'a',
             // meridian uppercase remains same
@@ -305,57 +217,8 @@ HTML;
             'Y' => 'YYYY',
             // unix timestamp
             'U' => 'X',
-        ]);
-    }
-
-    /**
-     * Initializes the pluginOptions range list
-     */
-    protected function initRange()
-    {
-        if (isset($dummyValidation)) {
-            /** @noinspection PhpUnusedLocalVariableInspection */
-            $msg = Yii::t('kvdrp', 'Select Date Range');
-        }
-        if ($this->presetDropdown) {
-            $this->initRangeExpr = $this->hideInput = true;
-            $this->pluginOptions['opens'] = 'left';
-            $this->pluginOptions['ranges'] = [
-                Yii::t('kvdrp', "Today") => ["moment().startOf('day')", "moment()"],
-                Yii::t('kvdrp', "Yesterday") => [
-                    "moment().startOf('day').subtract(1,'days')",
-                    "moment().endOf('day').subtract(1,'days')"
-                ],
-                Yii::t('kvdrp', "Last {n} Days", ['n' => 7]) => [
-                    "moment().startOf('day').subtract(6, 'days')",
-                    "moment()"
-                ],
-                Yii::t('kvdrp', "Last {n} Days", ['n' => 30]) => [
-                    "moment().startOf('day').subtract(29, 'days')",
-                    "moment()"
-                ],
-                Yii::t('kvdrp', "This Month") => ["moment().startOf('month')", "moment().endOf('month')"],
-                Yii::t('kvdrp', "Last Month") => [
-                    "moment().subtract(1, 'month').startOf('month')",
-                    "moment().subtract(1, 'month').endOf('month')"
-                ],
-            ];
-            if (empty($this->value)) {
-                $this->pluginOptions['startDate'] = new JsExpression("moment().startOf('day')");
-                $this->pluginOptions['endDate'] = new JsExpression("moment()");
-            }
-        }
-        if (!$this->initRangeExpr || empty($this->pluginOptions['ranges']) || !is_array($this->pluginOptions['ranges'])) {
-            return;
-        }
-        $range = [];
-        foreach ($this->pluginOptions['ranges'] as $key => $value) {
-            if (!is_array($value) || empty($value[0]) || empty($value[1])) {
-                throw new InvalidConfigException("Invalid settings for pluginOptions['ranges']. Each range value must be a two element array.");
-            }
-            $range[$key] = [static::parseJsExpr($value[0]), static::parseJsExpr($value[1])];
-        }
-        $this->pluginOptions['ranges'] = $range;
+        ];
+        return strtr($format, $conversions);
     }
 
     /**
@@ -368,6 +231,15 @@ HTML;
     protected static function parseJsExpr($value)
     {
         return $value instanceof JsExpression ? $value : new JsExpression($value);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function run()
+    {
+        $this->initSettings();
+        echo $this->renderInput();
     }
 
     /**
@@ -396,7 +268,7 @@ HTML;
             $change = $rangeJs . "{$input}.val(val).trigger('change');";
             if ($this->presetDropdown) {
                 $id = "{$id}.find('.kv-drp-dropdown')";
-            } 
+            }
             if ($this->hideInput) {
                 $script = "var val={$val};{$id}.find('.range-value').html(val);{$change}";
             } elseif ($this->useWithAddon) {
@@ -434,6 +306,135 @@ JS;
         }
         $view->registerJs($js);
         $this->registerPlugin($this->pluginName, $id, null, $this->callback);
+    }
+
+    /**
+     * Initializes widget settings
+     *
+     * @throws InvalidConfigException
+     */
+    protected function initSettings()
+    {
+        $this->_msgCat = 'kvdrp';
+        $this->initI18N(__DIR__);
+        $this->initLocale();
+        if ($this->convertFormat && isset($this->pluginOptions['locale']['format'])) {
+            $this->pluginOptions['locale']['format'] = static::convertDateFormat(
+                $this->pluginOptions['locale']['format']
+            );
+        }
+        $locale = ArrayHelper::getValue($this->pluginOptions, 'locale', []);
+        $this->_format = ArrayHelper::getValue($locale, 'format', 'YYYY-MM-DD');
+        $this->_separator = ArrayHelper::getValue($locale, 'separator', ' - ');
+        if (!empty($this->value)) {
+            $dates = explode($this->_separator, $this->value);
+            if (count($dates) > 1) {
+                $this->pluginOptions['startDate'] = $dates[0];
+                $this->pluginOptions['endDate'] = $dates[1];
+                $this->initRangeValue('start', $dates[0]);
+                $this->initRangeValue('end', $dates[1]);
+            }
+        } elseif ($this->startAttribute && $this->endAttribute) {
+            $start = $this->getRangeValue('start');
+            $end = $this->getRangeValue('end');
+            $this->value = $start . $this->_separator . $end;
+            if ($this->hasModel()) {
+                $attr = $this->attribute;
+                $this->model->$attr = $this->value;
+            }
+            $this->pluginOptions['startDate'] = $start;
+            $this->pluginOptions['endDate'] = $end;
+        }
+        $value = empty($this->value) ? '' : $this->value;
+        $this->containerTemplate = str_replace('{value}', $value, $this->containerTemplate);
+
+        // Set `autoUpdateInput` to false for certain settings
+        if (!$this->autoUpdateOnInit || $this->hideInput || $this->useWithAddon) {
+            $this->pluginOptions['autoUpdateInput'] = false;
+        }
+        $this->_startInput = $this->getRangeInput('start');
+        $this->_endInput = $this->getRangeInput('end');
+        if (empty($this->containerOptions['id'])) {
+            $this->containerOptions['id'] = $this->options['id'] . '-container';
+        }
+        if (empty($this->containerOptions['class'])) {
+            $css = $this->useWithAddon && !$this->presetDropdown && !$this->hideInput ? ' input-group' : '';
+            $this->containerOptions['class'] = 'kv-drp-container' . $css;
+        }
+        $this->initRange();
+        $this->registerAssets();
+    }
+
+    /**
+     * Initialize locale settings
+     */
+    protected function initLocale()
+    {
+        $this->setLanguage('');
+        if (empty($this->_langFile)) {
+            return;
+        }
+        $localeSettings = ArrayHelper::getValue($this->pluginOptions, 'locale', []);
+        $localeSettings += [
+            'applyLabel' => Yii::t('kvdrp', 'Apply'),
+            'cancelLabel' => Yii::t('kvdrp', 'Cancel'),
+            'fromLabel' => Yii::t('kvdrp', 'From'),
+            'toLabel' => Yii::t('kvdrp', 'To'),
+            'weekLabel' => Yii::t('kvdrp', 'W'),
+            'customRangeLabel' => Yii::t('kvdrp', 'Custom Range'),
+            'daysOfWeek' => new JsExpression('moment.weekdaysMin()'),
+            'monthNames' => new JsExpression('moment.monthsShort()'),
+            'firstDay' => new JsExpression('moment.localeData()._week.dow'),
+        ];
+        $this->pluginOptions['locale'] = $localeSettings;
+    }
+
+    /**
+     * Initializes the pluginOptions range list
+     */
+    protected function initRange()
+    {
+        if (isset($dummyValidation)) {
+            /** @noinspection PhpUnusedLocalVariableInspection */
+            $msg = Yii::t('kvdrp', 'Select Date Range');
+        }
+        $m = 'moment()';
+        if ($this->presetDropdown) {
+            $this->initRangeExpr = $this->hideInput = true;
+            $this->pluginOptions['opens'] = 'left';
+            $this->pluginOptions['ranges'] = [
+                Yii::t('kvdrp', 'Today') => ["{$m}.startOf('day')", $m],
+                Yii::t('kvdrp', 'Yesterday') => [
+                    "{$m}.startOf('day').subtract(1,'days')",
+                    "{$m}.endOf('day').subtract(1,'days')",
+                ],
+                Yii::t('kvdrp', 'Last {n} Days', ['n' => 7]) => ["{$m}.startOf('day').subtract(6, 'days')", $m],
+                Yii::t('kvdrp', 'Last {n} Days', ['n' => 30]) => ["{$m}.startOf('day').subtract(29, 'days')", $m],
+                Yii::t('kvdrp', 'This Month') => ["{$m}.startOf('month')", "{$m}.endOf('month')"],
+                Yii::t('kvdrp', 'Last Month') => [
+                    "{$m}.subtract(1, 'month').startOf('month')",
+                    "{$m}.subtract(1, 'month').endOf('month')",
+                ],
+            ];
+            if (empty($this->value)) {
+                $this->pluginOptions['startDate'] = new JsExpression("{$m}.startOf('day')");
+                $this->pluginOptions['endDate'] = new JsExpression($m);
+            }
+        }
+        $opts = $this->pluginOptions;
+        if (!$this->initRangeExpr || empty($opts['ranges']) || !is_array($opts['ranges'])) {
+            return;
+        }
+        $range = [];
+        foreach ($opts['ranges'] as $key => $value) {
+            if (!is_array($value) || empty($value[0]) || empty($value[1])) {
+                throw new InvalidConfigException(
+                    "Invalid settings for pluginOptions['ranges']. Each range value must be a two element array."
+                );
+            }
+            $range[$key] = [static::parseJsExpr($value[0]), static::parseJsExpr($value[1])];
+        }
+        $this->pluginOptions['ranges'] = $range;
     }
 
     /**
@@ -508,7 +509,7 @@ JS;
         $options = $this->getInputOpts($type);
         $input = "jQuery('#" . $this->options['id'] . "')";
         return "var v={$input}.val() ? {$type}.format('{$this->_format}') : '';jQuery('#" . $options['id'] .
-        "').val(v).trigger('change');";
+            "').val(v).trigger('change');";
     }
 
     /**
