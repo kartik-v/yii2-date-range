@@ -1,5 +1,5 @@
 {
-    "name": "kartik-v/yii2-date-range",
+    "name": "rossmann-it/yii2-date-range",
     "description": "An advanced Yii 2 date range picker input for based on bootstrap-daterangepicker plugin.",
     "keywords": [
         "yii2",
