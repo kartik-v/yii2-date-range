@@ -1,6 +1,10 @@
 Change Log: `yii2-date-range`
 =============================
 
+## Version 1.6.9
+
+- (bug #104): Allow specifying direction in preset dropdown
+
 ## Version 1.6.8
 
 **Date:** 08-Aug-2017
