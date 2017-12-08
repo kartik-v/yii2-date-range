@@ -401,7 +401,7 @@ JS;
         $m = 'moment()';
         if ($this->presetDropdown) {
             $this->initRangeExpr = $this->hideInput = true;
-            $this->pluginOptions['opens'] = 'left';
+            $this->pluginOptions['opens'] = ArrayHelper::getValue($this->pluginOptions, 'opens', 'left');
             $this->pluginOptions['ranges'] = [
                 Yii::t('kvdrp', 'Today') => ["{$m}.startOf('day')", $m],
                 Yii::t('kvdrp', 'Yesterday') => [
