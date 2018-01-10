@@ -346,7 +346,7 @@ JS;
             $this->pluginOptions['endDate'] = $end;
         }
         $value = empty($this->value) ? '' : $this->value;
-        $this->containerTemplate = str_replace('{value}', $value, $this->containerTemplate);
+        $this->containerTemplate = str_replace('{value}', Html::encode($value), $this->containerTemplate);
 
         // Set `autoUpdateInput` to false for certain settings
         if (!$this->autoUpdateOnInit || $this->hideInput || $this->useWithAddon) {
