@@ -3,6 +3,8 @@ Change Log: `yii2-date-range`
 
 ## Version 1.6.9
 
+**Date:** 15-Mar-2018
+
 - (enh #112): New boolean property `encodeValue` to HTML encode the value (to prevent XSS).
 - (enh #81, #108): Enhance empty date validation.
 - (bug #104, bug #111): Allow specifying direction in preset dropdown.
