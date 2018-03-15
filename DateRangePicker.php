@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015 - 2017
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015 - 2018
  * @package yii2-date-range
- * @version 1.6.8
+ * @version 1.6.9
  */
 
 namespace kartik\daterange;
@@ -118,6 +118,11 @@ class DateRangePicker extends InputWidget
         </div>
         {input}
 HTML;
+
+    /**
+     * @var boolean whether to HTML encode the value
+     */
+    public $encodeValue = true;
 
     /**
      * HTML attributes for the `span` element that displays the default value for a preset dropdown. By default for a
@@ -327,6 +332,9 @@ JS;
         $this->_format = ArrayHelper::getValue($locale, 'format', 'YYYY-MM-DD');
         $this->_separator = ArrayHelper::getValue($locale, 'separator', ' - ');
         if (!empty($this->value)) {
+            if ($this->encodeValue) {
+                $this->value = Html::encode($this->value);
+            }
             $dates = explode($this->_separator, $this->value);
             if (count($dates) > 1) {
                 $this->pluginOptions['startDate'] = $dates[0];
@@ -334,16 +342,17 @@ JS;
                 $this->initRangeValue('start', $dates[0]);
                 $this->initRangeValue('end', $dates[1]);
             }
-        } elseif ($this->startAttribute && $this->endAttribute) {
-            $start = $this->getRangeValue('start');
-            $end = $this->getRangeValue('end');
-            $this->value = $start . $this->_separator . $end;
-            if ($this->hasModel()) {
-                $attr = $this->attribute;
-                $this->model->$attr = $this->value;
+            if ($this->startAttribute && $this->endAttribute) {
+                $start = $this->getRangeValue('start');
+                $end = $this->getRangeValue('end');
+                $this->value = $start . $this->_separator . $end;
+                if ($this->hasModel()) {
+                    $attr = $this->attribute;
+                    $this->model->$attr = $this->value;
+                }
+                $this->pluginOptions['startDate'] = $start;
+                $this->pluginOptions['endDate'] = $end;
             }
-            $this->pluginOptions['startDate'] = $start;
-            $this->pluginOptions['endDate'] = $end;
         }
         $value = empty($this->value) ? '' : $this->value;
         $this->containerTemplate = str_replace('{value}', $value, $this->containerTemplate);
