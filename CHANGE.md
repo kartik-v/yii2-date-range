@@ -5,6 +5,7 @@ Change Log: `yii2-date-range`
 
 **Date:** (_work in progress_)
 
+- (enh #122): Better responsive styling of preset dropdown.
 - (bug #119): Correct client validation of model range attributes.
 - (enh #118): More correct predefined default date ranges.
 - Update to latest release v3.0.3 of `daterangepicker` plugin.

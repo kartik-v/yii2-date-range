@@ -111,10 +111,10 @@ class DateRangePicker extends InputWidget
      * form input during initialization
      */
     public $containerTemplate = <<< HTML
-        <div class="form-control kv-drp-dropdown">
-            <i class="glyphicon glyphicon-calendar"></i>&nbsp;
-            <span class="range-value">{value}</span>
-            <span class="pull-right"><b class="caret"></b></span>
+        <div class="kv-drp-dropdown">
+            <span class="left-ind"><span class="glyphicon glyphicon-calendar"></span></span>
+            <input type="text" readonly class="form-control range-value" value="{value}">
+            <span class="right-ind"><b class="caret"></b></span>
         </div>
         {input}
 HTML;
@@ -275,7 +275,7 @@ HTML;
                 $id = "{$id}.find('.kv-drp-dropdown')";
             }
             if ($this->hideInput) {
-                $script = "var val={$val};{$id}.find('.range-value').html(val);{$change}";
+                $script = "var val={$val};{$id}.find('.range-value').val(val);{$change}";
             } elseif ($this->useWithAddon) {
                 $id = "{$input}.closest('.input-group')";
                 $script = "var val={$val};{$change}";
@@ -307,7 +307,7 @@ JS;
             $tag = ArrayHelper::remove($this->defaultPresetValueOptions, 'tag', 'em');
             $fmTag = Html::beginTag($tag, $this->defaultPresetValueOptions);
             $toTag = Html::endTag($tag);
-            $js .= "var val={$nowFrom}+'{$this->_separator}'+{$nowTo};{$id}.find('.range-value').html('{$fmTag}'+val+'{$toTag}');";
+            $js .= "var val={$nowFrom}+'{$this->_separator}'+{$nowTo};{$id}.find('.range-value').val(val);";
         }
         $view->registerJs($js);
         $this->registerPlugin($this->pluginName, $id, null, $this->callback);

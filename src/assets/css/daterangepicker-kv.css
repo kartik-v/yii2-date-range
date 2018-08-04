@@ -5,10 +5,30 @@
  * Custom styling for DateRangePicker
  * 
  * Author: Kartik Visweswaran
- * Copyright: 2014, Kartik Visweswaran, Krajee.com
  * For more JQuery plugins visit http://plugins.krajee.com
  * For more Yii related demos visit http://demos.krajee.com
  */
 .drp-container .kv-drp-dropdown {
-    cursor: pointer;
+    position: relative;
+}
+
+.kv-drp-dropdown .range-value {
+    background: none;
+    padding-left: 32px;
+    padding-right: 32px;
+    opacity: 0.9;
+}
+
+.kv-drp-dropdown .left-ind,
+.kv-drp-dropdown .right-ind {
+    position: absolute;
+    top: 8px;
+}
+
+.kv-drp-dropdown .left-ind {
+    left: 12px;
+}
+
+.kv-drp-dropdown .right-ind {
+    right: 12px;
 }
