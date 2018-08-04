@@ -411,19 +411,16 @@ JS;
         if ($this->presetDropdown) {
             $this->initRangeExpr = $this->hideInput = true;
             $this->pluginOptions['opens'] = ArrayHelper::getValue($this->pluginOptions, 'opens', 'left');
+            $beg = "{$m}.startOf('day')";
+            $end = "{$m}.endOf('day')";
+            $last = "{$m}.subtract(1, 'month')";
             $this->pluginOptions['ranges'] = [
-                Yii::t('kvdrp', 'Today') => ["{$m}.startOf('day')", $m],
-                Yii::t('kvdrp', 'Yesterday') => [
-                    "{$m}.startOf('day').subtract(1,'days')",
-                    "{$m}.endOf('day').subtract(1,'days')",
-                ],
-                Yii::t('kvdrp', 'Last {n} Days', ['n' => 7]) => ["{$m}.startOf('day').subtract(6, 'days')", $m],
-                Yii::t('kvdrp', 'Last {n} Days', ['n' => 30]) => ["{$m}.startOf('day').subtract(29, 'days')", $m],
+                Yii::t('kvdrp', 'Today') => [$beg, $end],
+                Yii::t('kvdrp', 'Yesterday') => ["{$beg}.subtract(1,'days')", "{$end}.subtract(1,'days')"],
+                Yii::t('kvdrp', 'Last {n} Days', ['n' => 7]) => ["{$beg}.subtract(6, 'days')", $end],
+                Yii::t('kvdrp', 'Last {n} Days', ['n' => 30]) => ["{$beg}.subtract(29, 'days')", $end],
                 Yii::t('kvdrp', 'This Month') => ["{$m}.startOf('month')", "{$m}.endOf('month')"],
-                Yii::t('kvdrp', 'Last Month') => [
-                    "{$m}.subtract(1, 'month').startOf('month')",
-                    "{$m}.subtract(1, 'month').endOf('month')",
-                ],
+                Yii::t('kvdrp', 'Last Month') => ["{$last}.startOf('month')", "{$last}.endOf('month')"],
             ];
             if (empty($this->value)) {
                 $this->pluginOptions['startDate'] = new JsExpression("{$m}.startOf('day')");
