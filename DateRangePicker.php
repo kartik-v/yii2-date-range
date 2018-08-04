@@ -270,7 +270,7 @@ HTML;
                 $val = "start.format('{$this->_format}')";
             }
             $rangeJs = $this->getRangeJs('start') . $this->getRangeJs('end');
-            $change = $rangeJs . "{$input}.val(val).trigger('change');";
+            $change = "{$input}.val(val).trigger('change');{$rangeJs}";
             if ($this->presetDropdown) {
                 $id = "{$id}.find('.kv-drp-dropdown')";
             }

@@ -1,6 +1,12 @@
 Change Log: `yii2-date-range`
 =============================
 
+## Version 1.7.0 (_under development_)
+
+**Date:** (_work in progress_)
+
+- (bug #119): Correct client validation of model range attributes.
+
 ## Version 1.6.9
 
 **Date:** 15-Mar-2018
