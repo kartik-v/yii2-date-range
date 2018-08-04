@@ -5,6 +5,8 @@ Change Log: `yii2-date-range`
 
 **Date:** (_work in progress_)
 
+- Update to latest release v3.0.3 of `daterangepicker` plugin.
+- Reorganize code in `src` folder.
 - (bug #119): Correct client validation of model range attributes.
 
 ## Version 1.6.9
