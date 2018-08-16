@@ -24,7 +24,7 @@ return [
     'Last Month' => 'Попередній місяць',
     'Last {n} Days' => 'Останні {n} днів',
     'Select Date Range' => 'Оберіть діапазон дат',
-    'This Month' => 'Цей міяць',
+    'This Month' => 'Цей місяць',
     'To' => 'По',
     'Today' => 'Сьогодні',
     'W' => 'Т',
