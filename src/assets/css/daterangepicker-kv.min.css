@@ -7,4 +7,4 @@
  * Author: Kartik Visweswaran
  * For more JQuery plugins visit http://plugins.krajee.com
  * For more Yii related demos visit http://demos.krajee.com
- */.drp-container .kv-drp-dropdown{position:relative}.kv-drp-dropdown .range-value{background:0 0;padding-left:32px;padding-right:32px;opacity:.9}.kv-drp-dropdown .left-ind,.kv-drp-dropdown .right-ind{position:absolute;top:8px}.kv-drp-dropdown .left-ind{left:12px}.kv-drp-dropdown .right-ind{right:12px}
+ */.kv-drp-dropdown{position:relative}.kv-drp-dropdown .range-value{background:0 0;padding-left:32px;padding-right:32px;opacity:.9}.kv-drp-dropdown .left-ind,.kv-drp-dropdown .right-ind{position:absolute;top:8px}.kv-drp-dropdown .left-ind{left:12px}.kv-drp-dropdown .right-ind{right:12px}
