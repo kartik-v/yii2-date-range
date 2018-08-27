@@ -10,8 +10,8 @@ namespace kartik\daterange;
 
 use yii\base\Model;
 use yii\base\Behavior;
-use yii\base\InvalidParamException;
 use yii\base\InvalidConfigException;
+use yii\base\InvalidValueException;
 
 /**
  * DateRangeBehavior automatically fills the specified attributes with the parsed date range values.
@@ -96,6 +96,7 @@ class DateRangeBehavior extends Behavior
 
     /**
      * @inheritdoc
+     * @throws InvalidConfigException
      */
     public function init()
     {
@@ -128,6 +129,7 @@ class DateRangeBehavior extends Behavior
      * Handles owner 'afterValidate' event.
      *
      * @param \yii\base\Event $event event instance.
+     * @throws InvalidValueException
      */
     public function afterValidate($event)
     {
@@ -144,7 +146,7 @@ class DateRangeBehavior extends Behavior
             $separator = empty($this->separator) ? ' - ' : $this->separator;
             $dates = explode($separator, $dateRangeValue, 2);
             if (count($dates) !== 2) {
-                throw new InvalidParamException("Invalid date range: '{$dateRangeValue}'.");
+                throw new InvalidValueException("Invalid date range: '{$dateRangeValue}'.");
             }
             $this->setOwnerAttribute($this->dateStartAttribute, $this->dateStartFormat, $dates[0]);
             $this->setOwnerAttribute($this->dateEndAttribute, $this->dateEndFormat, $dates[1]);

@@ -1,10 +1,11 @@
 Change Log: `yii2-date-range`
 =============================
 
-## Version 1.7.0 (_under development_)
+## Version 1.7.0
 
-**Date:** (_work in progress_)
+**Date:** 27-Aug-2018
 
+- Enhancements to support Bootstrap 4.x.
 - (enh #122): Better responsive styling of preset dropdown.
 - (bug #119): Correct client validation of model range attributes.
 - (enh #118): More correct predefined default date ranges.

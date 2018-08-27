@@ -1,17 +1,14 @@
 yii2-date-range
 =================
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/kartik-v/yii2-date-range.svg)](https://packagist.org/packages/kartik-v/yii2-date-range)
+[![Stable Version](https://poser.pugx.org/kartik-v/yii2-date-range/v/stable)](https://packagist.org/packages/kartik-v/yii2-date-range)
+[![Untable Version](https://poser.pugx.org/kartik-v/yii2-date-range/v/unstable)](https://packagist.org/packages/kartik-v/yii2-date-range)
 [![License](https://poser.pugx.org/kartik-v/yii2-date-range/license)](https://packagist.org/packages/kartik-v/yii2-date-range)
 [![Total Downloads](https://poser.pugx.org/kartik-v/yii2-date-range/downloads)](https://packagist.org/packages/kartik-v/yii2-date-range)
 [![Monthly Downloads](https://poser.pugx.org/kartik-v/yii2-date-range/d/monthly)](https://packagist.org/packages/kartik-v/yii2-date-range)
 [![Daily Downloads](https://poser.pugx.org/kartik-v/yii2-date-range/d/daily)](https://packagist.org/packages/kartik-v/yii2-date-range)
 
-An advanced date range picker input for Yii Framework 2 based on [dangrossman/bootstrap-daterangepicker plugin](https://github.com/dangrossman/bootstrap-daterangepicker).
-The date range picker widget is styled for Bootstrap 3.x and creates a dropdown menu from which a user can select a range of dates. If the plugin is invoked with no options,
-it will present two calendars to choose a start and end date from. Optionally, you can provide a list of date ranges the user can select from instead of
-choosing dates from the calendars. If attached to a text input, the selected dates will be inserted into the text box. Otherwise, you can provide a custom callback
-function to receive the selection.
+An advanced date range picker input for Yii Framework 2 based on [dangrossman/bootstrap-daterangepicker plugin](https://github.com/dangrossman/bootstrap-daterangepicker). The date range picker widget is styled for Bootstrap 3.x and 4.x versions and creates a dropdown menu from which a user can select a range of dates. If the plugin is invoked with no options, it will present two calendars to choose a start and end date from. Optionally, you can provide a list of date ranges the user can select from instead of choosing dates from the calendars. If attached to a text input, the selected dates will be inserted into the text box. Otherwise, you can provide a custom callback function to receive the selection.
 
 Additional enhancements added for this widget (by Krajee):
 

@@ -48,7 +48,7 @@ class DateRangePicker extends InputWidget
 
     /**
      * @var boolean whether you are using the picker with a input group addon. You can set it to `true`, when
-     * `hideInput` is false, and you wish to show the picker position more correctly at the input-group-addon icon.
+     * `hideInput` is false, and you wish to show the picker position more correctly at the input-group addon indicator.
      * A default `callback` will be generated in this case to generate the selected range value for the input.
      */
     public $useWithAddon = false;
@@ -64,6 +64,13 @@ class DateRangePicker extends InputWidget
      * for selection. Setting this to true will also automatically set `initRangeExpr` to true.
      */
     public $presetDropdown = false;
+
+    /**
+     * @var string the markup for the calendar picker icon. If not set this will default to:
+     * - `<i class="glyphicon glyphicon-calendar"></i>` if [[bsVersion]] is set to `3.x`
+     * - `<i class="fas fa-calendar-alt"></i>` if [[bsVersion]] is set to `4.x`
+     */
+    public $pickerIcon;
 
     /**
      * @var array the HTML attributes for the container, if hideInput is set to true. The following special options
@@ -105,14 +112,21 @@ class DateRangePicker extends InputWidget
     public $endInputOptions = [];
 
     /**
-     * @var array the template for rendering the container, when hideInput is set to `true`. The special tag `{input}`
+     * @var array (DEPRECATED) the HTML attributes for the `span` element that displays the default value for a preset
+     * dropdown. This property is not used any more and the [[containerTemplate]] setting directly can be used to
+     * render the preset value input.
+     */
+    public $defaultPresetValueOptions = [];
+
+    /**
+     * @var string the template for rendering the container, when hideInput is set to `true`. The special tag `{input}`
      * will be replaced with the hidden form input. In addition, the element with css class `range-value` will be
-     * replaced by the calculated plugin value. The special tag `{value}` will be replaced with the value of the hidden
-     * form input during initialization
+     * replaced by the calculated plugin value. The special token `{value}` will be replaced with the value of the hidden
+     * form input during initialization and the token `{pickerIcon}` will be replaced with the [[pickerIcon]] property.
      */
     public $containerTemplate = <<< HTML
         <div class="kv-drp-dropdown">
-            <span class="left-ind"><span class="glyphicon glyphicon-calendar"></span></span>
+            <span class="left-ind">{pickerIcon}</span>
             <input type="text" readonly class="form-control range-value" value="{value}">
             <span class="right-ind"><b class="caret"></b></span>
         </div>
@@ -123,13 +137,6 @@ HTML;
      * @var boolean whether to HTML encode the value
      */
     public $encodeValue = true;
-
-    /**
-     * HTML attributes for the `span` element that displays the default value for a preset dropdown. By default for a
-     * preset dropdown, if the value is empty, it will default to "Today". The following special options are supported:
-     * - `tag`: the HTML tag under which the default value markup will be displayed when empty. Defaults to `em`.
-     */
-    public $defaultPresetValueOptions = ['class' => 'text-muted'];
 
     /**
      * @var array the HTML attributes for the form input
@@ -240,6 +247,8 @@ HTML;
 
     /**
      * @inheritdoc
+     * @throws InvalidConfigException
+     * @throws \ReflectionException
      */
     public function run()
     {
@@ -304,9 +313,6 @@ HTML;
 });
 JS;
         if ($this->presetDropdown && empty($this->value)) {
-            $tag = ArrayHelper::remove($this->defaultPresetValueOptions, 'tag', 'em');
-            $fmTag = Html::beginTag($tag, $this->defaultPresetValueOptions);
-            $toTag = Html::endTag($tag);
             $js .= "var val={$nowFrom}+'{$this->_separator}'+{$nowTo};{$id}.find('.range-value').val(val);";
         }
         $view->registerJs($js);
@@ -317,10 +323,19 @@ JS;
      * Initializes widget settings
      *
      * @throws InvalidConfigException
+     * @throws \ReflectionException
      */
     protected function initSettings()
     {
+        $isBs4 = $this->isBs4();
         $this->_msgCat = 'kvdrp';
+        if (!isset($this->pickerIcon)) {
+            $iconCss = $isBs4 ? 'fas fa-calendar-alt' : 'glyphicon glyphicon-calendar';
+            $this->pickerIcon = Html::tag('i', '', ['class' => $iconCss]);
+        }
+        if (!isset($this->pluginOptions['cancelButtonClasses'])) {
+            $this->pluginOptions['cancelButtonClasses'] = $isBs4 ? 'btn-secondary' : 'btn-default';
+        }
         $this->initI18N(__DIR__);
         $this->initLocale();
         if ($this->convertFormat && isset($this->pluginOptions['locale']['format'])) {
@@ -354,9 +369,10 @@ JS;
                 $this->pluginOptions['endDate'] = $end;
             }
         }
-        $value = empty($this->value) ? '' : $this->value;
-        $this->containerTemplate = str_replace('{value}', $value, $this->containerTemplate);
-
+        $this->containerTemplate = strtr($this->containerTemplate, [
+            '{value}' => isset($this->value) ? $this->value : '',
+            '{pickerIcon}' => $this->pickerIcon,
+        ]);
         // Set `autoUpdateInput` to false for certain settings
         if (!$this->autoUpdateOnInit || $this->hideInput || $this->useWithAddon) {
             $this->pluginOptions['autoUpdateInput'] = false;
@@ -376,6 +392,7 @@ JS;
 
     /**
      * Initialize locale settings
+     * @throws \ReflectionException
      */
     protected function initLocale()
     {
@@ -400,6 +417,7 @@ JS;
 
     /**
      * Initializes the pluginOptions range list
+     * @throws InvalidConfigException
      */
     protected function initRange()
     {
@@ -476,7 +494,7 @@ JS;
      * Sets input options for a specific type
      *
      * @param string $type whether `start` or `end`
-     * @param array  $options the options to set
+     * @param array $options the options to set
      */
     protected function setInputOpts($type = '', $options = [])
     {

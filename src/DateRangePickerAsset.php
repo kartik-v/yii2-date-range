@@ -22,7 +22,7 @@ class DateRangePickerAsset extends AssetBundle
      * @inheritdoc
      */
     public $depends = [
-        '\kartik\daterange\MomentAsset',
+        'kartik\daterange\MomentAsset',
         'yii\web\JqueryAsset'
     ];
 
