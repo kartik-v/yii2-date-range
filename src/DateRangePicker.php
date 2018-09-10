@@ -425,8 +425,8 @@ JS;
             /** @noinspection PhpUnusedLocalVariableInspection */
             $msg = Yii::t('kvdrp', 'Select Date Range');
         }
-        $m = 'moment()';
         if ($this->presetDropdown) {
+            $m = 'moment()';
             $this->initRangeExpr = $this->hideInput = true;
             $this->pluginOptions['opens'] = ArrayHelper::getValue($this->pluginOptions, 'opens', 'left');
             $beg = "{$m}.startOf('day')";
