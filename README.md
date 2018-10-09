@@ -139,4 +139,4 @@ class UserSearch extends User
 
 ## License
 
-**yii2-date-range** is released under the BSD 3-Clause License. See the bundled `LICENSE.md` for details.
+**yii2-date-range** is released under the BSD-3-Clause License. See the bundled `LICENSE.md` for details.

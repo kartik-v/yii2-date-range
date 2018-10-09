@@ -3,8 +3,11 @@ Change Log: `yii2-date-range`
 
 ## Version 1.7.0
 
-**Date:** 27-Aug-2018
+**Date:** 09-Oct-2018
 
+- Update composer dependencies.
+- (enh #129): Update Russian Translations.
+- (enh #128): Move init moment() variable.
 - Enhancements to support Bootstrap 4.x.
 - (enh #126): Fix `kv-drp-container` CSS style.
 - (enh #125): Add Czech Translations.
