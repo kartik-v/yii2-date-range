@@ -432,7 +432,7 @@ JS;
             $beg = "{$m}.startOf('day')";
             $end = "{$m}.endOf('day')";
             $last = "{$m}.subtract(1, 'month')";
-            $this->pluginOptions['ranges'] = [
+            $defaultRanges = [
                 Yii::t('kvdrp', 'Today') => [$beg, $end],
                 Yii::t('kvdrp', 'Yesterday') => ["{$beg}.subtract(1,'days')", "{$end}.subtract(1,'days')"],
                 Yii::t('kvdrp', 'Last {n} Days', ['n' => 7]) => ["{$beg}.subtract(6, 'days')", $end],
@@ -440,6 +440,7 @@ JS;
                 Yii::t('kvdrp', 'This Month') => ["{$m}.startOf('month')", "{$m}.endOf('month')"],
                 Yii::t('kvdrp', 'Last Month') => ["{$last}.startOf('month')", "{$last}.endOf('month')"],
             ];
+            $this->pluginOptions['ranges'] = ArrayHelper::getValue($this->pluginOptions, 'ranges', $defaultRanges);
             if (empty($this->value)) {
                 $this->pluginOptions['startDate'] = new JsExpression("{$m}.startOf('day')");
                 $this->pluginOptions['endDate'] = new JsExpression($m);
