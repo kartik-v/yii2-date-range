@@ -17,16 +17,16 @@
  * NOTE: this file must be saved in UTF-8 encoding.
  */
 return [
-    'Apply' => '',
-    'Cancel' => '',
-    'Custom Range' => '',
-    'From' => '',
-    'Last Month' => '',
-    'Last {n} Days' => '',
-    'Select Date Range' => '',
-    'This Month' => '',
-    'To' => '',
-    'Today' => '',
+    'Apply' => 'Pielietot',
+    'Cancel' => 'Atcelt',
+    'Custom Range' => 'Cits periods',
+    'From' => 'No',
+    'Last Month' => 'Pēdējais mēnesis',
+    'Last {n} Days' => 'Pēdējās {n} dienas',
+    'Select Date Range' => 'Izvēlēties datuma periodu',
+    'This Month' => 'Šis mēnesis',
+    'To' => 'Līdz',
+    'Today' => 'Šodiena',
     'W' => '',
-    'Yesterday' => '',
+    'Yesterday' => 'Vakardiena',
 ];
