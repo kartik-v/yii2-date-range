@@ -1,6 +1,13 @@
 Change Log: `yii2-date-range`
 =============================
 
+## Version 1.7.1
+
+**Date:** 17-May-2019
+
+- (enh #139): Update Latvian Translations.
+- (enh #134): Merge ranges for preset dropdown.
+- Implement stale bot.
 
 ## Version 1.7.0
 

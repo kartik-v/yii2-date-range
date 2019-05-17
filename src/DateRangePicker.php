@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015 - 2018
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015 - 2019
  * @package yii2-date-range
- * @version 1.7.0
+ * @version 1.7.1
  */
 
 namespace kartik\daterange;
@@ -313,7 +313,11 @@ HTML;
 });
 JS;
         if ($this->presetDropdown && empty($this->value)) {
-            $js .= "var val={$nowFrom}+'{$this->_separator}'+{$nowTo};{$id}.find('.range-value').val(val);";
+            $js .= <<< JS
+    var val = {$nowFrom} + '{$this->_separator}' + {$nowTo};
+    {$id}.find('.range-value').val(val);
+    {$input}.val(val);
+JS;
         }
         $view->registerJs($js);
         $this->registerPlugin($this->pluginName, $id, null, $this->callback);
@@ -432,15 +436,16 @@ JS;
             $beg = "{$m}.startOf('day')";
             $end = "{$m}.endOf('day')";
             $last = "{$m}.subtract(1, 'month')";
-            $defaultRanges = [
-                Yii::t('kvdrp', 'Today') => [$beg, $end],
-                Yii::t('kvdrp', 'Yesterday') => ["{$beg}.subtract(1,'days')", "{$end}.subtract(1,'days')"],
-                Yii::t('kvdrp', 'Last {n} Days', ['n' => 7]) => ["{$beg}.subtract(6, 'days')", $end],
-                Yii::t('kvdrp', 'Last {n} Days', ['n' => 30]) => ["{$beg}.subtract(29, 'days')", $end],
-                Yii::t('kvdrp', 'This Month') => ["{$m}.startOf('month')", "{$m}.endOf('month')"],
-                Yii::t('kvdrp', 'Last Month') => ["{$last}.startOf('month')", "{$last}.endOf('month')"],
-            ];
-            $this->pluginOptions['ranges'] = ArrayHelper::getValue($this->pluginOptions, 'ranges', $defaultRanges);
+            if (!isset($this->pluginOptions['ranges'])) {
+                $this->pluginOptions['ranges'] = [
+                    Yii::t('kvdrp', 'Today') => [$beg, $end],
+                    Yii::t('kvdrp', 'Yesterday') => ["{$beg}.subtract(1,'days')", "{$end}.subtract(1,'days')"],
+                    Yii::t('kvdrp', 'Last {n} Days', ['n' => 7]) => ["{$beg}.subtract(6, 'days')", $end],
+                    Yii::t('kvdrp', 'Last {n} Days', ['n' => 30]) => ["{$beg}.subtract(29, 'days')", $end],
+                    Yii::t('kvdrp', 'This Month') => ["{$m}.startOf('month')", "{$m}.endOf('month')"],
+                    Yii::t('kvdrp', 'Last Month') => ["{$last}.startOf('month')", "{$last}.endOf('month')"],
+                ];
+            }
             if (empty($this->value)) {
                 $this->pluginOptions['startDate'] = new JsExpression("{$m}.startOf('day')");
                 $this->pluginOptions['endDate'] = new JsExpression($m);
