@@ -366,7 +366,7 @@ JS;
                 $end = $this->getRangeValue('end');
                 $this->value = $start . $this->_separator . $end;
                 if ($this->hasModel()) {
-                    $attr = $this->attribute;
+                    $attr = Html::getAttributeName($this->attribute);
                     $this->model->$attr = $this->value;
                 }
                 $this->pluginOptions['startDate'] = $start;
