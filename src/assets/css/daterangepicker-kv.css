@@ -1,6 +1,6 @@
 /*!
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015 - 2019
- * @version 1.7.1
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015- 2020
+ * @version 1.7.2
  *
  * Custom styling for DateRangePicker
  * 
@@ -14,15 +14,15 @@
 
 .kv-drp-dropdown .range-value {
     background: none;
-    padding-left: 32px;
-    padding-right: 32px;
+    padding-left: 2rem;
     opacity: 0.9;
+    width: 100%;
 }
 
 .kv-drp-dropdown .left-ind,
 .kv-drp-dropdown .right-ind {
     position: absolute;
-    top: 8px;
+    top: 0.4rem;
 }
 
 .kv-drp-dropdown .left-ind {
@@ -33,8 +33,17 @@
     right: 12px;
 }
 
+.kv-drp-dropdown .kv-clear {
+    padding:0 0.3rem;
+    font-size: 1.1rem;
+    cursor:pointer;
+    right:1.6rem;
+    line-height:1.3rem;
+}
+
 .kv-drp-dropdown .caret {
     display: inline-block;
+    cursor: pointer;
     width: 0;
     height: 0;
     vertical-align: 0.255em;

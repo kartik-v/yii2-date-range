@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015 - 2019
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015- 2020
  * @package yii2-date-range
- * @version 1.7.1
+ * @version 1.7.2
  */
 
 namespace kartik\daterange;
@@ -128,6 +128,7 @@ class DateRangePicker extends InputWidget
         <div class="kv-drp-dropdown">
             <span class="left-ind">{pickerIcon}</span>
             <input type="text" readonly class="form-control range-value" value="{value}">
+            <span class="right-ind kv-clear" style="" title="Clear">&times;</span>
             <span class="right-ind"><b class="caret"></b></span>
         </div>
         {input}
@@ -300,7 +301,7 @@ HTML;
         $nowTo = "moment().format('{$this->_format}')";
         // parse input change correctly when range input value is cleared
         $js = <<< JS
-{$input}.off('change.kvdrp').on('change.kvdrp', function() {
+{$input}.off('change.kvdrp').on('change.kvdrp', function(e) {
     var drp = {$id}.data('{$this->pluginName}'), fm, to;
     if ($(this).val() || !drp) {
         return;
@@ -312,11 +313,14 @@ HTML;
     {$rangeJs}
 });
 JS;
-        if ($this->presetDropdown && empty($this->value)) {
+        if ($this->presetDropdown) {
             $js .= <<< JS
-    var val = {$nowFrom} + '{$this->_separator}' + {$nowTo};
-    {$id}.find('.range-value').val(val);
-    {$input}.val(val);
+    {$id}.find('.range-value').attr('placeholder', {$input}.attr('placeholder'));
+    {$id}.find('.kv-clear').on('click', function(e) {
+        e.stopPropagation();
+        {$id}.find('.range-value').val('');
+        {$input}.val('').trigger('change').trigger('cancel.daterangepicker');
+    });
 JS;
         }
         $view->registerJs($js);
