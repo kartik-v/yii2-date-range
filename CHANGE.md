@@ -3,8 +3,9 @@ Change Log: `yii2-date-range`
 
 ## Version 1.7.2
 
-**Date:** 29-Jan-2020
+**Date:** 09-Feb-2020
 
+- (enh #148): Correct date range preset dropdown selection for "Today".
 - (enh #147): Allow date range picker value to be cleared for preset dropdown.
 - (enh #146): Enhance preset dropdown user interface.
 - (enh #143): Update initSettings to support indexes .

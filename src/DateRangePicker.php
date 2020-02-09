@@ -315,6 +315,15 @@ HTML;
 JS;
         if ($this->presetDropdown) {
             $js .= <<< JS
+    {$id}.on('apply.daterangepicker', function() {
+        var drp = {$id}.data('{$this->pluginName}'), newValue = drp.startDate.format(drp.locale.format);
+        if (!drp.singleDatePicker) {
+            newValue += drp.locale.separator + drp.endDate.format(drp.locale.format);
+        }
+        if (newValue !== {$input}.val()) {
+            {$input}.val(newValue).trigger('change');
+        }
+    });            
     {$id}.find('.range-value').attr('placeholder', {$input}.attr('placeholder'));
     {$id}.find('.kv-clear').on('click', function(e) {
         e.stopPropagation();
