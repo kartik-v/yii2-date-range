@@ -14,7 +14,7 @@
 
 .kv-drp-dropdown .range-value {
     background: none;
-    padding-left: 2rem;
+    padding-left: 3rem;
     opacity: 0.9;
     width: 100%;
 }
@@ -27,18 +27,20 @@
 
 .kv-drp-dropdown .left-ind {
     left: 12px;
+    padding-top: 0.35rem;
 }
 
 .kv-drp-dropdown .right-ind {
     right: 12px;
+    padding-top: 0.2rem;
 }
 
 .kv-drp-dropdown .kv-clear {
-    padding:0 0.3rem;
-    font-size: 1.1rem;
-    cursor:pointer;
-    right:1.6rem;
-    line-height:1.3rem;
+    padding: 0.7rem 1rem 1rem 0rem;
+    font-size: 2.5rem;
+    cursor: pointer;
+    right: 1.6rem;
+    line-height: 1.3rem;
 }
 
 .kv-drp-dropdown .caret {
@@ -46,7 +48,7 @@
     cursor: pointer;
     width: 0;
     height: 0;
-    vertical-align: 0.255em;
+    vertical-align: middle;
     content: "";
     border-top: 0.3em solid;
     border-right: 0.3em solid transparent;
