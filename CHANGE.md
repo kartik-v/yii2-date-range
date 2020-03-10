@@ -1,6 +1,22 @@
 Change Log: `yii2-date-range`
 =============================
 
+## Version 1.7.3
+
+**Date:** _under development_
+
+- (enh #150): Add following properties to DateRangePicker (applicable only when `presetDropdown` is `true`).
+    - `includeDaysFilter` : _bool_ defaults to `true`
+    - `presetFilterDays` : _array_ defaults to `[7, 30]`
+    - If above is true - following preset options are additionally available:
+        - **Last 7 Days**
+        - **Last 30 Days**
+    - `includeMonthsFilter` : _bool_ defaults to `false`
+    - `presetFilterMonths` : _array_ defaults to `[3, 6, 12]`
+    - If above is true - following preset options are additionally available:
+       - **Last 6 Months**
+       - **Last 12 Months**
+
 ## Version 1.7.2
 
 **Date:** 09-Feb-2020
@@ -8,7 +24,7 @@ Change Log: `yii2-date-range`
 - (enh #148): Correct date range preset dropdown selection for "Today".
 - (enh #147): Allow date range picker value to be cleared for preset dropdown.
 - (enh #146): Enhance preset dropdown user interface.
-- (enh #143): Update initSettings to support indexes .
+- (enh #143): Update initSettings to support indexes.
 
 ## Version 1.7.1
 

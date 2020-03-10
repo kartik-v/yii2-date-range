@@ -3,7 +3,7 @@
 /**
  * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015 - 2020
  * @package yii2-date-range
- * @version 1.7.2
+ * @version 1.7.3
  */
 
 namespace kartik\daterange;
@@ -64,6 +64,34 @@ class DateRangePicker extends InputWidget
      * for selection. Setting this to true will also automatically set `initRangeExpr` to true.
      */
     public $presetDropdown = false;
+
+    /**
+     * @var boolean whether to add additional preset filter options for days (applicable only when
+     * [[presetDropdown]] is `true`). If this is set to `true` following additional preset filter option(s) will
+     * be available
+     * - **Last {n} Days**
+     * where n will be picked up from the list of filter days set via [presetFilterDays]
+     */
+    public $includeDaysFilter = true;
+
+    /**
+     * @var boolean whether to add additional preset filter options for months (applicable only when
+     * [[presetDropdown]] is `true`). If this is set to `true` following additional preset filter options will
+     * be available:
+     * - **Last {n} Months**
+     * where n will be picked up from the list of filter months set via [presetFilterMonths]
+     */
+    public $includeMonthsFilter = false;
+
+    /**
+     * @var array list of preset filter days (which will be shown as Last {n} days)
+     */
+    public $presetFilterDays = [7, 30];
+
+    /**
+     * @var array list of preset filter months (which will be shown as Last {n} months)
+     */
+    public $presetFilterMonths = [3, 6, 12];
 
     /**
      * @var string the markup for the calendar picker icon. If not set this will default to:
@@ -453,11 +481,30 @@ JS;
                 $this->pluginOptions['ranges'] = [
                     Yii::t('kvdrp', 'Today') => [$beg, $end],
                     Yii::t('kvdrp', 'Yesterday') => ["{$beg}.subtract(1,'days')", "{$end}.subtract(1,'days')"],
-                    Yii::t('kvdrp', 'Last {n} Days', ['n' => 7]) => ["{$beg}.subtract(6, 'days')", $end],
-                    Yii::t('kvdrp', 'Last {n} Days', ['n' => 30]) => ["{$beg}.subtract(29, 'days')", $end],
+                ];
+
+                if ($this->includeDaysFilter) {
+                    foreach ($this->presetFilterDays as $n) {
+                        $from = $n - 1;
+                        $this->pluginOptions['ranges'] += [
+                            Yii::t('kvdrp', 'Last {n} Days', ['n' => $n]) => ["{$beg}.subtract({$from}, 'days')", $end],
+                        ];
+                    }
+                }
+                $this->pluginOptions['ranges'] += [
                     Yii::t('kvdrp', 'This Month') => ["{$m}.startOf('month')", "{$m}.endOf('month')"],
                     Yii::t('kvdrp', 'Last Month') => ["{$last}.startOf('month')", "{$last}.endOf('month')"],
                 ];
+                if ($this->includeMonthsFilter) {
+                    foreach ($this->presetFilterMonths as $n) {
+                        $from = $n - 1;
+                        $beg = "{$m}.subtract({$from}, 'month').startOf('month')";
+                        $end = "{$m}.endOf('month')";
+                        $this->pluginOptions['ranges'] += [
+                            Yii::t('kvdrp', 'Last {n} Months', ['n' => $n]) => ["{$beg}", "{$end}"],
+                        ];
+                    }
+                }
             }
             if (empty($this->value)) {
                 $this->pluginOptions['startDate'] = new JsExpression("{$m}.startOf('day')");
