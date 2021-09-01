@@ -1,14 +1,16 @@
 <?php
 
 /**
- * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015 - 2020
+ * @copyright Copyright &copy; Kartik Visweswaran, Krajee.com, 2015 - 2021
  * @package yii2-date-range
  * @version 1.7.3
  */
 
 namespace kartik\daterange;
 
+use Exception;
 use kartik\base\InputWidget;
+use ReflectionException;
 use Yii;
 use yii\base\InvalidConfigException;
 use yii\helpers\ArrayHelper;
@@ -209,7 +211,7 @@ HTML;
      * @see http://php.net/manual/en/function.date.php
      * @see http://momentjs.com/docs/#/parsing/string-format/
      *
-     * @param string $format the PHP date format string
+     * @param  string  $format  the PHP date format string
      *
      * @return string
      */
@@ -259,13 +261,14 @@ HTML;
             // unix timestamp
             'U' => 'X',
         ];
+
         return strtr($format, $conversions);
     }
 
     /**
      * Parses and returns a JsExpression
      *
-     * @param string|JsExpression $value
+     * @param  string|JsExpression  $value
      *
      * @return JsExpression
      */
@@ -277,7 +280,7 @@ HTML;
     /**
      * @inheritdoc
      * @throws InvalidConfigException
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     public function run()
     {
@@ -292,10 +295,10 @@ HTML;
     {
         $view = $this->getView();
         MomentAsset::register($view);
-        $input = 'jQuery("#' . $this->options['id'] . '")';
+        $input = 'jQuery("#'.$this->options['id'].'")';
         $id = $input;
         if ($this->hideInput) {
-            $id = 'jQuery("#' . $this->containerOptions['id'] . '")';
+            $id = 'jQuery("#'.$this->containerOptions['id'].'")';
         }
         if (!empty($this->_langFile)) {
             LanguageAsset::register($view)->js[] = $this->_langFile;
@@ -307,7 +310,7 @@ HTML;
             if (ArrayHelper::getValue($this->pluginOptions, 'singleDatePicker', false)) {
                 $val = "start.format('{$this->_format}')";
             }
-            $rangeJs = $this->getRangeJs('start') . $this->getRangeJs('end');
+            $rangeJs = $this->getRangeJs('start').$this->getRangeJs('end');
             $change = "{$input}.val(val).trigger('change');{$rangeJs}";
             if ($this->presetDropdown) {
                 $id = "{$id}.find('.kv-drp-dropdown')";
@@ -321,6 +324,7 @@ HTML;
                 $script = "var val={$val};{$change}";
             } else {
                 $this->registerPlugin($this->pluginName, $id);
+
                 return;
             }
             $this->callback = "function(start,end,label){{$script}}";
@@ -368,18 +372,18 @@ JS;
      * Initializes widget settings
      *
      * @throws InvalidConfigException
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
     protected function initSettings()
     {
-        $isBs4 = $this->isBs4();
+        $notBs3 = !$this->isBs(3);
         $this->_msgCat = 'kvdrp';
         if (!isset($this->pickerIcon)) {
-            $iconCss = $isBs4 ? 'fas fa-calendar-alt' : 'glyphicon glyphicon-calendar';
+            $iconCss = $notBs3 ? 'fas fa-calendar-alt' : 'glyphicon glyphicon-calendar';
             $this->pickerIcon = Html::tag('i', '', ['class' => $iconCss]);
         }
         if (!isset($this->pluginOptions['cancelButtonClasses'])) {
-            $this->pluginOptions['cancelButtonClasses'] = $isBs4 ? 'btn-secondary' : 'btn-default';
+            $this->pluginOptions['cancelButtonClasses'] = $notBs3 ? 'btn-secondary' : 'btn-default';
         }
         $this->initI18N(__DIR__);
         $this->initLocale();
@@ -405,7 +409,7 @@ JS;
             if ($this->startAttribute && $this->endAttribute) {
                 $start = $this->getRangeValue('start');
                 $end = $this->getRangeValue('end');
-                $this->value = $start . $this->_separator . $end;
+                $this->value = $start.$this->_separator.$end;
                 if ($this->hasModel()) {
                     $attr = Html::getAttributeName($this->attribute);
                     $this->model->$attr = $this->value;
@@ -415,7 +419,7 @@ JS;
             }
         }
         $this->containerTemplate = strtr($this->containerTemplate, [
-            '{value}' => isset($this->value) ? $this->value : '',
+            '{value}' => $this->value ?? '',
             '{pickerIcon}' => $this->pickerIcon,
         ]);
         // Set `autoUpdateInput` to false for certain settings
@@ -425,11 +429,11 @@ JS;
         $this->_startInput = $this->getRangeInput('start');
         $this->_endInput = $this->getRangeInput('end');
         if (empty($this->containerOptions['id'])) {
-            $this->containerOptions['id'] = $this->options['id'] . '-container';
+            $this->containerOptions['id'] = $this->options['id'].'-container';
         }
         if (empty($this->containerOptions['class'])) {
             $css = $this->useWithAddon && !$this->presetDropdown && !$this->hideInput ? ' input-group' : '';
-            $this->containerOptions['class'] = 'kv-drp-container' . $css;
+            $this->containerOptions['class'] = 'kv-drp-container'.$css;
         }
         $this->initRange();
         $this->registerAssets();
@@ -437,7 +441,7 @@ JS;
 
     /**
      * Initialize locale settings
-     * @throws \ReflectionException
+     * @throws ReflectionException|Exception
      */
     protected function initLocale()
     {
@@ -534,37 +538,39 @@ JS;
      */
     protected function renderInput()
     {
-        $append = $this->_startInput . $this->_endInput;
+        $append = $this->_startInput.$this->_endInput;
         if (!$this->hideInput) {
-            return $this->getInput('textInput') . $append;
+            return $this->getInput('textInput').$append;
         }
-        $content = str_replace('{input}', $this->getInput('hiddenInput') . $append, $this->containerTemplate);
+        $content = str_replace('{input}', $this->getInput('hiddenInput').$append, $this->containerTemplate);
         $tag = ArrayHelper::remove($this->containerOptions, 'tag', 'div');
+
         return Html::tag($tag, $content, $this->containerOptions);
     }
 
     /**
      * Gets input options based on type
      *
-     * @param string $type whether `start` or `end`
+     * @param  string  $type  whether `start` or `end`
      *
      * @return array|mixed
      */
     protected function getInputOpts($type = '')
     {
-        $opts = $type . 'InputOptions';
+        $opts = $type.'InputOptions';
+
         return isset($this->$opts) && is_array($this->$opts) ? $this->$opts : [];
     }
 
     /**
      * Sets input options for a specific type
      *
-     * @param string $type whether `start` or `end`
-     * @param array $options the options to set
+     * @param  string  $type  whether `start` or `end`
+     * @param  array  $options  the options to set
      */
     protected function setInputOpts($type = '', $options = [])
     {
-        $opts = $type . 'InputOptions';
+        $opts = $type.'InputOptions';
         if (property_exists($this, $opts)) {
             $this->$opts = $options;
         }
@@ -573,20 +579,21 @@ JS;
     /**
      * Gets the range attribute value based on type
      *
-     * @param string $type whether `start` or `end`
+     * @param  string  $type  whether `start` or `end`
      *
      * @return mixed|string
      */
     protected function getRangeAttr($type = '')
     {
-        $attr = $type . 'Attribute';
+        $attr = $type.'Attribute';
+
         return $type && isset($this->$attr) ? $this->$attr : '';
     }
 
     /**
      * Generates and returns the client script on date range change, when the start and end attributes are set
      *
-     * @param string $type whether `start` or `end`
+     * @param  string  $type  whether `start` or `end`
      *
      * @return string
      */
@@ -597,15 +604,16 @@ JS;
             return '';
         }
         $options = $this->getInputOpts($type);
-        $input = "jQuery('#" . $this->options['id'] . "')";
-        return "var v={$input}.val() ? {$type}.format('{$this->_format}') : '';jQuery('#" . $options['id'] .
+        $input = "jQuery('#".$this->options['id']."')";
+
+        return "var v={$input}.val() ? {$type}.format('{$this->_format}') : '';jQuery('#".$options['id'].
             "').val(v).trigger('change');";
     }
 
     /**
      * Generates and returns the hidden input markup when one of start or end attributes are set.
      *
-     * @param string $type whether `start` or `end`
+     * @param  string  $type  whether `start` or `end`
      *
      * @return string
      */
@@ -617,23 +625,25 @@ JS;
         }
         $options = $this->getInputOpts($type);
         if (empty($options['id'])) {
-            $options['id'] = $this->options['id'] . '-' . $type;
+            $options['id'] = $this->options['id'].'-'.$type;
         }
         if ($this->hasModel()) {
             $this->setInputOpts($type, $options);
+
             return Html::activeHiddenInput($this->model, $attr, $options);
         }
         $options['type'] = 'hidden';
         $options['name'] = $attr;
         $this->setInputOpts($type, $options);
+
         return Html::tag('input', '', $options);
     }
 
     /**
      * Initializes the range values when one of start or end attributes are set.
      *
-     * @param string $type whether `start` or `end`
-     * @param string $value the value to set
+     * @param  string  $type  whether `start` or `end`
+     * @param  string  $value  the value to set
      */
     protected function initRangeValue($type = '', $value = '')
     {
@@ -653,9 +663,10 @@ JS;
     /**
      * Generates and returns the hidden input markup when one of start or end attributes are set.
      *
-     * @param string $type whether `start` or `end`
+     * @param  string  $type  whether `start` or `end`
      *
      * @return string
+     * @throws Exception
      */
     protected function getRangeValue($type = '')
     {
@@ -664,6 +675,7 @@ JS;
             return '';
         }
         $options = $this->getInputOpts($type);
+
         return $this->hasModel() ? Html::getAttributeValue($this->model, $attr) :
             ArrayHelper::getValue($options, 'value', '');
     }

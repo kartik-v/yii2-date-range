@@ -3,8 +3,13 @@ Change Log: `yii2-date-range`
 
 ## Version 1.7.3
 
-**Date:** _under development_
+**Date:** 01-Sep-2021
 
+- (enh #163): Enhancements to support Bootstrap v5.x.
+- (enh #162): Update Uzbek Translations.
+- (enh #156): Update Greek Translations.
+- (enh #155): Update Indonesian Translations.
+- (enh #154): Update Kazakh Translations.
 - (enh #150): Add following properties to DateRangePicker (applicable only when `presetDropdown` is `true`).
     - `includeDaysFilter` : _bool_ defaults to `true`
     - `presetFilterDays` : _array_ defaults to `[7, 30]`
