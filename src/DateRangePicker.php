@@ -419,7 +419,7 @@ JS;
             }
         }
         $this->containerTemplate = strtr($this->containerTemplate, [
-            '{value}' => $this->value ?? '',
+            '{value}' => $this->value ? $this->value : '',
             '{pickerIcon}' => $this->pickerIcon,
         ]);
         // Set `autoUpdateInput` to false for certain settings
