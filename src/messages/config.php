@@ -7,7 +7,7 @@ return [
     'messagePath' => __DIR__,
     // array, required, list of language codes that the extracted messages
     // should be translated to. For example, ['zh-CN', 'de'].
-    'languages' => ['af', 'ar-MA', 'ar-SA', 'ar', 'az', 'be', 'bg', 'bn', 'bo', 'br', 'bs', 'ca', 'cs', 'cv', 'cy', 'da', 'de-AT', 'de', 'el', 'en-AU', 'en-CA', 'en-GB', 'eo', 'es', 'et', 'eu', 'fa', 'fi', 'fo', 'fr-CA', 'fr', 'gl', 'he', 'hi', 'hr', 'hu', 'hy-AM', 'id', 'is', 'it', 'ja', 'ka', 'km', 'ko', 'lb', 'lt', 'lv', 'mk', 'ml', 'mr', 'ms-MY', 'my', 'nb', 'ne', 'nl', 'nn', 'pl', 'pt-BR', 'pt', 'ro', 'ru', 'sk', 'sl', 'sq', 'sr-CYRL', 'sr', 'sv', 'ta', 'th', 'tl-PH', 'tr', 'tzm-LATN', 'tzm', 'uk', 'uz', 'vi', 'zh-CN', 'zh-TW'],
+    'languages' => ['af', 'ar-MA', 'ar-SA', 'ar', 'az', 'be', 'bg', 'bn', 'bo', 'br', 'bs', 'ca', 'cs', 'cv', 'cy', 'da', 'de-AT', 'de', 'el', 'en-AU', 'en-CA', 'en-GB', 'eo', 'es', 'et', 'eu', 'fa', 'fi', 'fo', 'fr-CA', 'fr', 'gl', 'he', 'hi', 'hr', 'hu', 'hy-AM', 'id', 'is', 'it', 'ja', 'ka', 'km', 'ko', 'lb', 'lt', 'lv', 'mk', 'ml', 'mr', 'ms-MY', 'my', 'nb', 'ne', 'nl', 'nn', 'pl', 'pt-BR', 'pt', 'ro', 'ru', 'sk', 'sl', 'sq', 'sr-CYRL', 'sr', 'sv', 'ta', 'th', 'tl-PH', 'tr', 'tzm-LATN', 'tzm', 'uk', 'uz', 'uz-Cy', 'vi', 'zh-CN', 'zh-TW'],
     // string, the name of the function for translating messages.
     // Defaults to 'Yii::t'. This is used as a mark to find the messages to be
     // translated. You may use a string for single function name or an array for
