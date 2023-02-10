@@ -29,5 +29,5 @@ return [
     'Today' => 'Сегодня',
     'W' => 'W',
     'Yesterday' => 'Вчера',
-    'Last {n} Months' => '',
+    'Last {n} Months' => 'Последние {n} месяца(ев)',
 ];
