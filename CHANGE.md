@@ -1,6 +1,10 @@
 Change Log: `yii2-date-range`
 =============================
 
+## Version 1.7.4
+
+- (enh #170) Update Russian Translations.
+
 ## Version 1.7.3
 
 **Date:** 01-Sep-2021
