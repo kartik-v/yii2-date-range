@@ -29,5 +29,5 @@ return [
     'Today' => 'Hoje',
     'W' => 'W',
     'Yesterday' => 'Ontem',
-    'Last {n} Months' => '',
+    'Last {n} Months' => 'Últimos {n} meses',
 ];
