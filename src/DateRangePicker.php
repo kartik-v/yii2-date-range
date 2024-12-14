@@ -335,7 +335,7 @@ HTML;
         $js = <<< JS
 {$input}.off('change.kvdrp').on('change.kvdrp', function(e) {
     var drp = {$id}.data('{$this->pluginName}'), fm, to;
-    if ($(this).val() || !drp) {
+    if (jQuery(this).val() || !drp) {
         return;
     }
     fm = {$nowFrom} || '';
